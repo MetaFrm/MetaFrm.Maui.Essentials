@@ -1,0 +1,123 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루션 항목", "{0C5E5285-684F-40AE-87FE-83AE1961F279}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Maui.Essentials", "MetaFrm.Maui.Essentials(net6.0)\MetaFrm.Maui.Essentials.csproj", "{55467B87-95A4-47CA-BAA4-03A7B8D76BB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net6.0", "net6.0", "{B4A1A0BC-C496-472B-9EAF-2C90983BFB02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A112398B-7E9A-4DE8-B3B3-5359260448B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{90D941C1-8257-4052-9D59-676FC64C1586}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationModel", "ApplicationModel", "{C3761CCD-61FC-4C3E-BC88-F3FEC40E4A02}"
+	ProjectSection(SolutionItems) = preProject
+		src\ApplicationModel\AppInfo.cs = src\ApplicationModel\AppInfo.cs
+		src\ApplicationModel\Browser.cs = src\ApplicationModel\Browser.cs
+		src\ApplicationModel\Launcher.cs = src\ApplicationModel\Launcher.cs
+		src\ApplicationModel\Map.cs = src\ApplicationModel\Map.cs
+		src\ApplicationModel\Permissions.cs = src\ApplicationModel\Permissions.cs
+		src\ApplicationModel\VersionTracking.cs = src\ApplicationModel\VersionTracking.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Communication", "Communication", "{A6837B49-503D-4848-9140-21151BB48178}"
+	ProjectSection(SolutionItems) = preProject
+		src\ApplicationModel\Communication\Contacts.cs = src\ApplicationModel\Communication\Contacts.cs
+		src\ApplicationModel\Communication\Email.cs = src\ApplicationModel\Communication\Email.cs
+		src\ApplicationModel\Communication\PhoneDialer.cs = src\ApplicationModel\Communication\PhoneDialer.cs
+		src\ApplicationModel\Communication\Sms.cs = src\ApplicationModel\Communication\Sms.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Networking", "Networking", "{545A6128-AC4D-4A0F-9422-1B641AE313A0}"
+	ProjectSection(SolutionItems) = preProject
+		src\Networking\Connectivity.cs = src\Networking\Connectivity.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Devices", "Devices", "{4EDD840B-88A8-46C4-81A3-CC3BF7222B89}"
+	ProjectSection(SolutionItems) = preProject
+		src\Devices\Battery.cs = src\Devices\Battery.cs
+		src\Devices\DeviceDisplay.cs = src\Devices\DeviceDisplay.cs
+		src\Devices\DeviceInfo.cs = src\Devices\DeviceInfo.cs
+		src\Devices\HapticFeedback.cs = src\Devices\HapticFeedback.cs
+		src\Devices\Vibration.cs = src\Devices\Vibration.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sensors", "Sensors", "{22E7422F-5B8F-4430-AA56-3613C02FF3EA}"
+	ProjectSection(SolutionItems) = preProject
+		src\Devices\Sensors\Accelerometer.cs = src\Devices\Sensors\Accelerometer.cs
+		src\Devices\Sensors\Barometer.cs = src\Devices\Sensors\Barometer.cs
+		src\Devices\Sensors\Compass.cs = src\Devices\Sensors\Compass.cs
+		src\Devices\Sensors\Flashlight.cs = src\Devices\Sensors\Flashlight.cs
+		src\Devices\Sensors\Geocoding.cs = src\Devices\Sensors\Geocoding.cs
+		src\Devices\Sensors\Geolocation.cs = src\Devices\Sensors\Geolocation.cs
+		src\Devices\Sensors\Gyroscope.cs = src\Devices\Sensors\Gyroscope.cs
+		src\Devices\Sensors\Magnetometer.cs = src\Devices\Sensors\Magnetometer.cs
+		src\Devices\Sensors\OrientationSensor.cs = src\Devices\Sensors\OrientationSensor.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataTransfer", "DataTransfer", "{98578512-B888-4AD6-93DE-8935F42C67FD}"
+	ProjectSection(SolutionItems) = preProject
+		src\ApplicationModel\DataTransfer\Clipboard.cs = src\ApplicationModel\DataTransfer\Clipboard.cs
+		src\ApplicationModel\DataTransfer\Share.cs = src\ApplicationModel\DataTransfer\Share.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Storage", "Storage", "{01D1571F-5740-415E-9426-4620B158CBBF}"
+	ProjectSection(SolutionItems) = preProject
+		src\Storage\FilePicker.cs = src\Storage\FilePicker.cs
+		src\Storage\FileSystem.cs = src\Storage\FileSystem.cs
+		src\Storage\Preferences.cs = src\Storage\Preferences.cs
+		src\Storage\SecureStorage.cs = src\Storage\SecureStorage.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Media", "Media", "{A9AD74A2-A490-44AB-A0B0-42EBD33B7B7B}"
+	ProjectSection(SolutionItems) = preProject
+		src\Media\MediaPicker.cs = src\Media\MediaPicker.cs
+		src\Media\Screenshot.cs = src\Media\Screenshot.cs
+		src\Media\ScreenshotResult.cs = src\Media\ScreenshotResult.cs
+		src\Media\TextToSpeech.cs = src\Media\TextToSpeech.cs
+		src\Media\UnitConverters.cs = src\Media\UnitConverters.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55467B87-95A4-47CA-BAA4-03A7B8D76BB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55467B87-95A4-47CA-BAA4-03A7B8D76BB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55467B87-95A4-47CA-BAA4-03A7B8D76BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55467B87-95A4-47CA-BAA4-03A7B8D76BB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{55467B87-95A4-47CA-BAA4-03A7B8D76BB8} = {B4A1A0BC-C496-472B-9EAF-2C90983BFB02}
+		{90D941C1-8257-4052-9D59-676FC64C1586} = {A112398B-7E9A-4DE8-B3B3-5359260448B7}
+		{C3761CCD-61FC-4C3E-BC88-F3FEC40E4A02} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
+		{A6837B49-503D-4848-9140-21151BB48178} = {C3761CCD-61FC-4C3E-BC88-F3FEC40E4A02}
+		{545A6128-AC4D-4A0F-9422-1B641AE313A0} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
+		{4EDD840B-88A8-46C4-81A3-CC3BF7222B89} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
+		{22E7422F-5B8F-4430-AA56-3613C02FF3EA} = {4EDD840B-88A8-46C4-81A3-CC3BF7222B89}
+		{98578512-B888-4AD6-93DE-8935F42C67FD} = {C3761CCD-61FC-4C3E-BC88-F3FEC40E4A02}
+		{01D1571F-5740-415E-9426-4620B158CBBF} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
+		{A9AD74A2-A490-44AB-A0B0-42EBD33B7B7B} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41EE46A8-D346-47B4-81B1-F4E906B0B021}
+	EndGlobalSection
+EndGlobal
