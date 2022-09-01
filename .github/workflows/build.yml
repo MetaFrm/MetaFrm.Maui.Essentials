@@ -1,5 +1,8 @@
 name: build
 
+# 참고 사이트
+# https://blog.taranissoftware.com/build-net-maui-apps-with-github-actions
+
 on:
   push:
     branches: [ "master" ]
@@ -31,13 +34,13 @@ jobs:
 
 
     - name: Build MAUI Android Debug
-      run: dotnet build -c Debug -f net6.0-android --no-restore
+      run: dotnet publish -c Debug -f net6.0-android --no-restore
       
     - name: Build MAUI Android Debug Test
       run: dotnet test -c Debug -f net6.0-android --no-build --verbosity normal
 
     - name: Build MAUI Android Release
-      run: dotnet build -c Release -f net6.0-android --no-restore
+      run: dotnet publish -c Release -f net6.0-android --no-restore
       
     - name: Build MAUI Android Release Test
       run: dotnet test -c Release -f net6.0-android --no-build --verbosity normal
