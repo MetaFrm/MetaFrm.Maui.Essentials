@@ -14,7 +14,6 @@ env:
 jobs:
   build:
     runs-on: windows-2022
-    name: Android Build
 
     steps:
     - uses: actions/checkout@v3
@@ -78,16 +77,16 @@ jobs:
 
     
     - name: Build MAUI iOS Debug
-    run: dotnet build  -c Debug -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+      run: dotnet build  -c Debug -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
         
     - name: Build MAUI iOS Debug Test
-    run: dotnet test  -c Debug -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+      run: dotnet test  -c Debug -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
         
     - name: Build MAUI iOS Release
-    run: dotnet build  -c Release -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+      run: dotnet build  -c Release -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
         
     - name: Build MAUI iOS Release Test
-    run: dotnet test  -c Release -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
+      run: dotnet test  -c Release -f net6.0-ios --no-restore /p:buildForSimulator=True /p:packageApp=True /p:ArchiveOnBuild=False
 
 
     #- name: Upload iOS Artifact
@@ -98,16 +97,16 @@ jobs:
 
 
     - name: Build MAUI MacCatalyst Debug
-    run: dotnet build -c Debug -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
+      run: dotnet build -c Debug -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
 
     - name: Build MAUI MacCatalyst Debug Test
-    run: dotnet test -c Debug -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
+      run: dotnet test -c Debug -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
         
     - name: Build MAUI MacCatalyst Release
-    run: dotnet build -c Release -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
+      run: dotnet build -c Release -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
 
     - name: Build MAUI MacCatalyst Release Test
-    run: dotnet test -c Release -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
+      run: dotnet test -c Release -f net6.0-maccatalyst --no-restore -p:BuildIpa=True
 
     #- name: Upload MacCatalyst Artifact
     #  uses: actions/upload-artifact@v3.1.0
