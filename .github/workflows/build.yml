@@ -15,7 +15,7 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
   METAFRM_UPLOADMODULE_URL: "https://www.metafrm.net/MetaFrameworkManagementSystemUploadModule.zip"
   METAFRM_UPLOADMODULE_ZIP: "MetaFrameworkManagementSystemUploadModule.zip"
-  METAFRM_UPLOADMODULE_FILE: "MetaFrameworkManagementSystemUploadModule.exe"
+  METAFRM_UPLOADMODULE_FILE: "Meta Framework Management System UploadModule.exe"
   DLL_ID: 25
   DLL_PATH: "../MetaFrm.Maui.Essentials(net6.0)/bin/Release/net6.0/MetaFrm.Maui.Essentials.dll"
 
