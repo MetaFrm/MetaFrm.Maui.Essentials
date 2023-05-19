@@ -61,14 +61,14 @@ jobs:
       run: curl http://stahlworks.com/dev/unzip.exe --output temp/unzip.exe
 
     - name: unzip
-      run: temp/unzip.exe "${{env.METAFRM_UPLOADMODULE_ZIP}}"
+      run: temp\unzip.exe "${{env.METAFRM_UPLOADMODULE_ZIP}}"
 
       
     - name: dir
       run: dir temp
       
     - name: Upload Module
-      run: temp/${{env.METAFRM_UPLOADMODULE_FILE}} ${{env.DLL_ID}} "${{env.DLL_PATH}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}"
+      run: temp\${{env.METAFRM_UPLOADMODULE_FILE}} ${{env.DLL_ID}} "${{env.DLL_PATH}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}"
 
       
     - name: Pack nugets
