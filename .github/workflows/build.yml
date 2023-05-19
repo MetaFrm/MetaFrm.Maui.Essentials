@@ -67,7 +67,7 @@ jobs:
       run: dir temp
 
     - name: unzip
-      run: temp\unzip.exe "temp/${{env.METAFRM_UPLOADMODULE_ZIP}}"
+      run: temp\unzip.exe "temp/${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp\
 
       
     - name: dir
