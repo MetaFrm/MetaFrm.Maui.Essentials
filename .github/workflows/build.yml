@@ -59,9 +59,12 @@ jobs:
       
     - name: download unzip
       run: curl http://stahlworks.com/dev/unzip.exe --output temp/unzip.exe
+      
+    - name: dir
+      run: dir temp
 
     - name: unzip
-      run: temp\unzip.exe "${{env.METAFRM_UPLOADMODULE_ZIP}}"
+      run: temp\unzip.exe "temp/${{env.METAFRM_UPLOADMODULE_ZIP}}"
 
       
     - name: dir
