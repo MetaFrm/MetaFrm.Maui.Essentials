@@ -58,10 +58,10 @@ jobs:
       run: cd temp
 
     - name: download
-      run: curl "${{env.METAFRM_UPLOADMODULE_URL}} --output ${{env.METAFRM_UPLOADMODULE_ZIP}}
+      run: curl ${{env.METAFRM_UPLOADMODULE_URL}} --output ${{env.METAFRM_UPLOADMODULE_ZIP}}
       
     - name: download unzip
-      run: curl http://stahlworks.com/dev/unzip.exe -O unzip.exe
+      run: curl http://stahlworks.com/dev/unzip.exe --output unzip.exe
 
     - name: unzip
       run: unzip.exe "${{env.METAFRM_UPLOADMODULE_ZIP}}"
