@@ -17,7 +17,7 @@ env:
   METAFRM_UPLOADMODULE_ZIP: "MetaFrameworkManagementSystemUploadModule.zip"
   METAFRM_UPLOADMODULE_FILE: "MetaFrameworkManagementSystemUploadModule.exe"
   DLL_ID: 25
-  DLL_PATH: "../MetaFrm.Maui.Essentials(net6.0)/bin/Release/net6.0/MetaFrm.Maui.Essentials.dll"
+  DLL_PATH: "MetaFrm.Maui.Essentials(net6.0)/bin/Release/net6.0/MetaFrm.Maui.Essentials.dll"
 
 
 jobs:
@@ -32,71 +32,47 @@ jobs:
       with:
         dotnet-version: 6.0.x
         
-    - name: dir
-      run: dir
+    - name: Install MAUI Workload
+      run: dotnet workload install maui --ignore-failed-sources
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build Debug
+      run: dotnet build -c Debug --no-restore
       
+    - name: Test Debug
+      run: dotnet test -c Debug --no-build --verbosity normal
+
+    - name: Build Release
+      run: dotnet build -c Release --no-restore
+      
+    - name: Test Release
+      run: dotnet test -c Release --no-build --verbosity normal
+
+    
     - name: mkdir temp
       run: mkdir temp
 
-    - name: cd temp
-      run: cd temp
-      
-    - name: dir
-      run: dir
+    - name: download
+      run: curl ${{env.METAFRM_UPLOADMODULE_URL}} --output "temp/${{env.METAFRM_UPLOADMODULE_ZIP}}"
       
     - name: download unzip
       run: curl http://stahlworks.com/dev/unzip.exe --output temp/unzip.exe
+
+    - name: unzip
+      run: temp/unzip.exe "${{env.METAFRM_UPLOADMODULE_ZIP}}"
+
       
     - name: dir
       run: dir temp
-        
-    #- name: Install MAUI Workload
-    #  run: dotnet workload install maui --ignore-failed-sources
-
-    #- name: Restore dependencies
-    #  run: dotnet restore
-
-    #- name: Build Debug
-    #  run: dotnet build -c Debug --no-restore
       
-    #- name: Test Debug
-    #  run: dotnet test -c Debug --no-build --verbosity normal
-
-    #- name: Build Release
-    #  run: dotnet build -c Release --no-restore
-      
-    #- name: Test Release
-    #  run: dotnet test -c Release --no-build --verbosity normal
-
-    
-    #- name: mkdir temp
-    #  run: mkdir temp
-
-    #- name: cd temp
-    #  run: cd temp
-
-    #- name: download
-    #  run: curl ${{env.METAFRM_UPLOADMODULE_URL}} --output ${{env.METAFRM_UPLOADMODULE_ZIP}}
-      
-    #- name: download unzip
-    #  run: curl http://stahlworks.com/dev/unzip.exe --output unzip.exe
-
-    #- name: unzip
-    #  run: unzip.exe "${{env.METAFRM_UPLOADMODULE_ZIP}}"
+    - name: Upload Module
+      run: temp/${{env.METAFRM_UPLOADMODULE_FILE}} ${{env.DLL_ID}} "${{env.DLL_PATH}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}"
 
       
-    #- name: dir
-    #  run: dir
+    - name: Pack nugets
+      run: dotnet pack -c Release --no-build --output .
       
-    #- name: Upload Module
-    #  run: ${{env.METAFRM_UPLOADMODULE_FILE}} ${{env.DLL_ID}} "${{env.DLL_PATH}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}"
-
-    #- name: cd ..
-    #  run: cd ..
-      
-      
-    #- name: Pack nugets
-    #  run: dotnet pack -c Release --no-build --output .
-      
-    #- name: Push to NuGet
-    #  run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_AUTH_TOKEN}} --source https://api.nuget.org/v3/index.json
+    - name: Push to NuGet
+      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_AUTH_TOKEN}} --source https://api.nuget.org/v3/index.json
