@@ -67,7 +67,7 @@ jobs:
       run: unzip.exe "${{env.METAFRM_UPLOADMODULE_ZIP}}"
       
     - name: Upload Module
-      run: ${{env.METAFRM_UPLOADMODULE_FILE}} ${{env.DLL_ID}} "${{env.DLL_PATH}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}"
+      run: start "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{env.DLL_ID}}" "${{env.DLL_PATH}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}"
 
     - name: cd ..
       run: cd ..
