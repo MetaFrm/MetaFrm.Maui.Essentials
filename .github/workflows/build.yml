@@ -59,19 +59,9 @@ jobs:
       
     - name: download unzip
       run: curl http://stahlworks.com/dev/unzip.exe --output temp/unzip.exe
-      
-    - name: dir
-      run: dir
-
-    - name: dir
-      run: dir temp
 
     - name: unzip
       run: temp\unzip.exe "temp/${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp\
-
-      
-    - name: dir
-      run: dir temp
       
     - name: Upload Module
       run: temp\${{env.METAFRM_UPLOADMODULE_FILE}} ${{env.DLL_ID}} "${{env.DLL_PATH}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}"
