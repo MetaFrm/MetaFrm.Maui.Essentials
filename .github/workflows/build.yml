@@ -13,14 +13,13 @@ jobs:
   build:
     runs-on: windows-2022
     env:
-      #DOTNET_NOLOGO: true                     # Disable the .NET logo
-      #DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Disable the .NET first time experience
-      #DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
-      METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule.zip"
-      METAFRM_UPLOADMODULE_ZIP: "MetaFrameworkManagementSystemUploadModule.zip"
-      METAFRM_UPLOADMODULE_FILE: "MetaFrameworkManagementSystemUploadModule.exe"
       DLL_ID: 25
       DLL_PATH: "MetaFrm.Maui.Essentials(net6.0)/bin/Release/net6.0/MetaFrm.Maui.Essentials.dll"
+      UPLOAD_MODURE: "Y"
+      PUSH_NUGET: "Y"
+      METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule.zip"
+      METAFRM_UPLOADMODULE_ZIP: "temp/MetaFrameworkManagementSystemUploadModule.zip"
+      METAFRM_UPLOADMODULE_FILE: "temp/MetaFrameworkManagementSystemUploadModule.dll"
       
     steps:
     - uses: actions/checkout@v3
@@ -36,30 +35,30 @@ jobs:
       with:
         nuget-version: 5.x
         
-    - name: Install MAUI Workload
+    - name: Install MAUI Workload (Windows)
       if: runner.os == 'Windows'
       run: dotnet workload install maui --ignore-failed-sources
 
 
-    - name: download
+    - name: Download Upload Module
       if: runner.os != 'Windows'
       run: wget -d "${{env.METAFRM_UPLOADMODULE_URL}}" -P temp
 
-    - name: download
+    - name: Download Upload Module (Windows)
       if: runner.os == 'Windows'
-      run: curl ${{env.METAFRM_UPLOADMODULE_URL}} --output "temp\${{env.METAFRM_UPLOADMODULE_ZIP}}"
+      run: curl ${{env.METAFRM_UPLOADMODULE_URL}} --output "${{env.METAFRM_UPLOADMODULE_ZIP}}"
       
-    - name: download unzip
+    - name: Download unzip.exe (Windows)
       if: runner.os == 'Windows'
       run: curl http://stahlworks.com/dev/unzip.exe --output temp/unzip.exe
 
-    - name: unzip
+    - name: Unzip
       if: runner.os != 'Windows'
-      run: unzip "temp/${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp
+      run: unzip "${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp
       
-    - name: unzip
+    - name: Unzip (Windows)
       if: runner.os == 'Windows'
-      run: temp\unzip.exe "temp/${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp
+      run: temp\unzip.exe "${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp
 
 
     - name: Restore dependencies
@@ -101,20 +100,32 @@ jobs:
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Test Release Fail !!" "${{env.DLL_PATH}}"
 
-
-    - name: Pack nugets
+      
+      
+    - name: Upload Module
       id: ST6
-      run: dotnet pack -c Release --no-build --output .
+      if: env.UPLOAD_MODURE == 'Y'
+      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "upload" ${{env.DLL_ID}} "${{env.DLL_PATH}}"
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' && steps.ST5.outcome != 'failure' }}
+      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Upload Module Fail !!" "${{env.DLL_PATH}}"
+
+
+    - name: Pack nugets
+      id: ST7
+      if: env.PUSH_NUGET == 'Y'
+      run: dotnet pack -c Release --no-build --output .
+    - name: if failure
+      if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' && steps.ST5.outcome != 'failure' && steps.ST6.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Pack nugets Fail !!" "${{env.DLL_PATH}}"
       
 
     - name: Push to NuGet
-      id: ST7
+      id: ST8
+      if: env.PUSH_NUGET == 'Y'
       run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_AUTH_TOKEN}} --source https://api.nuget.org/v3/index.json
     - name: if failure
-      if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' && steps.ST5.outcome != 'failure' && steps.ST6.outcome != 'failure' }}
+      if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' && steps.ST5.outcome != 'failure' && steps.ST6.outcome != 'failure' && steps.ST7.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Push to NuGet Fail !!" "${{env.DLL_PATH}}"
       
 
