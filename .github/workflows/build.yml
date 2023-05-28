@@ -1,8 +1,5 @@
 name: build
 
-# 참고 사이트
-# https://blog.taranissoftware.com/build-net-maui-apps-with-github-actions
-
 on:
   push:
     branches: [ "master" ]
@@ -16,7 +13,7 @@ jobs:
       DLL_ID: 25
       DLL_PATH: "MetaFrm.Maui.Essentials(net6.0)/bin/Release/net6.0/MetaFrm.Maui.Essentials.dll"
       UPLOAD_MODURE: "Y"
-      PUSH_NUGET: "Y"
+      PUSH_NUGET: "N"
       METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule.zip"
       METAFRM_UPLOADMODULE_ZIP: "temp/MetaFrameworkManagementSystemUploadModule.zip"
       METAFRM_UPLOADMODULE_FILE: "temp/MetaFrameworkManagementSystemUploadModule.dll"
@@ -38,7 +35,6 @@ jobs:
     - name: Install MAUI Workload (Windows)
       if: runner.os == 'Windows'
       run: dotnet workload install maui --ignore-failed-sources
-
       
     - name: mkdir temp (Windows)
       if: runner.os == 'Windows'
@@ -81,14 +77,12 @@ jobs:
       if: ${{ failure() && steps.ST1.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Build Debug Fail !!" "${{env.DLL_PATH}}"
 
-
     - name: Test Debug
       id: ST3
       run: dotnet test -c Debug --no-build --verbosity normal
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Test Debug Fail !!" "${{env.DLL_PATH}}"
-
 
     - name: Build Release
       id: ST4
@@ -97,7 +91,6 @@ jobs:
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Build Release Fail !!" "${{env.DLL_PATH}}"
 
-      
     - name: Test Release
       id: ST5
       run: dotnet test -c Release --no-build --verbosity normal
@@ -105,7 +98,6 @@ jobs:
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Test Release Fail !!" "${{env.DLL_PATH}}"
 
-      
       
     - name: Upload Module
       id: ST6
@@ -124,7 +116,6 @@ jobs:
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' && steps.ST5.outcome != 'failure' && steps.ST6.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Pack nugets Fail !!" "${{env.DLL_PATH}}"
       
-
     - name: Push to NuGet
       id: ST8
       if: env.PUSH_NUGET == 'Y'
