@@ -8,22 +8,20 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-    
-env:
-  DOTNET_NOLOGO: true                     # Disable the .NET logo
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Disable the .NET first time experience
-  DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
-  METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule.zip"
-  METAFRM_UPLOADMODULE_ZIP: "MetaFrameworkManagementSystemUploadModule.zip"
-  METAFRM_UPLOADMODULE_FILE: "MetaFrameworkManagementSystemUploadModule.exe"
-  DLL_ID: 25
-  DLL_PATH: "MetaFrm.Maui.Essentials(net6.0)/bin/Release/net6.0/MetaFrm.Maui.Essentials.dll"
-
 
 jobs:
   build:
     runs-on: windows-2022
-
+    env:
+      #DOTNET_NOLOGO: true                     # Disable the .NET logo
+      #DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Disable the .NET first time experience
+      #DOTNET_CLI_TELEMETRY_OPTOUT: true       # Disable sending .NET CLI telemetry
+      METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule.zip"
+      METAFRM_UPLOADMODULE_ZIP: "MetaFrameworkManagementSystemUploadModule.zip"
+      METAFRM_UPLOADMODULE_FILE: "MetaFrameworkManagementSystemUploadModule.exe"
+      DLL_ID: 25
+      DLL_PATH: "MetaFrm.Maui.Essentials(net6.0)/bin/Release/net6.0/MetaFrm.Maui.Essentials.dll"
+      
     steps:
     - uses: actions/checkout@v3
     
@@ -31,44 +29,94 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+
+    - name: Setup NuGet
+      if: runner.os != 'Windows'
+      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        nuget-version: 5.x
         
     - name: Install MAUI Workload
+      if: runner.os == 'Windows'
       run: dotnet workload install maui --ignore-failed-sources
 
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Build Debug
-      run: dotnet build -c Debug --no-restore
-      
-    - name: Test Debug
-      run: dotnet test -c Debug --no-build --verbosity normal
-
-    - name: Build Release
-      run: dotnet build -c Release --no-restore
-      
-    - name: Test Release
-      run: dotnet test -c Release --no-build --verbosity normal
-
-    
-    - name: mkdir temp
-      run: mkdir temp
 
     - name: download
+      if: runner.os != 'Windows'
+      run: wget -d "${{env.METAFRM_UPLOADMODULE_URL}}" -P temp
+
+    - name: download
+      if: runner.os == 'Windows'
       run: curl ${{env.METAFRM_UPLOADMODULE_URL}} --output "temp\${{env.METAFRM_UPLOADMODULE_ZIP}}"
       
     - name: download unzip
+      if: runner.os == 'Windows'
       run: curl http://stahlworks.com/dev/unzip.exe --output temp/unzip.exe
 
     - name: unzip
-      run: temp\unzip.exe "temp/${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp\
+      if: runner.os != 'Windows'
+      run: unzip "temp/${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp
       
-    - name: Upload Module
-      run: temp\${{env.METAFRM_UPLOADMODULE_FILE}} ${{env.DLL_ID}} "${{env.DLL_PATH}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}"
+    - name: unzip
+      if: runner.os == 'Windows'
+      run: temp\unzip.exe "temp/${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp
+
+
+    - name: Restore dependencies
+      id: ST1
+      run: dotnet restore
+    - name: if failure
+      if: ${{ failure()}}
+      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Restore dependencies Fail !!" "${{env.DLL_PATH}}"
+      
+
+    - name: Build Debug
+      id: ST2
+      run: dotnet build -c Debug --no-restore
+    - name: if failure
+      if: ${{ failure() && steps.ST1.outcome != 'failure' }}
+      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Build Debug Fail !!" "${{env.DLL_PATH}}"
+
+
+    - name: Test Debug
+      id: ST3
+      run: dotnet test -c Debug --no-build --verbosity normal
+    - name: if failure
+      if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' }}
+      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Test Debug Fail !!" "${{env.DLL_PATH}}"
+
+
+    - name: Build Release
+      id: ST4
+      run: dotnet build -c Release --no-restore
+    - name: if failure
+      if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' }}
+      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Build Release Fail !!" "${{env.DLL_PATH}}"
 
       
+    - name: Test Release
+      id: ST5
+      run: dotnet test -c Release --no-build --verbosity normal
+    - name: if failure
+      if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' }}
+      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Test Release Fail !!" "${{env.DLL_PATH}}"
+
+
     - name: Pack nugets
+      id: ST6
       run: dotnet pack -c Release --no-build --output .
+    - name: if failure
+      if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' && steps.ST5.outcome != 'failure' }}
+      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Pack nugets Fail !!" "${{env.DLL_PATH}}"
       
+
     - name: Push to NuGet
+      id: ST7
       run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_AUTH_TOKEN}} --source https://api.nuget.org/v3/index.json
+    - name: if failure
+      if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' && steps.ST5.outcome != 'failure' && steps.ST6.outcome != 'failure' }}
+      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Push to NuGet Fail !!" "${{env.DLL_PATH}}"
+      
+
+    - name: Completed
+      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "CI/CD Completed !!" "${{env.DLL_PATH}}"
