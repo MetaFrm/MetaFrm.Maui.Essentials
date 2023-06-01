@@ -10,9 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루�
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Maui.Essentials", "MetaFrm.Maui.Essentials(net6.0)\MetaFrm.Maui.Essentials.csproj", "{55467B87-95A4-47CA-BAA4-03A7B8D76BB8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net6.0", "net6.0", "{B4A1A0BC-C496-472B-9EAF-2C90983BFB02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Maui.Essentials(net6.0)", "MetaFrm.Maui.Essentials(net6.0)\MetaFrm.Maui.Essentials(net6.0).csproj", "{55467B87-95A4-47CA-BAA4-03A7B8D76BB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}"
 EndProject
