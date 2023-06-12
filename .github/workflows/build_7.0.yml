@@ -1,4 +1,4 @@
-name: build
+name: build 7.0
 
 on:
   push:
@@ -6,26 +6,27 @@ on:
   pull_request:
     branches: [ "master" ]
 env:
-  DLL_ID: 25
-  UPLOAD_MODURE: "Y"
-  PUSH_NUGET: "Y"
+  DLL_ID: ${{secrets.DLL_ID_7}} # NET버전
+  UPLOAD_MODURE: "N"
+  PUSH_NUGET: "N"
 
 jobs:
-  build:
+  build7:
     runs-on: windows-2022
     env:
-      DLL_PATH: "${{vars.NAMESPACE}}(net6.0)/bin/Release/net6.0/${{vars.NAMESPACE}}.dll"
-      METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule.zip"
-      METAFRM_UPLOADMODULE_ZIP: "temp/MetaFrameworkManagementSystemUploadModule.zip"
+      DLL_PATH: "${{vars.NAMESPACE}}(net7.0)/bin/Release/net7.0/${{vars.NAMESPACE}}.dll" # NET버전
+      PROJECT_PATH: "${{vars.NAMESPACE}}(net7.0)" # NET버전
+      METAFRM_UPLOADMODULE_URL: "https://download.crcbot.kr/github/MetaFrameworkManagementSystemUploadModule7.0.zip" # NET버전
+      METAFRM_UPLOADMODULE_ZIP: "temp/MetaFrameworkManagementSystemUploadModule7.0.zip" # NET버전
       METAFRM_UPLOADMODULE_FILE: "temp/MetaFrameworkManagementSystemUploadModule.dll"
-      
+
     steps:
     - uses: actions/checkout@v3
     
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 7.0.x # NET버전
 
     - name: Setup NuGet
       if: runner.os != 'Windows'
@@ -65,41 +66,41 @@ jobs:
 
     - name: Restore dependencies
       id: ST1
-      run: dotnet restore
+      run: dotnet restore "${{env.PROJECT_PATH}}"
     - name: if failure
       if: ${{ failure()}}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Restore dependencies Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
-      
+
 
     - name: Build Debug
       id: ST2
-      run: dotnet build -c Debug --no-restore
+      run: dotnet build "${{env.PROJECT_PATH}}" -c Debug --no-restore
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Build Debug Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
 
     - name: Test Debug
       id: ST3
-      run: dotnet test -c Debug --no-build --verbosity normal
+      run: dotnet test "${{env.PROJECT_PATH}}" -c Debug --no-build --verbosity normal
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Test Debug Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
 
     - name: Build Release
       id: ST4
-      run: dotnet build -c Release --no-restore
+      run: dotnet build "${{env.PROJECT_PATH}}" -c Release --no-restore
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Build Release Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
-
+      
     - name: Test Release
       id: ST5
-      run: dotnet test -c Release --no-build --verbosity normal
+      run: dotnet test "${{env.PROJECT_PATH}}" -c Release --no-build --verbosity normal
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Test Release Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
-
       
+
     - name: Upload Module
       id: ST6
       if: env.UPLOAD_MODURE == 'Y'
@@ -112,7 +113,7 @@ jobs:
     - name: Pack nugets
       id: ST7
       if: env.PUSH_NUGET == 'Y'
-      run: dotnet pack -c Release --no-build --output .
+      run: dotnet pack "${{env.PROJECT_PATH}}"  -c Release --no-build --output .
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' && steps.ST5.outcome != 'failure' && steps.ST6.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Pack nugets Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
@@ -120,7 +121,7 @@ jobs:
     - name: Push to NuGet
       id: ST8
       if: env.PUSH_NUGET == 'Y'
-      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_AUTH_TOKEN}} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "${{env.PROJECT_PATH}}/bin/Release/*.nupkg" --api-key ${{secrets.NUGET_AUTH_TOKEN}} --source https://api.nuget.org/v3/index.json
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' && steps.ST5.outcome != 'failure' && steps.ST6.outcome != 'failure' && steps.ST7.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}" "notification" "Push to NuGet Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"

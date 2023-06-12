@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net7.0;net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<RootNamespace>MetaFrm.Maui</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
@@ -19,8 +19,8 @@
 		<AssemblyName>MetaFrm.Maui.Essentials</AssemblyName>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageId>MetaFrm.Maui.Essentials.net6.0</PackageId>
-		<Version>6.0.0.33</Version>
+		<PackageId>MetaFrm.Maui.Essentials.net7.0</PackageId>
+		<Version>7.0.0.0</Version>
 		<Authors>dsun</Authors>
 		<Company>Meta Framework</Company>
 		<Copyright>Copyright 2023. dsun all rights reserved.</Copyright>
@@ -87,6 +87,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="MetaFrm.Core.net6.0" Version="6.0.0.33" />
+	  <PackageReference Include="MetaFrm.Core.net7.0" Version="7.0.0" />
 	</ItemGroup>
 </Project>

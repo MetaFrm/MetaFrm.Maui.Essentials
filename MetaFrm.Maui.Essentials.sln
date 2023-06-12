@@ -18,7 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A112
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{90D941C1-8257-4052-9D59-676FC64C1586}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\build_6.0.yml = .github\workflows\build_6.0.yml
+		.github\workflows\build_7.0.yml = .github\workflows\build_7.0.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationModel", "ApplicationModel", "{C3761CCD-61FC-4C3E-BC88-F3FEC40E4A02}"
@@ -89,6 +90,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Media", "Media", "{A9AD74A2
 		src\Media\UnitConverters.cs = src\Media\UnitConverters.cs
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Maui.Essentials(net7.0)", "MetaFrm.Maui.Essentials(net7.0)\MetaFrm.Maui.Essentials(net7.0).csproj", "{8B1B3095-27A2-40BE-A61F-42BF7C95101E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +102,10 @@ Global
 		{55467B87-95A4-47CA-BAA4-03A7B8D76BB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55467B87-95A4-47CA-BAA4-03A7B8D76BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55467B87-95A4-47CA-BAA4-03A7B8D76BB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B1B3095-27A2-40BE-A61F-42BF7C95101E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B1B3095-27A2-40BE-A61F-42BF7C95101E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B1B3095-27A2-40BE-A61F-42BF7C95101E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B1B3095-27A2-40BE-A61F-42BF7C95101E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
