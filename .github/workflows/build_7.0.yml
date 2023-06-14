@@ -8,7 +8,7 @@ on:
 env:
   DLL_ID: ${{secrets.DLL_ID_7}} # NET버전
   UPLOAD_MODURE: "N" # 고정
-  PUSH_NUGET: "Y"
+  PUSH_NUGET: "N"
 
 jobs:
   build7:
@@ -16,7 +16,7 @@ jobs:
     env:
       DLL_PATH: "${{vars.NAMESPACE}}(net7.0)/bin/Release/net7.0/${{vars.NAMESPACE}}.dll" # NET버전
       PROJECT_PATH: "${{vars.NAMESPACE}}(net7.0)" # NET버전
-      METAFRM_UPLOADMODULE_URL: "https://download.crcbot.kr/github/MetaFrameworkManagementSystemUploadModule7.0.zip" # NET버전
+      METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule7.0.zip" # NET버전
       METAFRM_UPLOADMODULE_ZIP: "temp/MetaFrameworkManagementSystemUploadModule7.0.zip" # NET버전
       METAFRM_UPLOADMODULE_FILE: "temp/MetaFrameworkManagementSystemUploadModule.dll"
 
