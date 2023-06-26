@@ -1,92 +1,83 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
-		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
-		<RootNamespace>MetaFrm.Maui</RootNamespace>
-		<UseMaui>true</UseMaui>
-		<SingleProject>true</SingleProject>
-		<ImplicitUsings>enable</ImplicitUsings>
-
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<AssemblyName>MetaFrm.Maui.Essentials</AssemblyName>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageId>MetaFrm.Maui.Essentials.net6.0</PackageId>
-		<Version>6.0.0.42</Version>
-		<Authors>dsun</Authors>
-		<Company>Meta Framework</Company>
-		<Copyright>Copyright 2023. dsun all rights reserved.</Copyright>
-		<PackageProjectUrl>https://github.com/MetaFrm/MetaFrm.Maui.Essentials</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/MetaFrm/MetaFrm.Maui.Essentials</RepositoryUrl>
-		<PackageTags>meta;framework;dotnet;</PackageTags>
-		
-		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ss:fffZ"))</SourceRevisionId>
-		
-		<Title>Meta Framework Maui Essentials</Title>
-		
-		<Product>Meta Framework Maui Essentials</Product>
-		
-		<Description>Meta Framework
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+    <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+    <!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+    <RootNamespace>MetaFrm.Maui</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    <AssemblyName>MetaFrm.Maui.Essentials</AssemblyName>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>MetaFrm.Maui.Essentials.net6.0</PackageId>
+    <Version>6.0.0.46</Version>
+    <Authors>dsun</Authors>
+    <Company>Meta Framework</Company>
+    <Copyright>Copyright 2023. dsun all rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/MetaFrm/MetaFrm.Maui.Essentials</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MetaFrm/MetaFrm.Maui.Essentials</RepositoryUrl>
+    <PackageTags>meta;framework;dotnet;</PackageTags>
+    <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ss:fffZ"))</SourceRevisionId>
+    <Title>Meta Framework Maui Essentials</Title>
+    <Product>Meta Framework Maui Essentials</Product>
+    <Description>Meta Framework
 (Multi platform &amp; Meta management)</Description>
-	</PropertyGroup>
-
-	<ItemGroup>
-	  <Compile Include="..\src\ApplicationModel\AppInfo.cs" Link="ApplicationModel\AppInfo.cs" />
-	  <Compile Include="..\src\ApplicationModel\Browser.cs" Link="ApplicationModel\Browser.cs" />
-	  <Compile Include="..\src\ApplicationModel\Communication\Contacts.cs" Link="ApplicationModel\Communication\Contacts.cs" />
-	  <Compile Include="..\src\ApplicationModel\Communication\Email.cs" Link="ApplicationModel\Communication\Email.cs" />
-	  <Compile Include="..\src\ApplicationModel\Communication\PhoneDialer.cs" Link="ApplicationModel\Communication\PhoneDialer.cs" />
-	  <Compile Include="..\src\ApplicationModel\Communication\Sms.cs" Link="ApplicationModel\Communication\Sms.cs" />
-	  <Compile Include="..\src\ApplicationModel\DataTransfer\Clipboard.cs" Link="ApplicationModel\DataTransfer\Clipboard.cs" />
-	  <Compile Include="..\src\ApplicationModel\DataTransfer\Share.cs" Link="ApplicationModel\DataTransfer\Share.cs" />
-	  <Compile Include="..\src\ApplicationModel\Launcher.cs" Link="ApplicationModel\Launcher.cs" />
-	  <Compile Include="..\src\ApplicationModel\Map.cs" Link="ApplicationModel\Map.cs" />
-	  <Compile Include="..\src\ApplicationModel\Permissions.cs" Link="ApplicationModel\Permissions.cs" />
-	  <Compile Include="..\src\ApplicationModel\VersionTracking.cs" Link="ApplicationModel\VersionTracking.cs" />
-	  <Compile Include="..\src\Devices\Battery.cs" Link="Devices\Battery.cs" />
-	  <Compile Include="..\src\Devices\DeviceDisplay.cs" Link="Devices\DeviceDisplay.cs" />
-	  <Compile Include="..\src\Devices\DeviceInfo.cs" Link="Devices\DeviceInfo.cs" />
-	  <Compile Include="..\src\Devices\HapticFeedback.cs" Link="Devices\HapticFeedback.cs" />
-	  <Compile Include="..\src\Devices\Sensors\Accelerometer.cs" Link="Devices\Sensors\Accelerometer.cs" />
-	  <Compile Include="..\src\Devices\Sensors\Barometer.cs" Link="Devices\Sensors\Barometer.cs" />
-	  <Compile Include="..\src\Devices\Sensors\Compass.cs" Link="Devices\Sensors\Compass.cs" />
-	  <Compile Include="..\src\Devices\Sensors\Flashlight.cs" Link="Devices\Sensors\Flashlight.cs" />
-	  <Compile Include="..\src\Devices\Sensors\Geocoding.cs" Link="Devices\Sensors\Geocoding.cs" />
-	  <Compile Include="..\src\Devices\Sensors\Geolocation.cs" Link="Devices\Sensors\Geolocation.cs" />
-	  <Compile Include="..\src\Devices\Sensors\Gyroscope.cs" Link="Devices\Sensors\Gyroscope.cs" />
-	  <Compile Include="..\src\Devices\Sensors\Magnetometer.cs" Link="Devices\Sensors\Magnetometer.cs" />
-	  <Compile Include="..\src\Devices\Sensors\OrientationSensor.cs" Link="Devices\Sensors\OrientationSensor.cs" />
-	  <Compile Include="..\src\Devices\Vibration.cs" Link="Devices\Vibration.cs" />
-	  <Compile Include="..\src\Media\MediaPicker.cs" Link="Media\MediaPicker.cs" />
-	  <Compile Include="..\src\Media\Screenshot.cs" Link="Media\Screenshot.cs" />
-	  <Compile Include="..\src\Media\ScreenshotResult.cs" Link="Media\ScreenshotResult.cs" />
-	  <Compile Include="..\src\Media\TextToSpeech.cs" Link="Media\TextToSpeech.cs" />
-	  <Compile Include="..\src\Media\UnitConverters.cs" Link="Media\UnitConverters.cs" />
-	  <Compile Include="..\src\Networking\Connectivity.cs" Link="Networking\Connectivity.cs" />
-	  <Compile Include="..\src\Storage\FilePicker.cs" Link="Storage\FilePicker.cs" />
-	  <Compile Include="..\src\Storage\FileSystem.cs" Link="Storage\FileSystem.cs" />
-	  <Compile Include="..\src\Storage\Preferences.cs" Link="Storage\Preferences.cs" />
-	  <Compile Include="..\src\Storage\SecureStorage.cs" Link="Storage\SecureStorage.cs" />
-	</ItemGroup>
-	
-	<ItemGroup>
-	  <Folder Include="ApplicationModel\Communication\" />
-	  <Folder Include="ApplicationModel\DataTransfer\" />
-	  <Folder Include="Devices\Sensors\" />
-	  <Folder Include="Networking\" />
-	  <Folder Include="Media\" />
-	  <Folder Include="Storage\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Include="MetaFrm.Core.net6.0" Version="6.0.0.42" />
-	</ItemGroup>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\src\ApplicationModel\AppInfo.cs" Link="ApplicationModel\AppInfo.cs" />
+    <Compile Include="..\src\ApplicationModel\Browser.cs" Link="ApplicationModel\Browser.cs" />
+    <Compile Include="..\src\ApplicationModel\Communication\Contacts.cs" Link="ApplicationModel\Communication\Contacts.cs" />
+    <Compile Include="..\src\ApplicationModel\Communication\Email.cs" Link="ApplicationModel\Communication\Email.cs" />
+    <Compile Include="..\src\ApplicationModel\Communication\PhoneDialer.cs" Link="ApplicationModel\Communication\PhoneDialer.cs" />
+    <Compile Include="..\src\ApplicationModel\Communication\Sms.cs" Link="ApplicationModel\Communication\Sms.cs" />
+    <Compile Include="..\src\ApplicationModel\DataTransfer\Clipboard.cs" Link="ApplicationModel\DataTransfer\Clipboard.cs" />
+    <Compile Include="..\src\ApplicationModel\DataTransfer\Share.cs" Link="ApplicationModel\DataTransfer\Share.cs" />
+    <Compile Include="..\src\ApplicationModel\Launcher.cs" Link="ApplicationModel\Launcher.cs" />
+    <Compile Include="..\src\ApplicationModel\Map.cs" Link="ApplicationModel\Map.cs" />
+    <Compile Include="..\src\ApplicationModel\Permissions.cs" Link="ApplicationModel\Permissions.cs" />
+    <Compile Include="..\src\ApplicationModel\VersionTracking.cs" Link="ApplicationModel\VersionTracking.cs" />
+    <Compile Include="..\src\Devices\Battery.cs" Link="Devices\Battery.cs" />
+    <Compile Include="..\src\Devices\DeviceDisplay.cs" Link="Devices\DeviceDisplay.cs" />
+    <Compile Include="..\src\Devices\DeviceInfo.cs" Link="Devices\DeviceInfo.cs" />
+    <Compile Include="..\src\Devices\HapticFeedback.cs" Link="Devices\HapticFeedback.cs" />
+    <Compile Include="..\src\Devices\Sensors\Accelerometer.cs" Link="Devices\Sensors\Accelerometer.cs" />
+    <Compile Include="..\src\Devices\Sensors\Barometer.cs" Link="Devices\Sensors\Barometer.cs" />
+    <Compile Include="..\src\Devices\Sensors\Compass.cs" Link="Devices\Sensors\Compass.cs" />
+    <Compile Include="..\src\Devices\Sensors\Flashlight.cs" Link="Devices\Sensors\Flashlight.cs" />
+    <Compile Include="..\src\Devices\Sensors\Geocoding.cs" Link="Devices\Sensors\Geocoding.cs" />
+    <Compile Include="..\src\Devices\Sensors\Geolocation.cs" Link="Devices\Sensors\Geolocation.cs" />
+    <Compile Include="..\src\Devices\Sensors\Gyroscope.cs" Link="Devices\Sensors\Gyroscope.cs" />
+    <Compile Include="..\src\Devices\Sensors\Magnetometer.cs" Link="Devices\Sensors\Magnetometer.cs" />
+    <Compile Include="..\src\Devices\Sensors\OrientationSensor.cs" Link="Devices\Sensors\OrientationSensor.cs" />
+    <Compile Include="..\src\Devices\Vibration.cs" Link="Devices\Vibration.cs" />
+    <Compile Include="..\src\Media\MediaPicker.cs" Link="Media\MediaPicker.cs" />
+    <Compile Include="..\src\Media\Screenshot.cs" Link="Media\Screenshot.cs" />
+    <Compile Include="..\src\Media\ScreenshotResult.cs" Link="Media\ScreenshotResult.cs" />
+    <Compile Include="..\src\Media\TextToSpeech.cs" Link="Media\TextToSpeech.cs" />
+    <Compile Include="..\src\Media\UnitConverters.cs" Link="Media\UnitConverters.cs" />
+    <Compile Include="..\src\Networking\Connectivity.cs" Link="Networking\Connectivity.cs" />
+    <Compile Include="..\src\Storage\FilePicker.cs" Link="Storage\FilePicker.cs" />
+    <Compile Include="..\src\Storage\FileSystem.cs" Link="Storage\FileSystem.cs" />
+    <Compile Include="..\src\Storage\Preferences.cs" Link="Storage\Preferences.cs" />
+    <Compile Include="..\src\Storage\SecureStorage.cs" Link="Storage\SecureStorage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ApplicationModel\Communication\" />
+    <Folder Include="ApplicationModel\DataTransfer\" />
+    <Folder Include="Devices\Sensors\" />
+    <Folder Include="Networking\" />
+    <Folder Include="Media\" />
+    <Folder Include="Storage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MetaFrm.Core.net6.0" Version="6.0.0.46" />
+  </ItemGroup>
 </Project>
