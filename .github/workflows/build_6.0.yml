@@ -8,7 +8,7 @@ on:
 env:
   DLL_ID: ${{secrets.DLL_ID_6}} # NET¹öÀü
   UPLOAD_MODURE: "Y"
-  PUSH_NUGET: "Y"
+  PUSH_NUGET: "N"
 
 jobs:
   build6:
