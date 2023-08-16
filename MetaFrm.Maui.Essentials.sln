@@ -92,6 +92,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Media", "Media", "{A9AD74A2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Maui.Essentials(net7.0)", "MetaFrm.Maui.Essentials(net7.0)\MetaFrm.Maui.Essentials(net7.0).csproj", "{8B1B3095-27A2-40BE-A61F-42BF7C95101E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localization", "{A5C6F04F-49C0-4CEB-8CD8-504BBC2641D8}"
+	ProjectSection(SolutionItems) = preProject
+		src\Localization\LocalizationManager.cs = src\Localization\LocalizationManager.cs
+		src\Localization\TranslateExtension.cs = src\Localization\TranslateExtension.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,6 +126,7 @@ Global
 		{98578512-B888-4AD6-93DE-8935F42C67FD} = {C3761CCD-61FC-4C3E-BC88-F3FEC40E4A02}
 		{01D1571F-5740-415E-9426-4620B158CBBF} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
 		{A9AD74A2-A490-44AB-A0B0-42EBD33B7B7B} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
+		{A5C6F04F-49C0-4CEB-8CD8-504BBC2641D8} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {41EE46A8-D346-47B4-81B1-F4E906B0B021}
