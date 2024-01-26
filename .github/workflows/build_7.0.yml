@@ -22,7 +22,7 @@ jobs:
       METAFRM_UPLOADMODULE_FILE: "temp/MetaFrameworkManagementSystemUploadModule.dll"
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
@@ -128,5 +128,5 @@ jobs:
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}^${{env.PASSWORD}}" "notification" "Push to NuGet Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
       
 
-    - name: Completed
-      run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}^${{env.PASSWORD}}" "notification" "CI/CD Completed !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
+    # - name: Completed
+    #   run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}^${{env.PASSWORD}}" "notification" "CI/CD Completed !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
