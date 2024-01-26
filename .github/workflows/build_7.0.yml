@@ -38,6 +38,11 @@ jobs:
     - name: Install MAUI Workload (Windows)
       if: runner.os == 'Windows'
       run: dotnet workload install maui --ignore-failed-sources
+
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'microsoft'
+        java-version: '11'
       
     - name: mkdir temp (Windows)
       if: runner.os == 'Windows'
