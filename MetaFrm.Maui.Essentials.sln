@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build_6.0.yml = .github\workflows\build_6.0.yml
 		.github\workflows\build_7.0.yml = .github\workflows\build_7.0.yml
+		.github\workflows\build_8.0.yml = .github\workflows\build_8.0.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationModel", "ApplicationModel", "{C3761CCD-61FC-4C3E-BC88-F3FEC40E4A02}"
@@ -98,6 +99,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localizatio
 		src\Localization\TranslateExtension.cs = src\Localization\TranslateExtension.cs
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Maui.Essentials(net8.0)", "MetaFrm.Maui.Essentials(net8.0)\MetaFrm.Maui.Essentials(net8.0).csproj", "{A8822E8D-471E-44F9-8187-1E7FB93B5D50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -112,6 +115,10 @@ Global
 		{8B1B3095-27A2-40BE-A61F-42BF7C95101E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B1B3095-27A2-40BE-A61F-42BF7C95101E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B1B3095-27A2-40BE-A61F-42BF7C95101E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8822E8D-471E-44F9-8187-1E7FB93B5D50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8822E8D-471E-44F9-8187-1E7FB93B5D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8822E8D-471E-44F9-8187-1E7FB93B5D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8822E8D-471E-44F9-8187-1E7FB93B5D50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

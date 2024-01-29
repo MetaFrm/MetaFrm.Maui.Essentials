@@ -1,4 +1,4 @@
-name: build 6.0
+name: build 8.0
 
 on:
   push:
@@ -6,19 +6,19 @@ on:
   pull_request:
     branches: [ "master" ]
 env:
-  DLL_ID: ${{secrets.DLL_ID_6}} # NET버전
+  DLL_ID: ${{secrets.DLL_ID_8}} # NET버전
   UPLOAD_MODURE: "Y"
-  PUSH_NUGET: "N"
+  PUSH_NUGET: "Y"
   PASSWORD: ${{secrets.PASSWORD}}
 
 jobs:
-  build6:
+  build8:
     runs-on: windows-2022
     env:
-      DLL_PATH: "${{vars.NAMESPACE}}(net6.0)/bin/Release/net6.0/${{vars.NAMESPACE}}.dll" # NET버전
-      PROJECT_PATH: "${{vars.NAMESPACE}}(net6.0)" # NET버전
-      METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule6.0.zip" # NET버전
-      METAFRM_UPLOADMODULE_ZIP: "temp/MetaFrameworkManagementSystemUploadModule6.0.zip" # NET버전
+      DLL_PATH: "${{vars.NAMESPACE}}(net8.0)/bin/Release/net8.0/${{vars.NAMESPACE}}.dll" # NET버전
+      PROJECT_PATH: "${{vars.NAMESPACE}}(net8.0)" # NET버전
+      METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule8.0.zip" # NET버전
+      METAFRM_UPLOADMODULE_ZIP: "temp/MetaFrameworkManagementSystemUploadModule8.0.zip" # NET버전
       METAFRM_UPLOADMODULE_FILE: "temp/MetaFrameworkManagementSystemUploadModule.dll"
 
     steps:
@@ -27,7 +27,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 6.0.x # NET버전
+        dotnet-version: 8.0.x # NET버전
 
     - name: Setup NuGet
       if: runner.os != 'Windows'
@@ -39,10 +39,10 @@ jobs:
       if: runner.os == 'Windows'
       run: dotnet workload install maui --ignore-failed-sources
 
-    - uses: actions/setup-java@v2
-      with:
-        distribution: 'microsoft'
-        java-version: '11'
+    # - uses: actions/setup-java@v2
+    #   with:
+    #     distribution: 'microsoft'
+    #     java-version: '11'
       
     - name: mkdir temp (Windows)
       if: runner.os == 'Windows'
