@@ -25,7 +25,7 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 6.0.x # NET¹öÀü
 
@@ -33,7 +33,7 @@ jobs:
       if: runner.os != 'Windows'
       uses: NuGet/setup-nuget@v1.2.0
       with:
-        nuget-version: 5.x
+        nuget-version: latest
         
     - name: Install MAUI Workload (Windows)
       if: runner.os == 'Windows'
