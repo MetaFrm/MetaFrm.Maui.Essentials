@@ -31,7 +31,7 @@ jobs:
 
     - name: Setup NuGet
       if: runner.os != 'Windows'
-      uses: NuGet/setup-nuget@v1.2.0
+      uses: NuGet/setup-nuget@v2
       with:
         nuget-version: latest
         
