@@ -40,7 +40,6 @@
                 case PermissionType.CalendarRead: state = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.CalendarRead>(); break;
                 case PermissionType.Battery: state = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.Battery>(); break;
                 case PermissionType.Vibrate: state = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.Vibrate>(); break;
-                case PermissionType.PostNotifications: state = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.PostNotifications>(); break;
                 default:
                     return;
             }
@@ -73,7 +72,6 @@
                     case PermissionType.CalendarRead: state = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.CalendarRead>(); break;
                     case PermissionType.Battery: state = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.Battery>(); break;
                     case PermissionType.Vibrate: state = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.Vibrate>(); break;
-                    case PermissionType.PostNotifications: state = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.PostNotifications>(); break;
                     default:
                         return;
                 }
