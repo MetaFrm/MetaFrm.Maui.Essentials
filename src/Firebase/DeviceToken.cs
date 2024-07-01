@@ -12,7 +12,7 @@ namespace MetaFrm.Maui.Firebase
         /// GetToken
         /// </summary>
         /// <returns></returns>
-        public async Task<string?> GetToken()
+        public async Task<string> GetToken()
         {
             PermissionStatus state;
 
