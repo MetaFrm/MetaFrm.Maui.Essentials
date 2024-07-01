@@ -10,7 +10,7 @@ namespace MetaFrm.Maui.Ads
         /// <summary>
         /// IsDebug
         /// </summary>
-        public bool IsDebug { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsDebug { get; set; }
 
         private readonly string bannerAdsId;
         /// <summary>
