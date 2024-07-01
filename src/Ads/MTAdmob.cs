@@ -204,6 +204,46 @@ namespace MetaFrm.Maui.Ads
         public bool IsRewardedLoaded => CrossMauiMTAdmob.Current.IsRewardedLoaded();
 
         /// <summary>
+        /// ShowInterstitial
+        /// </summary>
+        public void ShowInterstitial()
+        {
+            try
+            {
+                if (Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.iOS))
+                {
+                    if (!CrossMauiMTAdmob.Current.IsInterstitialLoaded())
+                        CrossMauiMTAdmob.Current.LoadInterstitial(this.interstitialAdsId);
+
+                    CrossMauiMTAdmob.Current.ShowInterstitial();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        /// <summary>
+        /// ShowRewarded
+        /// </summary>
+        public void ShowRewarded()
+        {
+            try
+            {
+                if (Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.iOS))
+                {
+                    if (!CrossMauiMTAdmob.Current.IsRewardedLoaded())
+                        CrossMauiMTAdmob.Current.LoadRewarded(this.rewardeAdsId);
+
+                    CrossMauiMTAdmob.Current.ShowRewarded();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        /// <summary>
         /// MTAdmob
         /// </summary>
         public MTAdmob()
@@ -230,6 +270,9 @@ namespace MetaFrm.Maui.Ads
                     this.interstitialAdsId = this.IsDebug ? "ca-app-pub-3940256099942544/4411468910" : this.GetAttribute("iOSInterstitialAdsId");
                 else
                     this.interstitialAdsId = "";
+
+                if (!this.interstitialAdsId.IsNullOrEmpty())
+                    CrossMauiMTAdmob.Current.LoadInterstitial(this.interstitialAdsId);
             }
             catch (Exception)
             {
@@ -244,6 +287,9 @@ namespace MetaFrm.Maui.Ads
                     this.rewardeAdsId = this.IsDebug ? "ca-app-pub-3940256099942544/1712485313" : this.GetAttribute("iOSRewardeAdsId");
                 else
                     this.rewardeAdsId = "";
+
+                if (!this.rewardeAdsId.IsNullOrEmpty())
+                    CrossMauiMTAdmob.Current.LoadRewarded(this.rewardeAdsId);
             }
             catch (Exception)
             {
