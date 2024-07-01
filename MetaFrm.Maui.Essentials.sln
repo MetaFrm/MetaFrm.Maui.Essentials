@@ -99,6 +99,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localizatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Maui.Essentials(net8.0)", "MetaFrm.Maui.Essentials(net8.0)\MetaFrm.Maui.Essentials(net8.0).csproj", "{A8822E8D-471E-44F9-8187-1E7FB93B5D50}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ads", "Ads", "{FD6FD484-56F8-4077-8F19-15ED94BF5C96}"
+	ProjectSection(SolutionItems) = preProject
+		src\Ads\MTAdmob.cs = src\Ads\MTAdmob.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Firebase", "Firebase", "{16133272-8B53-40CA-8E9E-495B5049CA7B}"
+	ProjectSection(SolutionItems) = preProject
+		src\Firebase\DeviceToken.cs = src\Firebase\DeviceToken.cs
+		src\Firebase\DeviceToken7.cs = src\Firebase\DeviceToken7.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notification", "{EFD59C06-75A6-4152-85F0-55BC73434B22}"
+	ProjectSection(SolutionItems) = preProject
+		src\Firebase\Notification\CloudMessaging.cs = src\Firebase\Notification\CloudMessaging.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,6 +144,9 @@ Global
 		{01D1571F-5740-415E-9426-4620B158CBBF} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
 		{A9AD74A2-A490-44AB-A0B0-42EBD33B7B7B} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
 		{A5C6F04F-49C0-4CEB-8CD8-504BBC2641D8} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
+		{FD6FD484-56F8-4077-8F19-15ED94BF5C96} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
+		{16133272-8B53-40CA-8E9E-495B5049CA7B} = {BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}
+		{EFD59C06-75A6-4152-85F0-55BC73434B22} = {16133272-8B53-40CA-8E9E-495B5049CA7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {41EE46A8-D346-47B4-81B1-F4E906B0B021}
