@@ -7,24 +7,36 @@ namespace MetaFrm.Maui.Ads
     /// </summary>
     public class MTAdmob : IAds
     {
+        private bool isDebug;
         /// <summary>
         /// IsDebug
         /// </summary>
-        public bool IsDebug { get; set; }
+        public bool IsDebug
+        {
+            get
+            {
+                return this.isDebug;
+            }
+            set
+            {
+                this.isDebug = value;
+                this.Init();
+            }
+        }
 
-        private readonly string bannerAdsId;
+        private string bannerAdsId;
         /// <summary>
         /// BannerAdsId
         /// </summary>
         public string BannerAdsId => this.bannerAdsId;
 
-        private readonly string interstitialAdsId;
+        private string interstitialAdsId;
         /// <summary>
         /// InterstitialAdsId
         /// </summary>
         public string InterstitialAdsId => this.interstitialAdsId;
 
-        private readonly string rewardeAdsId;
+        private string rewardeAdsId;
         /// <summary>
         /// RewardeAdsId
         /// </summary>
@@ -243,10 +255,7 @@ namespace MetaFrm.Maui.Ads
             }
         }
 
-        /// <summary>
-        /// MTAdmob
-        /// </summary>
-        public MTAdmob()
+        private void Init()
         {
             try
             {
