@@ -93,7 +93,7 @@ namespace MetaFrm.Maui.Platforms
 
             add
             {
-                this.InterstitialOpened += value;
+                this.InterstitialClosed += value;
 
                 try
                 {
@@ -120,7 +120,7 @@ namespace MetaFrm.Maui.Platforms
                 {
                 }
 
-                this.InterstitialOpened -= value;
+                this.InterstitialClosed -= value;
             }
         }
         private void Current_OnInterstitialClosed(object sender, EventArgs e) => this.InterstitialClosed?.Invoke(sender, e);
