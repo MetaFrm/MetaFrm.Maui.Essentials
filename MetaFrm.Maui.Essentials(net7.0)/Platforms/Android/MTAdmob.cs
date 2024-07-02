@@ -1,6 +1,7 @@
-﻿using Plugin.MauiMTAdmob;
+﻿using MetaFrm.Maui.Ads;
+using Plugin.MauiMTAdmob;
 
-namespace MetaFrm.Maui.Ads
+namespace MetaFrm.Maui.Platforms
 {
     /// <summary>
     /// MTAdmob
@@ -20,7 +21,7 @@ namespace MetaFrm.Maui.Ads
             set
             {
                 this.isDebug = value;
-                this.Init();
+                this.AdsInit();
             }
         }
 
@@ -42,7 +43,7 @@ namespace MetaFrm.Maui.Ads
         /// </summary>
         public string RewardeAdsId => this.rewardeAdsId;
 
-        private event EventHandler InterstitialOpened;
+        private EventHandler InterstitialOpened;
         /// <summary>
         /// OnInterstitialOpened
         /// </summary>
@@ -83,7 +84,7 @@ namespace MetaFrm.Maui.Ads
         }
         private void Current_OnInterstitialOpened(object sender, EventArgs e) => this.InterstitialOpened?.Invoke(sender, e);
 
-        private event EventHandler InterstitialClosed;
+        private EventHandler InterstitialClosed;
         /// <summary>
         /// OnInterstitialClosed
         /// </summary>
@@ -124,7 +125,8 @@ namespace MetaFrm.Maui.Ads
         }
         private void Current_OnInterstitialClosed(object sender, EventArgs e) => this.InterstitialClosed?.Invoke(sender, e);
 
-        private event EventHandler RewardedOpened;
+
+        private EventHandler RewardedOpened;
         /// <summary>
         /// OnRewardedOpened
         /// </summary>
@@ -165,7 +167,7 @@ namespace MetaFrm.Maui.Ads
         }
         private void Current_OnRewardedOpened(object sender, EventArgs e) => this.RewardedOpened?.Invoke(sender, e);
 
-        private event EventHandler RewardedClosed;
+        private EventHandler RewardedClosed;
         /// <summary>
         /// OnRewardedClosed
         /// </summary>
@@ -206,6 +208,7 @@ namespace MetaFrm.Maui.Ads
         }
         private void Current_OnRewardedClosed(object sender, EventArgs e) => this.RewardedClosed?.Invoke(sender, e);
 
+
         /// <summary>
         /// IsInterstitialLoaded
         /// </summary>
@@ -215,6 +218,7 @@ namespace MetaFrm.Maui.Ads
         /// </summary>
         public bool IsRewardedLoaded => CrossMauiMTAdmob.Current.IsRewardedLoaded();
 
+
         /// <summary>
         /// ShowInterstitial
         /// </summary>
@@ -222,17 +226,27 @@ namespace MetaFrm.Maui.Ads
         {
             try
             {
-                if (Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.iOS))
+                if (!this.interstitialAdsId.IsNullOrEmpty() && Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.iOS))
                 {
-                    if (!CrossMauiMTAdmob.Current.IsInterstitialLoaded())
-                        CrossMauiMTAdmob.Current.LoadInterstitial(this.interstitialAdsId);
+                    try
+                    {
+                        CrossMauiMTAdmob.Current.OnInterstitialLoaded -= Current_OnInterstitialLoaded;
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    CrossMauiMTAdmob.Current.OnInterstitialLoaded += Current_OnInterstitialLoaded;
 
-                    CrossMauiMTAdmob.Current.ShowInterstitial();
+                    CrossMauiMTAdmob.Current.LoadInterstitial(this.interstitialAdsId);
                 }
             }
             catch (Exception)
             {
             }
+        }
+        private void Current_OnInterstitialLoaded(object sender, EventArgs e)
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
         }
 
         /// <summary>
@@ -242,20 +256,30 @@ namespace MetaFrm.Maui.Ads
         {
             try
             {
-                if (Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.iOS))
+                if (!this.rewardeAdsId.IsNullOrEmpty() && Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.iOS))
                 {
-                    if (!CrossMauiMTAdmob.Current.IsRewardedLoaded())
-                        CrossMauiMTAdmob.Current.LoadRewarded(this.rewardeAdsId);
+                    try
+                    {
+                        CrossMauiMTAdmob.Current.OnRewardedLoaded -= Current_OnRewardedLoaded;
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    CrossMauiMTAdmob.Current.OnRewardedLoaded += Current_OnRewardedLoaded;
 
-                    CrossMauiMTAdmob.Current.ShowRewarded();
+                    CrossMauiMTAdmob.Current.LoadRewarded(this.rewardeAdsId);
                 }
             }
             catch (Exception)
             {
             }
         }
+        private void Current_OnRewardedLoaded(object sender, EventArgs e)
+        {
+            CrossMauiMTAdmob.Current.ShowRewarded();
+        }
 
-        private void Init()
+        private void AdsInit()
         {
             try
             {
@@ -279,9 +303,6 @@ namespace MetaFrm.Maui.Ads
                     this.interstitialAdsId = this.IsDebug ? "ca-app-pub-3940256099942544/4411468910" : this.GetAttribute("iOSInterstitialAdsId");
                 else
                     this.interstitialAdsId = "";
-
-                if (!this.interstitialAdsId.IsNullOrEmpty())
-                    CrossMauiMTAdmob.Current.LoadInterstitial(this.interstitialAdsId);
             }
             catch (Exception)
             {
@@ -296,9 +317,6 @@ namespace MetaFrm.Maui.Ads
                     this.rewardeAdsId = this.IsDebug ? "ca-app-pub-3940256099942544/1712485313" : this.GetAttribute("iOSRewardeAdsId");
                 else
                     this.rewardeAdsId = "";
-
-                if (!this.rewardeAdsId.IsNullOrEmpty())
-                    CrossMauiMTAdmob.Current.LoadRewarded(this.rewardeAdsId);
             }
             catch (Exception)
             {
