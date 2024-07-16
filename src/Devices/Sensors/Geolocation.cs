@@ -1,56 +1,58 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Devices.Sensors
+namespace MetaFrm.Maui.Essentials.Devices.Sensors
 {
     /// <summary>
     /// Geolocation
     /// </summary>
-    public class Geolocation : IGeolocation
+    public class Geolocation : Maui.Devices.Sensors.IGeolocation
     {
         /// <summary>
         /// GetLastKnownLocationAsync
         /// </summary>
         /// <returns></returns>
-        public async Task<Location> GetLastKnownLocationAsync()
+        public async Task<Maui.Devices.Sensors.Location?> GetLastKnownLocationAsync()
         {
-            Microsoft.Maui.Devices.Sensors.Location locationOrg = await Microsoft.Maui.Devices.Sensors.Geolocation.Default.GetLastKnownLocationAsync();
+            Location? locationOrg = await Microsoft.Maui.Devices.Sensors.Geolocation.Default.GetLastKnownLocationAsync();
 
-            Location location = new(locationOrg.Latitude, locationOrg.Longitude, locationOrg.Timestamp)
-            {
-                Altitude = locationOrg.Altitude,
-                Course = locationOrg.Course,
-                Speed = locationOrg.Speed,
-                ReducedAccuracy = locationOrg.ReducedAccuracy,
-                VerticalAccuracy = locationOrg.VerticalAccuracy,
-                Accuracy = locationOrg.Accuracy,
-                IsFromMockProvider = locationOrg.IsFromMockProvider,
-                AltitudeReferenceSystem = locationOrg.AltitudeReferenceSystem.EnumParse<AltitudeReferenceSystem>()
-            };
+            if (locationOrg != null)
+                return new(locationOrg.Latitude, locationOrg.Longitude, locationOrg.Timestamp)
+                {
+                    Altitude = locationOrg.Altitude,
+                    Course = locationOrg.Course,
+                    Speed = locationOrg.Speed,
+                    ReducedAccuracy = locationOrg.ReducedAccuracy,
+                    VerticalAccuracy = locationOrg.VerticalAccuracy,
+                    Accuracy = locationOrg.Accuracy,
+                    IsFromMockProvider = locationOrg.IsFromMockProvider,
+                    AltitudeReferenceSystem = locationOrg.AltitudeReferenceSystem.EnumParse<Maui.Devices.Sensors.AltitudeReferenceSystem>()
+                };
 
-            return location;
+            return null;
         }
 
         /// <summary>
         /// GetLocationAsync
         /// </summary>
         /// <returns></returns>
-        public async Task<Location> GetLocationAsync()
+        public async Task<Maui.Devices.Sensors.Location?> GetLocationAsync()
         {
-            Microsoft.Maui.Devices.Sensors.Location locationOrg = await Microsoft.Maui.Devices.Sensors.Geolocation.Default.GetLocationAsync();
+            Location? locationOrg = await Microsoft.Maui.Devices.Sensors.Geolocation.Default.GetLocationAsync();
 
-            Location location = new(locationOrg.Latitude, locationOrg.Longitude, locationOrg.Timestamp)
-            {
-                Altitude = locationOrg.Altitude,
-                Course = locationOrg.Course,
-                Speed = locationOrg.Speed,
-                ReducedAccuracy = locationOrg.ReducedAccuracy,
-                VerticalAccuracy = locationOrg.VerticalAccuracy,
-                Accuracy = locationOrg.Accuracy,
-                IsFromMockProvider = locationOrg.IsFromMockProvider,
-                AltitudeReferenceSystem = locationOrg.AltitudeReferenceSystem.EnumParse<AltitudeReferenceSystem>()
-            };
+            if (locationOrg != null)
+                return new(locationOrg.Latitude, locationOrg.Longitude, locationOrg.Timestamp)
+                {
+                    Altitude = locationOrg.Altitude,
+                    Course = locationOrg.Course,
+                    Speed = locationOrg.Speed,
+                    ReducedAccuracy = locationOrg.ReducedAccuracy,
+                    VerticalAccuracy = locationOrg.VerticalAccuracy,
+                    Accuracy = locationOrg.Accuracy,
+                    IsFromMockProvider = locationOrg.IsFromMockProvider,
+                    AltitudeReferenceSystem = locationOrg.AltitudeReferenceSystem.EnumParse<Maui.Devices.Sensors.AltitudeReferenceSystem>()
+                };
 
-            return location;
+            return null;
         }
 
         /// <summary>
@@ -58,23 +60,24 @@ namespace MetaFrm.Maui.Devices.Sensors
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<Location> GetLocationAsync(GeolocationRequest request)
+        public async Task<Maui.Devices.Sensors.Location?> GetLocationAsync(Maui.Devices.Sensors.GeolocationRequest request)
         {
-            Microsoft.Maui.Devices.Sensors.Location locationOrg = await Microsoft.Maui.Devices.Sensors.Geolocation.Default.GetLocationAsync(new Microsoft.Maui.Devices.Sensors.GeolocationRequest(request.DesiredAccuracy.EnumParse<Microsoft.Maui.Devices.Sensors.GeolocationAccuracy>(), request.Timeout));
+            Location? locationOrg = await Microsoft.Maui.Devices.Sensors.Geolocation.Default.GetLocationAsync(new GeolocationRequest(request.DesiredAccuracy.EnumParse<GeolocationAccuracy>(), request.Timeout));
 
-            Location location = new(locationOrg.Latitude, locationOrg.Longitude, locationOrg.Timestamp)
-            {
-                Altitude = locationOrg.Altitude,
-                Course = locationOrg.Course,
-                Speed = locationOrg.Speed,
-                ReducedAccuracy = locationOrg.ReducedAccuracy,
-                VerticalAccuracy = locationOrg.VerticalAccuracy,
-                Accuracy = locationOrg.Accuracy,
-                IsFromMockProvider = locationOrg.IsFromMockProvider,
-                AltitudeReferenceSystem = locationOrg.AltitudeReferenceSystem.EnumParse<AltitudeReferenceSystem>()
-            };
+            if (locationOrg != null)
+                return new(locationOrg.Latitude, locationOrg.Longitude, locationOrg.Timestamp)
+                {
+                    Altitude = locationOrg.Altitude,
+                    Course = locationOrg.Course,
+                    Speed = locationOrg.Speed,
+                    ReducedAccuracy = locationOrg.ReducedAccuracy,
+                    VerticalAccuracy = locationOrg.VerticalAccuracy,
+                    Accuracy = locationOrg.Accuracy,
+                    IsFromMockProvider = locationOrg.IsFromMockProvider,
+                    AltitudeReferenceSystem = locationOrg.AltitudeReferenceSystem.EnumParse<Maui.Devices.Sensors.AltitudeReferenceSystem>()
+                };
 
-            return location;
+            return null;
         }
 
         /// <summary>
@@ -83,23 +86,24 @@ namespace MetaFrm.Maui.Devices.Sensors
         /// <param name="request"></param>
         /// <param name="cancelToken"></param>
         /// <returns></returns>
-        public async Task<Location> GetLocationAsync(GeolocationRequest request, CancellationToken cancelToken)
+        public async Task<Maui.Devices.Sensors.Location?> GetLocationAsync(Maui.Devices.Sensors.GeolocationRequest request, CancellationToken cancelToken)
         {
-            Microsoft.Maui.Devices.Sensors.Location locationOrg = await Microsoft.Maui.Devices.Sensors.Geolocation.Default.GetLocationAsync(new Microsoft.Maui.Devices.Sensors.GeolocationRequest(request.DesiredAccuracy.EnumParse<Microsoft.Maui.Devices.Sensors.GeolocationAccuracy>(), request.Timeout), cancelToken);
+            Location? locationOrg = await Microsoft.Maui.Devices.Sensors.Geolocation.Default.GetLocationAsync(new GeolocationRequest(request.DesiredAccuracy.EnumParse<GeolocationAccuracy>(), request.Timeout), cancelToken);
 
-            Location location = new(locationOrg.Latitude, locationOrg.Longitude, locationOrg.Timestamp)
-            {
-                Altitude = locationOrg.Altitude,
-                Course = locationOrg.Course,
-                Speed = locationOrg.Speed,
-                ReducedAccuracy = locationOrg.ReducedAccuracy,
-                VerticalAccuracy = locationOrg.VerticalAccuracy,
-                Accuracy = locationOrg.Accuracy,
-                IsFromMockProvider = locationOrg.IsFromMockProvider,
-                AltitudeReferenceSystem = locationOrg.AltitudeReferenceSystem.EnumParse<AltitudeReferenceSystem>()
-            };
+            if (locationOrg != null)
+                return new(locationOrg.Latitude, locationOrg.Longitude, locationOrg.Timestamp)
+                {
+                    Altitude = locationOrg.Altitude,
+                    Course = locationOrg.Course,
+                    Speed = locationOrg.Speed,
+                    ReducedAccuracy = locationOrg.ReducedAccuracy,
+                    VerticalAccuracy = locationOrg.VerticalAccuracy,
+                    Accuracy = locationOrg.Accuracy,
+                    IsFromMockProvider = locationOrg.IsFromMockProvider,
+                    AltitudeReferenceSystem = locationOrg.AltitudeReferenceSystem.EnumParse<Maui.Devices.Sensors.AltitudeReferenceSystem>()
+                };
 
-            return location;
+            return null;
         }
     }
 }

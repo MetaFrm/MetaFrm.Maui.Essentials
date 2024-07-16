@@ -1,18 +1,18 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Devices.Sensors
+namespace MetaFrm.Maui.Essentials.Devices.Sensors
 {
     /// <summary>
     /// OrientationSensor
     /// </summary>
-    public class OrientationSensor : IOrientationSensor
+    public class OrientationSensor : Maui.Devices.Sensors.IOrientationSensor
     {
-        private OrientationSensorChanged OrientationSensorChanged;
+        private Maui.Devices.Sensors.OrientationSensorChanged? OrientationSensorChanged;
 
         /// <summary>
         /// OrientationSensorChangedEvent
         /// </summary>
-        public event OrientationSensorChanged OrientationSensorChangedEvent
+        public event Maui.Devices.Sensors.OrientationSensorChanged OrientationSensorChangedEvent
         {
             add
             {
@@ -47,7 +47,7 @@ namespace MetaFrm.Maui.Devices.Sensors
             }
         }
 
-        private void OrientationSensor_ReadingChanged(object sender, Microsoft.Maui.Devices.Sensors.OrientationSensorChangedEventArgs e) => this.OrientationSensorChanged?.Invoke(sender, new OrientationSensorChangedEventArgs(new OrientationSensorData(e.Reading.Orientation.X, e.Reading.Orientation.Y, e.Reading.Orientation.Z, e.Reading.Orientation.W)));
+        private void OrientationSensor_ReadingChanged(object? sender, OrientationSensorChangedEventArgs e) => this.OrientationSensorChanged?.Invoke(sender, new Maui.Devices.Sensors.OrientationSensorChangedEventArgs(new Maui.Devices.Sensors.OrientationSensorData(e.Reading.Orientation.X, e.Reading.Orientation.Y, e.Reading.Orientation.Z, e.Reading.Orientation.W)));
 
         /// <summary>
         /// OrientationSensorIsSupported
@@ -63,7 +63,7 @@ namespace MetaFrm.Maui.Devices.Sensors
         /// OrientationSensorStart
         /// </summary>
         /// <param name="sensorSpeed"></param>
-        public void OrientationSensorStart(SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.OrientationSensor.Default.Start(sensorSpeed.EnumParse<Microsoft.Maui.Devices.Sensors.SensorSpeed>());
+        public void OrientationSensorStart(Maui.Devices.Sensors.SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.OrientationSensor.Default.Start(sensorSpeed.EnumParse<SensorSpeed>());
 
         /// <summary>
         /// OrientationSensorStop

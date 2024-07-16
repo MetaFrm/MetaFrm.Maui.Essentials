@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.ApplicationModel
+﻿namespace MetaFrm.Maui.Essentials.ApplicationModel
 {
     /// <summary>
     /// Provides an easy way to track an app's version on a device.
     /// </summary>
-    public class VersionTracking : IVersionTracking
+    public class VersionTracking : Maui.ApplicationModel.IVersionTracking
     {
         /// <summary>
         /// Gets a value indicating whether this is the first time this app has ever been launched on this device.
@@ -32,22 +32,22 @@
         /// <summary>
         /// Gets the version number for the previously run version.
         /// </summary>
-        public string PreviousVersion => Microsoft.Maui.ApplicationModel.VersionTracking.PreviousVersion;
+        public string? PreviousVersion => Microsoft.Maui.ApplicationModel.VersionTracking.PreviousVersion;
 
         /// <summary>
         /// Gets the build number for the previously run version.
         /// </summary>
-        public string PreviousBuild => Microsoft.Maui.ApplicationModel.VersionTracking.PreviousBuild;
+        public string? PreviousBuild => Microsoft.Maui.ApplicationModel.VersionTracking.PreviousBuild;
 
         /// <summary>
         /// Gets the version number of the first version of the app that was installed on this device.
         /// </summary>
-        public string FirstInstalledVersion => Microsoft.Maui.ApplicationModel.VersionTracking.FirstInstalledVersion;
+        public string? FirstInstalledVersion => Microsoft.Maui.ApplicationModel.VersionTracking.FirstInstalledVersion;
 
         /// <summary>
         /// Gets the build number of first version of the app that was installed on this device.
         /// </summary>
-        public string FirstInstalledBuild => Microsoft.Maui.ApplicationModel.VersionTracking.FirstInstalledBuild;
+        public string? FirstInstalledBuild => Microsoft.Maui.ApplicationModel.VersionTracking.FirstInstalledBuild;
 
         /// <summary>
         /// Gets the collection of version numbers of the app that ran on this device.

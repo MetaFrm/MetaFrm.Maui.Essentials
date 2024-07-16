@@ -1,61 +1,62 @@
-﻿namespace MetaFrm.Maui.ApplicationModel.Communication
+﻿namespace MetaFrm.Maui.Essentials.ApplicationModel.Communication
 {
     /// <summary>
     /// Contacts
     /// </summary>
-    public class Contacts : IContacts
+    public class Contacts : Maui.ApplicationModel.Communication.IContacts
     {
         /// <summary>
         /// GetAllContactAsync
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<Contact>> GetAllContactAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Maui.ApplicationModel.Communication.Contact>> GetAllContactAsync(CancellationToken cancellationToken = default)
         {
-            IEnumerable<Microsoft.Maui.ApplicationModel.Communication.Contact> contactsOrg = await Microsoft.Maui.ApplicationModel.Communication.Contacts.Default.GetAllAsync(cancellationToken);
+            List<Maui.ApplicationModel.Communication.Contact> contacts = new();
+
+            IEnumerable<Contact> contactsOrg = await Microsoft.Maui.ApplicationModel.Communication.Contacts.Default.GetAllAsync(cancellationToken);
 
             if (contactsOrg != null)
             {
-                IList<Contact> contacts = new List<Contact>();
 
-                foreach (Microsoft.Maui.ApplicationModel.Communication.Contact contact in contactsOrg)
+                foreach (Contact contact in contactsOrg)
                 {
-                    IList<ContactPhone> phones = new List<ContactPhone>();
+                    List<Maui.ApplicationModel.Communication.ContactPhone> phones = new();
                     foreach (var phone in contact.Phones)
-                        phones.Add(new ContactPhone(phone.PhoneNumber));
+                        phones.Add(new Maui.ApplicationModel.Communication.ContactPhone(phone.PhoneNumber));
 
-                    IList<ContactEmail> emails = new List<ContactEmail>();
+                    List<Maui.ApplicationModel.Communication.ContactEmail> emails = new();
                     foreach (var email in contact.Emails)
-                        emails.Add(new ContactEmail(email.EmailAddress));
+                        emails.Add(new Maui.ApplicationModel.Communication.ContactEmail(email.EmailAddress));
 
-                    contacts.Add(new Contact(contact.Id, contact.NamePrefix, contact.GivenName, contact.MiddleName, contact.FamilyName, contact.NameSuffix, phones, emails, contact.DisplayName));
+                    contacts.Add(new Maui.ApplicationModel.Communication.Contact(contact.Id, contact.NamePrefix, contact.GivenName, contact.MiddleName, contact.FamilyName, contact.NameSuffix, phones, emails, contact.DisplayName));
                 }
 
                 return contacts;
             }
             else
-                return null;
+                return contacts;
         }
 
         /// <summary>
         /// PickContactAsync
         /// </summary>
         /// <returns></returns>
-        public async Task<Contact> PickContactAsync()
+        public async Task<Maui.ApplicationModel.Communication.Contact?> PickContactAsync()
         {
-            Microsoft.Maui.ApplicationModel.Communication.Contact contact = await Microsoft.Maui.ApplicationModel.Communication.Contacts.Default.PickContactAsync();
+            Contact? contact = await Microsoft.Maui.ApplicationModel.Communication.Contacts.Default.PickContactAsync();
 
             if (contact != null)
             {
-                IList<ContactPhone> phones = new List<ContactPhone>();
+                List<Maui.ApplicationModel.Communication.ContactPhone> phones = new();
                 foreach (var phone in contact.Phones)
-                    phones.Add(new ContactPhone(phone.PhoneNumber));
+                    phones.Add(new Maui.ApplicationModel.Communication.ContactPhone(phone.PhoneNumber));
 
-                IList<ContactEmail> emails = new List<ContactEmail>();
+                List<Maui.ApplicationModel.Communication.ContactEmail> emails = new();
                 foreach (var email in contact.Emails)
-                    emails.Add(new ContactEmail(email.EmailAddress));
+                    emails.Add(new Maui.ApplicationModel.Communication.ContactEmail(email.EmailAddress));
 
-                return new Contact(contact.Id, contact.NamePrefix, contact.GivenName, contact.MiddleName, contact.FamilyName, contact.NameSuffix, phones, emails, contact.DisplayName);
+                return new Maui.ApplicationModel.Communication.Contact(contact.Id, contact.NamePrefix, contact.GivenName, contact.MiddleName, contact.FamilyName, contact.NameSuffix, phones, emails, contact.DisplayName);
             }
             else
                 return null;

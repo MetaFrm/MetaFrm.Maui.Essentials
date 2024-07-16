@@ -1,18 +1,18 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Devices.Sensors
+namespace MetaFrm.Maui.Essentials.Devices.Sensors
 {
     /// <summary>
     /// Maui Essentials Device
     /// </summary>
-    public class Accelerometer : IAccelerometer
+    public class Accelerometer : Maui.Devices.Sensors.IAccelerometer
     {
-        private AccelerometerChanged AccelerometerChanged;
+        private Maui.Devices.Sensors.AccelerometerChanged? AccelerometerChanged;
 
         /// <summary>
         /// AccelerometerChanged
         /// </summary>
-        public event AccelerometerChanged AccelerometerChangedEvent
+        public event Maui.Devices.Sensors.AccelerometerChanged AccelerometerChangedEvent
         {
             add
             {
@@ -47,9 +47,9 @@ namespace MetaFrm.Maui.Devices.Sensors
             }
         }
 
-        private void Accelerometer_ReadingChanged(object sender, Microsoft.Maui.Devices.Sensors.AccelerometerChangedEventArgs e) => this.AccelerometerChanged?.Invoke(sender, new AccelerometerChangedEventArgs(new AccelerometerData(e.Reading.Acceleration.X, e.Reading.Acceleration.Y, e.Reading.Acceleration.Z)));
+        private void Accelerometer_ReadingChanged(object? sender, AccelerometerChangedEventArgs e) => this.AccelerometerChanged?.Invoke(sender, new Maui.Devices.Sensors.AccelerometerChangedEventArgs(new Maui.Devices.Sensors.AccelerometerData(e.Reading.Acceleration.X, e.Reading.Acceleration.Y, e.Reading.Acceleration.Z)));
 
-        private EventHandler ShakeDetected;
+        private EventHandler? ShakeDetected;
 
         /// <summary>
         /// ShakeDetectedEvent
@@ -89,7 +89,7 @@ namespace MetaFrm.Maui.Devices.Sensors
             }
         }
 
-        private void Accelerometer_ShakeDetected(object sender, EventArgs e) => this.ShakeDetected?.Invoke(sender, e);
+        private void Accelerometer_ShakeDetected(object? sender, EventArgs e) => this.ShakeDetected?.Invoke(sender, e);
 
         /// <summary>
         /// AccelerometerIsSupported
@@ -105,7 +105,7 @@ namespace MetaFrm.Maui.Devices.Sensors
         /// AccelerometerStart
         /// </summary>
         /// <param name="sensorSpeed"></param>
-        public void AccelerometerStart(SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.Accelerometer.Default.Start(sensorSpeed.EnumParse<Microsoft.Maui.Devices.Sensors.SensorSpeed>());
+        public void AccelerometerStart(Maui.Devices.Sensors.SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.Accelerometer.Default.Start(sensorSpeed.EnumParse<SensorSpeed>());
 
         /// <summary>
         /// AccelerometerStop

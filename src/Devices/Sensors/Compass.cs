@@ -1,18 +1,18 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Devices.Sensors
+namespace MetaFrm.Maui.Essentials.Devices.Sensors
 {
     /// <summary>
     /// Compass
     /// </summary>
-    public class Compass : ICompass
+    public class Compass : Maui.Devices.Sensors.ICompass
     {
-        private CompassChanged CompassChanged;
+        private Maui.Devices.Sensors.CompassChanged? CompassChanged;
 
         /// <summary>
         /// CompassChangedEvent
         /// </summary>
-        public event CompassChanged CompassChangedEvent
+        public event Maui.Devices.Sensors.CompassChanged CompassChangedEvent
         {
             add
             {
@@ -47,7 +47,7 @@ namespace MetaFrm.Maui.Devices.Sensors
             }
         }
 
-        private void Compass_ReadingChanged(object sender, Microsoft.Maui.Devices.Sensors.CompassChangedEventArgs e) => this.CompassChanged?.Invoke(sender, new CompassChangedEventArgs(new CompassData(e.Reading.HeadingMagneticNorth)));
+        private void Compass_ReadingChanged(object? sender, CompassChangedEventArgs e) => this.CompassChanged?.Invoke(sender, new Maui.Devices.Sensors.CompassChangedEventArgs(new Maui.Devices.Sensors.CompassData(e.Reading.HeadingMagneticNorth)));
 
         /// <summary>
         /// CompassIsSupported
@@ -63,7 +63,7 @@ namespace MetaFrm.Maui.Devices.Sensors
         /// CompassStart
         /// </summary>
         /// <param name="sensorSpeed"></param>
-        public void CompassStart(SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.Compass.Default.Start(sensorSpeed.EnumParse<Microsoft.Maui.Devices.Sensors.SensorSpeed>());
+        public void CompassStart(Maui.Devices.Sensors.SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.Compass.Default.Start(sensorSpeed.EnumParse<SensorSpeed>());
 
         /// <summary>
         /// CompassStop

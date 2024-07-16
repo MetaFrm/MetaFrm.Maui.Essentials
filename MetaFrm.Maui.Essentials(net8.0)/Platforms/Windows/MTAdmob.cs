@@ -1,6 +1,6 @@
 ﻿using MetaFrm.Maui.Ads;
 
-namespace MetaFrm.Maui.Platforms
+namespace MetaFrm.Maui.Essentials.Platforms
 {
     /// <summary>
     /// MTAdmob

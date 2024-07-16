@@ -1,18 +1,18 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.ApplicationModel
+namespace MetaFrm.Maui.Essentials.ApplicationModel
 {
     /// <summary>
     /// Map
     /// </summary>
-    public class Map : IMap
+    public class Map : Maui.ApplicationModel.IMap
     {
         /// <summary>
         /// Open the installed application to a specific location.
         /// </summary>
         /// <param name="location">Location to open on maps.</param>
         /// <returns>Task to be completed.</returns>
-        public async Task OpenAsync(Devices.Sensors.Location location) => await Microsoft.Maui.ApplicationModel.Map.OpenAsync(new Microsoft.Maui.Devices.Sensors.Location(location.Longitude, location.Longitude, location.Timestamp));
+        public async Task OpenAsync(Maui.Devices.Sensors.Location location) => await Microsoft.Maui.ApplicationModel.Map.OpenAsync(new Location(location.Longitude, location.Longitude, location.Timestamp));
 
         /// <summary>
         /// Open the installed application to a specific location with launch options.
@@ -20,8 +20,8 @@ namespace MetaFrm.Maui.ApplicationModel
         /// <param name="location">Location to open maps to.</param>
         /// <param name="options">Launch options to use.</param>
         /// <returns>Task to be completed.</returns>
-        public async Task OpenAsync(Devices.Sensors.Location location, MapLaunchOptions options) => await Microsoft.Maui.ApplicationModel.Map.OpenAsync(new Microsoft.Maui.Devices.Sensors.Location(location.Longitude, location.Longitude, location.Timestamp)
-                , new Microsoft.Maui.ApplicationModel.MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<Microsoft.Maui.ApplicationModel.NavigationMode>() });
+        public async Task OpenAsync(Maui.Devices.Sensors.Location location, Maui.ApplicationModel.MapLaunchOptions options) => await Microsoft.Maui.ApplicationModel.Map.OpenAsync(new Location(location.Longitude, location.Longitude, location.Timestamp)
+                , new MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<NavigationMode>() });
 
         /// <summary>
         /// Open the installed application to a specific location.
@@ -38,27 +38,28 @@ namespace MetaFrm.Maui.ApplicationModel
         /// <param name="longitude">Longitude to open to.</param>
         /// <param name="options">Launch options to use.</param>
         /// <returns>Task to be completed.</returns>
-        public async Task OpenAsync(double latitude, double longitude, MapLaunchOptions options) => await Microsoft.Maui.ApplicationModel.Map.OpenAsync(latitude, longitude, new Microsoft.Maui.ApplicationModel.MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<Microsoft.Maui.ApplicationModel.NavigationMode>() });
+        public async Task OpenAsync(double latitude, double longitude, Maui.ApplicationModel.MapLaunchOptions options) => await Microsoft.Maui.ApplicationModel.Map.OpenAsync(latitude, longitude, new MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<NavigationMode>() });
 
         /// <summary>
         /// Open the installed application to a specific placemark.
         /// </summary>
         /// <param name="placemark">Placemark to open on maps.</param>
         /// <returns>Task to be completed.</returns>
-        public async Task OpenAsync(Devices.Sensors.Placemark placemark) => await Microsoft.Maui.ApplicationModel.Map.OpenAsync(new Microsoft.Maui.Devices.Sensors.Placemark()
-        {
-            Location = new Microsoft.Maui.Devices.Sensors.Location(placemark.Location.Longitude, placemark.Location.Longitude, placemark.Location.Timestamp),
-            CountryCode = placemark.CountryCode,
-            CountryName = placemark.CountryName,
-            FeatureName = placemark.FeatureName,
-            PostalCode = placemark.PostalCode,
-            SubLocality = placemark.SubLocality,
-            Thoroughfare = placemark.Thoroughfare,
-            SubThoroughfare = placemark.SubThoroughfare,
-            Locality = placemark.Locality,
-            AdminArea = placemark.AdminArea,
-            SubAdminArea = placemark.SubAdminArea
-        });
+        public async Task OpenAsync(Maui.Devices.Sensors.Placemark placemark)
+            => await Microsoft.Maui.ApplicationModel.Map.OpenAsync(new Placemark()
+            {
+                Location = placemark.Location == null ? new Location() : new Location(placemark.Location.Longitude, placemark.Location.Longitude, placemark.Location.Timestamp),
+                CountryCode = placemark.CountryCode,
+                CountryName = placemark.CountryName,
+                FeatureName = placemark.FeatureName,
+                PostalCode = placemark.PostalCode,
+                SubLocality = placemark.SubLocality,
+                Thoroughfare = placemark.Thoroughfare,
+                SubThoroughfare = placemark.SubThoroughfare,
+                Locality = placemark.Locality,
+                AdminArea = placemark.AdminArea,
+                SubAdminArea = placemark.SubAdminArea
+            });
 
         /// <summary>
         /// Open the installed application to a specific placemark with launch options.
@@ -66,27 +67,28 @@ namespace MetaFrm.Maui.ApplicationModel
         /// <param name="placemark">Placemark to open maps to.</param>
         /// <param name="options">Launch options to use.</param>
         /// <returns>Task to be completed.</returns>
-        public async Task OpenAsync(Devices.Sensors.Placemark placemark, ApplicationModel.MapLaunchOptions options) => await Microsoft.Maui.ApplicationModel.Map.OpenAsync(new Microsoft.Maui.Devices.Sensors.Placemark()
-        {
-            Location = new Microsoft.Maui.Devices.Sensors.Location(placemark.Location.Longitude, placemark.Location.Longitude, placemark.Location.Timestamp),
-            CountryCode = placemark.CountryCode,
-            CountryName = placemark.CountryName,
-            FeatureName = placemark.FeatureName,
-            PostalCode = placemark.PostalCode,
-            SubLocality = placemark.SubLocality,
-            Thoroughfare = placemark.Thoroughfare,
-            SubThoroughfare = placemark.SubThoroughfare,
-            Locality = placemark.Locality,
-            AdminArea = placemark.AdminArea,
-            SubAdminArea = placemark.SubAdminArea
-        }, new Microsoft.Maui.ApplicationModel.MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<Microsoft.Maui.ApplicationModel.NavigationMode>() });
+        public async Task OpenAsync(Maui.Devices.Sensors.Placemark placemark, Maui.ApplicationModel.MapLaunchOptions options)
+            => await Microsoft.Maui.ApplicationModel.Map.OpenAsync(new Placemark()
+            {
+                Location = placemark.Location == null ? new Location() : new Location(placemark.Location.Longitude, placemark.Location.Longitude, placemark.Location.Timestamp),
+                CountryCode = placemark.CountryCode,
+                CountryName = placemark.CountryName,
+                FeatureName = placemark.FeatureName,
+                PostalCode = placemark.PostalCode,
+                SubLocality = placemark.SubLocality,
+                Thoroughfare = placemark.Thoroughfare,
+                SubThoroughfare = placemark.SubThoroughfare,
+                Locality = placemark.Locality,
+                AdminArea = placemark.AdminArea,
+                SubAdminArea = placemark.SubAdminArea
+            }, new MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<NavigationMode>() });
 
         /// <summary>
         /// TryOpenAsync
         /// </summary>
         /// <param name="location"></param>
         /// <returns></returns>
-        public async Task<bool> TryOpenAsync(Devices.Sensors.Location location) => await Microsoft.Maui.ApplicationModel.Map.TryOpenAsync(new Microsoft.Maui.Devices.Sensors.Location(location.Longitude, location.Longitude, location.Timestamp));
+        public async Task<bool> TryOpenAsync(Maui.Devices.Sensors.Location location) => await Microsoft.Maui.ApplicationModel.Map.TryOpenAsync(new Location(location.Longitude, location.Longitude, location.Timestamp));
 
         /// <summary>
         /// TryOpenAsync
@@ -94,8 +96,8 @@ namespace MetaFrm.Maui.ApplicationModel
         /// <param name="location"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public async Task<bool> TryOpenAsync(Devices.Sensors.Location location, MapLaunchOptions options) => await Microsoft.Maui.ApplicationModel.Map.TryOpenAsync(new Microsoft.Maui.Devices.Sensors.Location(location.Longitude, location.Longitude, location.Timestamp)
-                , new Microsoft.Maui.ApplicationModel.MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<Microsoft.Maui.ApplicationModel.NavigationMode>() });
+        public async Task<bool> TryOpenAsync(Maui.Devices.Sensors.Location location, Maui.ApplicationModel.MapLaunchOptions options) => await Microsoft.Maui.ApplicationModel.Map.TryOpenAsync(new Location(location.Longitude, location.Longitude, location.Timestamp)
+                , new MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<NavigationMode>() });
 
         /// <summary>
         /// TryOpenAsync
@@ -112,28 +114,29 @@ namespace MetaFrm.Maui.ApplicationModel
         /// <param name="longitude"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public async Task<bool> TryOpenAsync(double latitude, double longitude, MapLaunchOptions options) => await Microsoft.Maui.ApplicationModel.Map.TryOpenAsync(latitude, longitude
-                , new Microsoft.Maui.ApplicationModel.MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<Microsoft.Maui.ApplicationModel.NavigationMode>() });
+        public async Task<bool> TryOpenAsync(double latitude, double longitude, Maui.ApplicationModel.MapLaunchOptions options) => await Microsoft.Maui.ApplicationModel.Map.TryOpenAsync(latitude, longitude
+                , new MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<NavigationMode>() });
 
         /// <summary>
         /// TryOpenAsync
         /// </summary>
         /// <param name="placemark"></param>
         /// <returns></returns>
-        public async Task<bool> TryOpenAsync(Devices.Sensors.Placemark placemark) => await Microsoft.Maui.ApplicationModel.Map.TryOpenAsync(new Microsoft.Maui.Devices.Sensors.Placemark()
-        {
-            Location = new Microsoft.Maui.Devices.Sensors.Location(placemark.Location.Longitude, placemark.Location.Longitude, placemark.Location.Timestamp),
-            CountryCode = placemark.CountryCode,
-            CountryName = placemark.CountryName,
-            FeatureName = placemark.FeatureName,
-            PostalCode = placemark.PostalCode,
-            SubLocality = placemark.SubLocality,
-            Thoroughfare = placemark.Thoroughfare,
-            SubThoroughfare = placemark.SubThoroughfare,
-            Locality = placemark.Locality,
-            AdminArea = placemark.AdminArea,
-            SubAdminArea = placemark.SubAdminArea
-        });
+        public async Task<bool> TryOpenAsync(Maui.Devices.Sensors.Placemark placemark)
+            => await Microsoft.Maui.ApplicationModel.Map.TryOpenAsync(new Placemark()
+            {
+                Location = placemark.Location == null ? new Location() : new Location(placemark.Location.Longitude, placemark.Location.Longitude, placemark.Location.Timestamp),
+                CountryCode = placemark.CountryCode,
+                CountryName = placemark.CountryName,
+                FeatureName = placemark.FeatureName,
+                PostalCode = placemark.PostalCode,
+                SubLocality = placemark.SubLocality,
+                Thoroughfare = placemark.Thoroughfare,
+                SubThoroughfare = placemark.SubThoroughfare,
+                Locality = placemark.Locality,
+                AdminArea = placemark.AdminArea,
+                SubAdminArea = placemark.SubAdminArea
+            });
 
         /// <summary>
         /// TryOpenAsync
@@ -141,19 +144,20 @@ namespace MetaFrm.Maui.ApplicationModel
         /// <param name="placemark"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public async Task<bool> TryOpenAsync(Devices.Sensors.Placemark placemark, MapLaunchOptions options) => await Microsoft.Maui.ApplicationModel.Map.TryOpenAsync(new Microsoft.Maui.Devices.Sensors.Placemark()
-        {
-            Location = new Microsoft.Maui.Devices.Sensors.Location(placemark.Location.Longitude, placemark.Location.Longitude, placemark.Location.Timestamp),
-            CountryCode = placemark.CountryCode,
-            CountryName = placemark.CountryName,
-            FeatureName = placemark.FeatureName,
-            PostalCode = placemark.PostalCode,
-            SubLocality = placemark.SubLocality,
-            Thoroughfare = placemark.Thoroughfare,
-            SubThoroughfare = placemark.SubThoroughfare,
-            Locality = placemark.Locality,
-            AdminArea = placemark.AdminArea,
-            SubAdminArea = placemark.SubAdminArea
-        }, new Microsoft.Maui.ApplicationModel.MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<Microsoft.Maui.ApplicationModel.NavigationMode>() });
+        public async Task<bool> TryOpenAsync(Maui.Devices.Sensors.Placemark placemark, Maui.ApplicationModel.MapLaunchOptions options)
+            => await Microsoft.Maui.ApplicationModel.Map.TryOpenAsync(new Placemark()
+            {
+                Location = placemark.Location == null ? new Location() : new Location(placemark.Location.Longitude, placemark.Location.Longitude, placemark.Location.Timestamp),
+                CountryCode = placemark.CountryCode,
+                CountryName = placemark.CountryName,
+                FeatureName = placemark.FeatureName,
+                PostalCode = placemark.PostalCode,
+                SubLocality = placemark.SubLocality,
+                Thoroughfare = placemark.Thoroughfare,
+                SubThoroughfare = placemark.SubThoroughfare,
+                Locality = placemark.Locality,
+                AdminArea = placemark.AdminArea,
+                SubAdminArea = placemark.SubAdminArea
+            }, new MapLaunchOptions() { Name = options.Name, NavigationMode = options.NavigationMode.EnumParse<NavigationMode>() });
     }
 }

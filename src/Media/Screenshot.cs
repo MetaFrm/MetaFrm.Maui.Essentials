@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.Media
+﻿namespace MetaFrm.Maui.Essentials.Media
 {
     /// <summary>
     /// Screenshot
     /// </summary>
-    public class Screenshot : IScreenshot
+    public class Screenshot : Maui.Media.IScreenshot
     {
         /// <summary>
         /// ScreenshotIsCaptureSupported
@@ -15,9 +15,9 @@
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<IScreenshotResult> CaptureAsync()
+        public async Task<Maui.Media.IScreenshotResult> CaptureAsync()
         {
-            Microsoft.Maui.Media.IScreenshotResult screen = await Microsoft.Maui.Media.Screenshot.Default.CaptureAsync();
+            IScreenshotResult screen = await Microsoft.Maui.Media.Screenshot.Default.CaptureAsync();
 
             return new ScreenshotResult() { ScreenshotResultOrg = screen };
         }

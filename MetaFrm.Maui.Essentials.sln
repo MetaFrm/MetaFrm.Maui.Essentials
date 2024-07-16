@@ -11,6 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루�
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA73B9E0-D27F-47E9-A7BD-CFE65BF57FCE}"
+	ProjectSection(SolutionItems) = preProject
+		src\Extensions.cs = src\Extensions.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A112398B-7E9A-4DE8-B3B3-5359260448B7}"
 EndProject
@@ -78,6 +81,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Storage", "Storage", "{01D1
 		src\Storage\FileSystem.cs = src\Storage\FileSystem.cs
 		src\Storage\Preferences.cs = src\Storage\Preferences.cs
 		src\Storage\SecureStorage.cs = src\Storage\SecureStorage.cs
+		src\Storage\SecureStorage7.cs = src\Storage\SecureStorage7.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Media", "Media", "{A9AD74A2-A490-44AB-A0B0-42EBD33B7B7B}"

@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.ApplicationModel.Communication
+﻿namespace MetaFrm.Maui.Essentials.ApplicationModel.Communication
 {
     /// <summary>
     /// Email
     /// </summary>
-    public class Email : IEmail
+    public class Email : Maui.ApplicationModel.Communication.IEmail
     {
         /// <summary>
         /// IsComposeSupported
@@ -15,9 +15,21 @@
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public async Task EmailComposeAsync(EmailMessage message)
+        public async Task EmailComposeAsync(Maui.ApplicationModel.Communication.EmailMessage? message)
         {
-            await Microsoft.Maui.ApplicationModel.Communication.Email.Default.ComposeAsync(new Microsoft.Maui.ApplicationModel.Communication.EmailMessage(message.Subject, message.Body, message.To.ToArray()));
+            if (message != null)
+            {
+                if (message.To != null)
+                {
+                    string[] to = message.To.ToArray();
+
+                    await Microsoft.Maui.ApplicationModel.Communication.Email.Default.ComposeAsync(new EmailMessage(message.Subject ?? "", message?.Body ?? "", to));
+                }
+                else
+                    await Microsoft.Maui.ApplicationModel.Communication.Email.Default.ComposeAsync(new EmailMessage(message.Subject ?? "", message?.Body ?? ""));
+            }
+            else
+                await Microsoft.Maui.ApplicationModel.Communication.Email.Default.ComposeAsync(null);
         }
     }
 }

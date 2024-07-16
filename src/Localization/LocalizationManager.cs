@@ -1,20 +1,70 @@
-﻿using System.ComponentModel;
+﻿using Blazored.LocalStorage;
+using MetaFrm.Localization;
+using System.ComponentModel;
 using System.Globalization;
 
-namespace MetaFrm.Maui.Localization
+namespace MetaFrm.Maui.Essentials.Localization
 {
     /// <summary>
     /// LocalizationManager
     /// </summary>
-    public class LocalizationManager : INotifyPropertyChanged
+    public class LocalizationManager : INotifyPropertyChanged, ICultureChanged
     {
-        private LocalizationManager()
-        {
-            if (Preferences.Get("Factory.CultureInfo", null).IsNullOrEmpty())
-                Preferences.Set("Factory.CultureInfo", CultureInfo.CurrentCulture.Name);
+        private static CultureInfo CurrentCulture = Thread.CurrentThread.CurrentCulture; //CultureInfo.CurrentCulture;
+        private static ILocalStorageService? LocalStorage;
 
-            //Factory.CultureInfo = new("en-us");
-            Factory.CultureInfo = new(Preferences.Get("Factory.CultureInfo", null));
+        /// <summary>
+        /// LocalizationManager
+        /// </summary>
+        public LocalizationManager(ILocalStorageService? localStorageService)
+        {
+            LocalStorage = localStorageService;
+
+            GetCultureInfo();
+        }
+        private static async void GetCultureInfo()
+        {
+            if (LocalStorage == null)
+                CurrentCulture = Thread.CurrentThread.CurrentCulture;
+            else
+            {
+                try
+                {
+                    string? tmp = await LocalStorage.GetItemAsStringAsync(".AspNetCore.Culture");//c=es-MX|uic=es-MX
+
+                    if (tmp == null)
+                        CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                    else
+                    {
+                        if (tmp.Contains('|'))
+                            tmp = tmp.Split('|')[0];
+
+                        if (tmp.Contains("c=") && tmp.Contains('-'))
+                            CurrentCulture = new(tmp.Split('=')[1]);
+                        else
+                            CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                    }
+                }
+                catch (Exception)
+                {
+                    CurrentCulture = Thread.CurrentThread.CurrentCulture;
+                }
+            }
+        }
+        private static async void SetCultureInfo(CultureInfo cultureInfo)
+        {
+            if (LocalStorage != null)
+            {
+                try
+                {
+                    await LocalStorage.SetItemAsStringAsync(".AspNetCore.Culture", $"c={cultureInfo.Name}|uic={cultureInfo.Name}");//c=es-MX|uic=es-MX
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            CurrentCulture = cultureInfo;
         }
 
         /// <summary>
@@ -30,36 +80,36 @@ namespace MetaFrm.Maui.Localization
                 {
                     List<string> tmps = key.Split("^").ToList();
 
-                    key = tmps.FirstOrDefault();
+                    key = tmps.FirstOrDefault() ?? "";
 
-                    tmps.Remove(key);
+                    if (!key.IsNullOrEmpty())
+                        tmps.Remove(key);
 
-                    return key.Translate(tmps.ToArray());
+                    return key.Translate(CurrentCulture, tmps.ToArray());
                 }
                 else
-                    return key.Translate();
+                    return key.Translate(CurrentCulture);
             }
         }
 
         /// <summary>
         /// Instance
         /// </summary>
-        public static LocalizationManager Instance { get; } = new();
+        public static LocalizationManager Instance { get; } = new(LocalStorage);
 
         /// <summary>
         /// PropertyChanged
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
-        /// SetCulture
+        /// CultureChange
         /// </summary>
-        /// <param name="culture"></param>
-        public void SetCulture(CultureInfo culture)
+        /// <param name="cultureInfo"></param>
+        public void CultureChange(CultureInfo cultureInfo)
         {
-            Factory.CultureInfo = culture;
+            LocalizationManager.SetCultureInfo(cultureInfo);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
-            Preferences.Set("Factory.CultureInfo", Factory.CultureInfo.Name);
         }
     }
 }

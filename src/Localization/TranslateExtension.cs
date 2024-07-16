@@ -1,4 +1,4 @@
-﻿namespace MetaFrm.Maui.Localization
+﻿namespace MetaFrm.Maui.Essentials.Localization
 {
     /// <summary>
     /// TranslateExtension
@@ -9,12 +9,12 @@
         /// <summary>
         /// Text
         /// </summary>
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         /// <summary>
         /// Args
         /// </summary>
-        public string Args { get; set; }
+        public string? Args { get; set; }
 
         /// <summary>
         /// ProvideValue

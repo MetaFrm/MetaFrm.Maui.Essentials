@@ -1,18 +1,18 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Devices.Sensors
+namespace MetaFrm.Maui.Essentials.Devices.Sensors
 {
     /// <summary>
     /// Maui Essentials Device
     /// </summary>
-    public class Magnetometer : IMagnetometer
+    public class Magnetometer : Maui.Devices.Sensors.IMagnetometer
     {
-        private MagnetometerChanged MagnetometerChanged;
+        private Maui.Devices.Sensors.MagnetometerChanged? MagnetometerChanged;
 
         /// <summary>
         /// MagnetometerChangedEvent
         /// </summary>
-        public event MagnetometerChanged MagnetometerChangedEvent
+        public event Maui.Devices.Sensors.MagnetometerChanged MagnetometerChangedEvent
         {
             add
             {
@@ -47,7 +47,7 @@ namespace MetaFrm.Maui.Devices.Sensors
             }
         }
 
-        private void Magnetometer_ReadingChanged(object sender, Microsoft.Maui.Devices.Sensors.MagnetometerChangedEventArgs e) => this.MagnetometerChanged?.Invoke(sender, new MagnetometerChangedEventArgs(new MagnetometerData(e.Reading.MagneticField.X, e.Reading.MagneticField.Y, e.Reading.MagneticField.Z)));
+        private void Magnetometer_ReadingChanged(object? sender, MagnetometerChangedEventArgs e) => this.MagnetometerChanged?.Invoke(sender, new Maui.Devices.Sensors.MagnetometerChangedEventArgs(new Maui.Devices.Sensors.MagnetometerData(e.Reading.MagneticField.X, e.Reading.MagneticField.Y, e.Reading.MagneticField.Z)));
 
         /// <summary>
         /// MagnetometerIsSupported
@@ -63,7 +63,7 @@ namespace MetaFrm.Maui.Devices.Sensors
         /// MagnetometerStart
         /// </summary>
         /// <param name="sensorSpeed"></param>
-        public void MagnetometerStart(SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.Magnetometer.Default.Start(sensorSpeed.EnumParse<Microsoft.Maui.Devices.Sensors.SensorSpeed>());
+        public void MagnetometerStart(Maui.Devices.Sensors.SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.Magnetometer.Default.Start(sensorSpeed.EnumParse<SensorSpeed>());
 
         /// <summary>
         /// MagnetometerStop

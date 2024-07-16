@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.ApplicationModel.Communication
+﻿namespace MetaFrm.Maui.Essentials.ApplicationModel.Communication
 {
     /// <summary>
     /// Sms
     /// </summary>
-    public class Sms : ISms
+    public class Sms : Maui.ApplicationModel.Communication.ISms
     {
         /// <summary>
         /// IsSupported
@@ -15,9 +15,12 @@
         /// </summary>
         /// <param name="message"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public async void ComposeAsync(SmsMessage message)
+        public async void ComposeAsync(Maui.ApplicationModel.Communication.SmsMessage? message)
         {
-            await Microsoft.Maui.ApplicationModel.Communication.Sms.Default.ComposeAsync(new Microsoft.Maui.ApplicationModel.Communication.SmsMessage(message.Body, message.Recipients));
+            if (message != null)
+                await Microsoft.Maui.ApplicationModel.Communication.Sms.Default.ComposeAsync(new SmsMessage(message.Body ?? "", message.Recipients));
+            else
+                await Microsoft.Maui.ApplicationModel.Communication.Sms.Default.ComposeAsync(null);
         }
     }
 }

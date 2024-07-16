@@ -1,11 +1,11 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Devices
+namespace MetaFrm.Maui.Essentials.Devices
 {
     /// <summary>
     /// HapticFeedback
     /// </summary>
-    public class HapticFeedback : IHapticFeedback
+    public class HapticFeedback : Maui.Devices.IHapticFeedback
     {
         /// <summary>
         /// HapticFeedback IsSupported
@@ -16,6 +16,6 @@ namespace MetaFrm.Maui.Devices
         /// HapticFeedbackPerform
         /// </summary>
         /// <param name="type"></param>
-        public void HapticFeedbackPerform(HapticFeedbackType type) => Microsoft.Maui.Devices.HapticFeedback.Default.Perform(type.EnumParse<Microsoft.Maui.Devices.HapticFeedbackType>());
+        public void HapticFeedbackPerform(Maui.Devices.HapticFeedbackType type) => Microsoft.Maui.Devices.HapticFeedback.Default.Perform(type.EnumParse<HapticFeedbackType>());
     }
 }

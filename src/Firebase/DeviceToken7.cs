@@ -1,7 +1,7 @@
 ﻿using MetaFrm.Maui.Devices;
 using Plugin.Firebase.CloudMessaging;
 
-namespace MetaFrm.Maui.Firebase
+namespace MetaFrm.Maui.Essentials.Firebase
 {
     /// <summary>
     /// DeviceToken
@@ -29,7 +29,7 @@ namespace MetaFrm.Maui.Firebase
                 Console.WriteLine(ex);
             }
 
-            return null;
+            return "";
         }
     }
 }

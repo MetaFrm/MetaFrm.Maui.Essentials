@@ -2,7 +2,7 @@
 using Plugin.Firebase.CloudMessaging;
 using Plugin.Firebase.Core.Platforms.iOS;
 
-namespace MetaFrm.Maui.Platforms
+namespace MetaFrm.Maui.Essentials.Platforms
 {
     /// <summary>
     /// ExtensionsFirebase

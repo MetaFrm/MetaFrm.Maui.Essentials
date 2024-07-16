@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.ApplicationModel.DataTransfer
+﻿namespace MetaFrm.Maui.Essentials.ApplicationModel.DataTransfer
 {
     /// <summary>
     /// Share data such as text and uris to other applications.
     /// </summary>
-    public class Share : IShare
+    public class Share : Maui.ApplicationModel.DataTransfer.IShare
     {
         /// <summary>
         /// Show the share user interface to share text.
@@ -31,11 +31,16 @@
         /// </summary>
         /// <param name="request">Share request with options.</param>
         /// <returns>Task when completed.</returns>
-        public async Task RequestAsync(ShareTextRequest request)
+        public async Task RequestAsync(Maui.ApplicationModel.DataTransfer.ShareTextRequest request)
         {
-            await Microsoft.Maui.ApplicationModel.DataTransfer.Share.RequestAsync(new Microsoft.Maui.ApplicationModel.DataTransfer.ShareTextRequest() { Text = request.Text, Title = request.Title
-                                                                            , PresentationSourceBounds = new Rect(request.PresentationSourceBounds.X, request.PresentationSourceBounds.Y, request.PresentationSourceBounds.Width, request.PresentationSourceBounds.Height)
-                                                                            , Subject = request.Subject, Uri = request.Uri });
+            await Microsoft.Maui.ApplicationModel.DataTransfer.Share.RequestAsync(new ShareTextRequest()
+            {
+                Text = request.Text,
+                Title = request.Title,
+                PresentationSourceBounds = new Rect(request.PresentationSourceBounds.X, request.PresentationSourceBounds.Y, request.PresentationSourceBounds.Width, request.PresentationSourceBounds.Height),
+                Subject = request.Subject,
+                Uri = request.Uri
+            });
         }
 
         /// <summary>
@@ -43,10 +48,13 @@
         /// </summary>
         /// <param name="request">File request to share.</param>
         /// <returns>Task when completed.</returns>
-        public async Task RequestAsync(ShareFileRequest request) 
+        public async Task RequestAsync(Maui.ApplicationModel.DataTransfer.ShareFileRequest request)
         {
-            await Microsoft.Maui.ApplicationModel.DataTransfer.Share.RequestAsync(new Microsoft.Maui.ApplicationModel.DataTransfer.ShareFileRequest() { Title = request.Title
-                                                                                , File = new Microsoft.Maui.ApplicationModel.DataTransfer.ShareFile(request.File.FullPath, request.File.ContentType)});
+            await Microsoft.Maui.ApplicationModel.DataTransfer.Share.RequestAsync(new ShareFileRequest()
+            {
+                Title = request.Title,
+                File = request.File != null ? new ShareFile(request.File.FullPath, request.File.ContentType) : null
+            });
         }
 
         /// <summary>
@@ -54,17 +62,21 @@
         /// </summary>
         /// <param name="request">Multiple Files request to share.</param>
         /// <returns>Task when completed.</returns>
-        public async Task RequestAsync(ShareMultipleFilesRequest request)
+        public async Task RequestAsync(Maui.ApplicationModel.DataTransfer.ShareMultipleFilesRequest request)
         {
-            List<Microsoft.Maui.ApplicationModel.DataTransfer.ShareFile> files = new();
+            List<ShareFile>? files = null;
 
-            foreach (ShareFile shareFile in request.Files)
-                files.Add(new Microsoft.Maui.ApplicationModel.DataTransfer.ShareFile(shareFile.FullPath, shareFile.ContentType));
-
-            await Microsoft.Maui.ApplicationModel.DataTransfer.Share.RequestAsync(new Microsoft.Maui.ApplicationModel.DataTransfer.ShareMultipleFilesRequest()
+            if (request.Files != null)
             {
-                Title = request.Title
-                , Files = files
+                files = new();
+                foreach (Maui.ApplicationModel.DataTransfer.ShareFile shareFile in request.Files)
+                    files.Add(new ShareFile(shareFile.FullPath, shareFile.ContentType));
+            }
+
+            await Microsoft.Maui.ApplicationModel.DataTransfer.Share.RequestAsync(new ShareMultipleFilesRequest()
+            {
+                Title = request.Title,
+                Files = files
             });
         }
     }

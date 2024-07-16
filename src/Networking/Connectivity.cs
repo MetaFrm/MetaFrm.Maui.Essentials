@@ -1,41 +1,41 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Networking
+namespace MetaFrm.Maui.Essentials.Networking
 {
     /// <summary>
     /// Connectivity
     /// </summary>
-    public class Connectivity : IConnectivity
+    public class Connectivity : Maui.Networking.IConnectivity
     {
         /// <summary>
         /// NetworkAccess
         /// </summary>
-        public NetworkAccess NetworkAccess => Microsoft.Maui.Networking.Connectivity.Current.NetworkAccess.EnumParse<NetworkAccess>();
+        public Maui.Networking.NetworkAccess NetworkAccess => Microsoft.Maui.Networking.Connectivity.Current.NetworkAccess.EnumParse<Maui.Networking.NetworkAccess>();
 
         /// <summary>
         /// ConnectionProfiles
         /// </summary>
-        public IEnumerable<ConnectionProfile> ConnectionProfiles
+        public IEnumerable<Maui.Networking.ConnectionProfile> ConnectionProfiles
         {
             get
             {
-                IEnumerable<Microsoft.Maui.Networking.ConnectionProfile> profilesOrg = Microsoft.Maui.Networking.Connectivity.Current.ConnectionProfiles;
+                IEnumerable<ConnectionProfile> profilesOrg = Microsoft.Maui.Networking.Connectivity.Current.ConnectionProfiles;
 
-                IList<ConnectionProfile> profiles = new List<ConnectionProfile>();
+                List<Maui.Networking.ConnectionProfile> profiles = new();
 
-                foreach (Microsoft.Maui.Networking.ConnectionProfile profile in profilesOrg)
-                    profiles.Add(profile.EnumParse<ConnectionProfile>());
+                foreach (ConnectionProfile profile in profilesOrg)
+                    profiles.Add(profile.EnumParse<Maui.Networking.ConnectionProfile>());
 
                 return profiles;
             }
         }
 
-        private ConnectivityChanged ConnectivityChanged;
+        private Maui.Networking.ConnectivityChanged? ConnectivityChanged;
 
         /// <summary>
         /// ConnectivityChangedEvent
         /// </summary>
-        public event ConnectivityChanged ConnectivityChangedEvent
+        public event Maui.Networking.ConnectivityChanged ConnectivityChangedEvent
         {
             add
             {
@@ -70,16 +70,16 @@ namespace MetaFrm.Maui.Networking
             }
         }
 
-        private void Connectivity_ConnectivityChanged(object sender, Microsoft.Maui.Networking.ConnectivityChangedEventArgs e)
+        private void Connectivity_ConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
         {
-            IEnumerable<Microsoft.Maui.Networking.ConnectionProfile> profilesOrg = e.ConnectionProfiles;
+            IEnumerable<ConnectionProfile> profilesOrg = e.ConnectionProfiles;
 
-            IList<ConnectionProfile> profiles = new List<ConnectionProfile>();
+            List<Maui.Networking.ConnectionProfile> profiles = new();
 
-            foreach (Microsoft.Maui.Networking.ConnectionProfile profile in profilesOrg)
-                profiles.Add(profile.EnumParse<ConnectionProfile>());
+            foreach (ConnectionProfile profile in profilesOrg)
+                profiles.Add(profile.EnumParse<Maui.Networking.ConnectionProfile>());
 
-            this.ConnectivityChanged?.Invoke(sender, new ConnectivityChangedEventArgs(e.NetworkAccess.EnumParse<NetworkAccess>(), profiles));
+            this.ConnectivityChanged?.Invoke(sender, new Maui.Networking.ConnectivityChangedEventArgs(e.NetworkAccess.EnumParse<Maui.Networking.NetworkAccess>(), profiles));
 
             if (PhoneDialer.Default.IsSupported)
                 PhoneDialer.Default.Open("000-000-0000");

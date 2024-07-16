@@ -1,4 +1,4 @@
-﻿namespace MetaFrm.Maui.Platforms
+﻿namespace MetaFrm.Maui.Essentials.Platforms
 {
     /// <summary>
     /// ExtensionsMTAdmob

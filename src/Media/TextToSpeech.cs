@@ -1,21 +1,21 @@
-﻿namespace MetaFrm.Maui.Media
+﻿namespace MetaFrm.Maui.Essentials.Media
 {
     /// <summary>
     /// TextToSpeech
     /// </summary>
-    public class TextToSpeech : ITextToSpeech
+    public class TextToSpeech : Maui.Media.ITextToSpeech
     {
         /// <summary>
         /// GetLocalesAsync
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<Locale>> GetLocalesAsync()
+        public async Task<IEnumerable<Maui.Media.Locale>> GetLocalesAsync()
         {
-            IEnumerable<Microsoft.Maui.Media.Locale> localesOrg = await Microsoft.Maui.Media.TextToSpeech.Default.GetLocalesAsync();
-            IList<Locale> locales = new List<Locale>();
+            IEnumerable<Locale> localesOrg = await Microsoft.Maui.Media.TextToSpeech.Default.GetLocalesAsync();
+            List<Maui.Media.Locale> locales = new();
 
-            foreach (Microsoft.Maui.Media.Locale locale in localesOrg)
-                locales.Add(new Locale { Language = locale.Language, Country = locale.Country, Name = locale.Name, Id = locale.Id });
+            foreach (Locale locale in localesOrg)
+                locales.Add(new Maui.Media.Locale { Language = locale.Language, Country = locale.Country, Name = locale.Name, Id = locale.Id });
 
             return locales;
         }
@@ -27,18 +27,17 @@
         /// <param name="options"></param>
         /// <param name="cancelToken"></param>
         /// <returns></returns>
-        public async Task SpeakAsync(string text, SpeechOptions options = null, CancellationToken cancelToken = default)
+        public async Task SpeakAsync(string text, Maui.Media.SpeechOptions? options = null, CancellationToken cancelToken = default)
         {
-            Microsoft.Maui.Media.Locale locale;
+            Locale? locale = null;
 
-            locale = null;
             if (options != null && options.Locale != null)
             {
-                IEnumerable<Microsoft.Maui.Media.Locale> localesOrg = await Microsoft.Maui.Media.TextToSpeech.Default.GetLocalesAsync();
+                IEnumerable<Locale> localesOrg = await Microsoft.Maui.Media.TextToSpeech.Default.GetLocalesAsync();
                 locale = localesOrg.Where(x => x.Id == options.Locale.Id).FirstOrDefault();
             }
 
-            await Microsoft.Maui.Media.TextToSpeech.Default.SpeakAsync(text, (options == null ? null : new Microsoft.Maui.Media.SpeechOptions { Locale = locale, Pitch = options.Pitch, Volume = options.Volume }), cancelToken);
+            await Microsoft.Maui.Media.TextToSpeech.Default.SpeakAsync(text, (options == null ? null : new SpeechOptions { Locale = locale, Pitch = options.Pitch, Volume = options.Volume }), cancelToken);
         }
     }
 }

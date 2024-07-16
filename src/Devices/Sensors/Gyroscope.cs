@@ -1,18 +1,18 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Devices.Sensors
+namespace MetaFrm.Maui.Essentials.Devices.Sensors
 {
     /// <summary>
     /// Gyroscope
     /// </summary>
-    public class Gyroscope : IGyroscope
+    public class Gyroscope : Maui.Devices.Sensors.IGyroscope
     {
-        private GyroscopeChanged GyroscopeChanged;
+        private Maui.Devices.Sensors.GyroscopeChanged? GyroscopeChanged;
 
         /// <summary>
         /// GyroscopeChangedEvent
         /// </summary>
-        public event GyroscopeChanged GyroscopeChangedEvent
+        public event Maui.Devices.Sensors.GyroscopeChanged GyroscopeChangedEvent
         {
             add
             {
@@ -47,7 +47,7 @@ namespace MetaFrm.Maui.Devices.Sensors
             }
         }
 
-        private void Gyroscope_ReadingChanged(object sender, Microsoft.Maui.Devices.Sensors.GyroscopeChangedEventArgs e) => this.GyroscopeChanged?.Invoke(sender, new GyroscopeChangedEventArgs(new GyroscopeData(e.Reading.AngularVelocity.X, e.Reading.AngularVelocity.Y, e.Reading.AngularVelocity.Z)));
+        private void Gyroscope_ReadingChanged(object? sender, GyroscopeChangedEventArgs e) => this.GyroscopeChanged?.Invoke(sender, new Maui.Devices.Sensors.GyroscopeChangedEventArgs(new Maui.Devices.Sensors.GyroscopeData(e.Reading.AngularVelocity.X, e.Reading.AngularVelocity.Y, e.Reading.AngularVelocity.Z)));
 
         /// <summary>
         /// GyroscopeIsSupported
@@ -63,7 +63,7 @@ namespace MetaFrm.Maui.Devices.Sensors
         /// GyroscopeStart
         /// </summary>
         /// <param name="sensorSpeed"></param>
-        public void GyroscopeStart(SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.Gyroscope.Default.Start(sensorSpeed.EnumParse<Microsoft.Maui.Devices.Sensors.SensorSpeed>());
+        public void GyroscopeStart(Maui.Devices.Sensors.SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.Gyroscope.Default.Start(sensorSpeed.EnumParse<SensorSpeed>());
 
         /// <summary>
         /// GyroscopeStop

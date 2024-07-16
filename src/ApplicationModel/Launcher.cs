@@ -1,10 +1,10 @@
-﻿namespace MetaFrm.Maui.ApplicationModel
+﻿namespace MetaFrm.Maui.Essentials.ApplicationModel
 {
     /// <summary>
     /// Launches an application specified by the passed uri.
     /// </summary>
     /// <remarks>Has to be a valid System.Uri</remarks>
-    public class Launcher : ILauncher
+    public class Launcher : Maui.ApplicationModel.ILauncher
     {
         /// <summary>
         /// Queries if device supports opening the uri scheme
@@ -55,20 +55,20 @@
         /// </summary>
         /// <param name="request">Request that contains information on the file to open.</param>
         /// <returns></returns>
-        public async Task<bool> OpenAsync(OpenFileRequest request)
+        public async Task<bool> OpenAsync(Maui.ApplicationModel.OpenFileRequest request)
         {
             if (DeviceInfo.Platform == DevicePlatform.iOS && DeviceInfo.Idiom == DeviceIdiom.Tablet)
             {
                 if (request.PresentationSourceBounds == null)
-                    return await Microsoft.Maui.ApplicationModel.Launcher.Default.OpenAsync(new Microsoft.Maui.ApplicationModel.OpenFileRequest(request.Title, new Microsoft.Maui.Storage.ReadOnlyFile(request.File.FullPath, request.File.ContentType)));
+                    return await Microsoft.Maui.ApplicationModel.Launcher.Default.OpenAsync(new OpenFileRequest(request.Title ?? "", new ReadOnlyFile(request.File?.FullPath ?? "", request.File?.ContentType ?? "")));
                 else
-                    return await Microsoft.Maui.ApplicationModel.Launcher.Default.OpenAsync(new Microsoft.Maui.ApplicationModel.OpenFileRequest(request.Title, new Microsoft.Maui.Storage.ReadOnlyFile(request.File.FullPath, request.File.ContentType))
+                    return await Microsoft.Maui.ApplicationModel.Launcher.Default.OpenAsync(new OpenFileRequest(request.Title ?? "", new ReadOnlyFile(request.File?.FullPath ?? "", request.File?.ContentType ?? ""))
                     {
-                        PresentationSourceBounds = new Rect((double)request.PresentationSourceBounds?.X, (double)request.PresentationSourceBounds?.Y, (double)request.PresentationSourceBounds?.Width, (double)request.PresentationSourceBounds?.Height)
+                        PresentationSourceBounds = new((double?)request.PresentationSourceBounds?.X ?? 0D, (double?)request.PresentationSourceBounds?.Y ?? 0D, (double?)request.PresentationSourceBounds?.Width ?? 0D, (double?)request.PresentationSourceBounds?.Height ?? 0D)
                     });
             }
             else
-                return await Microsoft.Maui.ApplicationModel.Launcher.Default.OpenAsync(new Microsoft.Maui.ApplicationModel.OpenFileRequest(request.Title, new Microsoft.Maui.Storage.ReadOnlyFile(request.File.FullPath, request.File.ContentType)));
+                return await Microsoft.Maui.ApplicationModel.Launcher.Default.OpenAsync(new OpenFileRequest(request.Title ?? "", new ReadOnlyFile(request.File?.FullPath ?? "", request.File?.ContentType ?? "")));
         }
 
         /// <summary>

@@ -1,18 +1,18 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Devices.Sensors
+namespace MetaFrm.Maui.Essentials.Devices.Sensors
 {
     /// <summary>
     /// Maui Essentials Device
     /// </summary>
-    public class Barometer : IBarometer
+    public class Barometer : Maui.Devices.Sensors.IBarometer
     {
-        private BarometerChanged BarometerChanged;
+        private Maui.Devices.Sensors.BarometerChanged? BarometerChanged;
 
         /// <summary>
         /// BarometerChangedEvent
         /// </summary>
-        public event BarometerChanged BarometerChangedEvent
+        public event Maui.Devices.Sensors.BarometerChanged BarometerChangedEvent
         {
             add
             {
@@ -47,7 +47,7 @@ namespace MetaFrm.Maui.Devices.Sensors
             }
         }
 
-        private void Barometer_ReadingChanged(object sender, Microsoft.Maui.Devices.Sensors.BarometerChangedEventArgs e) => this.BarometerChanged?.Invoke(sender, new BarometerChangedEventArgs(new BarometerData(e.Reading.PressureInHectopascals)));
+        private void Barometer_ReadingChanged(object? sender, BarometerChangedEventArgs e) => this.BarometerChanged?.Invoke(sender, new Maui.Devices.Sensors.BarometerChangedEventArgs(new Maui.Devices.Sensors.BarometerData(e.Reading.PressureInHectopascals)));
 
         /// <summary>
         /// BarometerIsSupported
@@ -63,7 +63,7 @@ namespace MetaFrm.Maui.Devices.Sensors
         /// BarometerStart
         /// </summary>
         /// <param name="sensorSpeed"></param>
-        public void BarometerStart(SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.Barometer.Default.Start(sensorSpeed.EnumParse<Microsoft.Maui.Devices.Sensors.SensorSpeed>());
+        public void BarometerStart(Maui.Devices.Sensors.SensorSpeed sensorSpeed) => Microsoft.Maui.Devices.Sensors.Barometer.Default.Start(sensorSpeed.EnumParse<SensorSpeed>());
 
         /// <summary>
         /// BarometerStop

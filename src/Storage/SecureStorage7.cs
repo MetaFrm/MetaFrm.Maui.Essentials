@@ -23,7 +23,7 @@
         /// </summary>
         /// <param name="key">Storage Key.</param>
         /// <returns>Decrypted string or null if key does not exist.</returns>
-        public async Task<string?> GetAsync(string key)
+        public async Task<string> GetAsync(string key)
         {
             return await Microsoft.Maui.Storage.SecureStorage.Default.GetAsync(key);
         }

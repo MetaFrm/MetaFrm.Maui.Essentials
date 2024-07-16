@@ -1,11 +1,11 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Storage
+namespace MetaFrm.Maui.Essentials.Storage
 {
     /// <summary>
     /// Lets the user pick a file from the device's storage.
     /// </summary>
-    public class FilePicker : IFilePicker
+    public class FilePicker : Maui.Storage.IFilePicker
     {
         /// <summary>
         /// Starts file picker for selecting files.
@@ -17,34 +17,34 @@ namespace MetaFrm.Maui.Storage
         /// that occured during file picking. When calling PickAsync() again while showing
         /// a file picker, the Task object that was returned from the first call is cancelled.
         /// Be sure to also handle the TaskCanceledException in this case.</remarks>
-        public async Task<FileResult> PickAsync(PickOptions options = null)
+        public async Task<Maui.Storage.FileResult?> PickAsync(Maui.Storage.PickOptions? options = null)
         {
-            Microsoft.Maui.Storage.FilePickerFileType filePickerFileType;
+            FilePickerFileType filePickerFileType;
 
             if (options != null && options.FileTypes != null && options.FileTypes.FileTypes != null)
             {
-                IDictionary<DevicePlatform, IEnumerable<string>> fileTypes= new Dictionary<DevicePlatform, IEnumerable<string>>();
+                Dictionary<DevicePlatform, IEnumerable<string>> fileTypes = new();
 
                 foreach (var type in options.FileTypes.FileTypes)
                     fileTypes.Add(type.Key.EnumParse<DevicePlatform>(), type.Value);
 
-                filePickerFileType = new Microsoft.Maui.Storage.FilePickerFileType(fileTypes);
+                filePickerFileType = new FilePickerFileType(fileTypes);
 
-                var result = await Microsoft.Maui.Storage.FilePicker.Default.PickAsync(new Microsoft.Maui.Storage.PickOptions() { PickerTitle = options.PickerTitle, FileTypes = filePickerFileType });
+                var result = await Microsoft.Maui.Storage.FilePicker.Default.PickAsync(new PickOptions() { PickerTitle = options.PickerTitle, FileTypes = filePickerFileType });
 
                 if (result != null)
-                    return new FileResult(result.FullPath, result.ContentType);
+                    return new Maui.Storage.FileResult(result.FullPath, result.ContentType);
                 else
-                    return null; ;
+                    return null;
             }
             else
             {
                 var result = await Microsoft.Maui.Storage.FilePicker.Default.PickAsync();
 
                 if (result != null)
-                    return new FileResult(result.FullPath, result.ContentType);
+                    return new Maui.Storage.FileResult(result.FullPath, result.ContentType);
                 else
-                    return null; ;
+                    return null;
             }
         }
 
@@ -58,49 +58,48 @@ namespace MetaFrm.Maui.Storage
         /// that occured during file picking. When calling PickMultipleAsync() again while
         /// showing a file picker, the Task object that was returned from the first call
         /// is cancelled. Be sure to also handle the TaskCanceledException in this case.</remarks>
-        public async Task<IEnumerable<FileResult>> PickMultipleAsync(PickOptions options = null)
+        public async Task<IEnumerable<Maui.Storage.FileResult>> PickMultipleAsync(Maui.Storage.PickOptions? options = null)
         {
-            Microsoft.Maui.Storage.FilePickerFileType filePickerFileType;
+            FilePickerFileType filePickerFileType;
 
             if (options != null && options.FileTypes != null && options.FileTypes.FileTypes != null)
             {
-                IDictionary<DevicePlatform, IEnumerable<string>> fileTypes = new Dictionary<DevicePlatform, IEnumerable<string>>();
+                Dictionary<DevicePlatform, IEnumerable<string>> fileTypes = new();
 
                 foreach (var type in options.FileTypes.FileTypes)
                     fileTypes.Add(type.Key.EnumParse<DevicePlatform>(), type.Value);
 
-                filePickerFileType = new Microsoft.Maui.Storage.FilePickerFileType(fileTypes);
+                filePickerFileType = new FilePickerFileType(fileTypes);
 
-                var resultPickMultiple = await Microsoft.Maui.Storage.FilePicker.Default.PickMultipleAsync(new Microsoft.Maui.Storage.PickOptions() { PickerTitle = options.PickerTitle, FileTypes = filePickerFileType });
+                var resultPickMultiple = await Microsoft.Maui.Storage.FilePicker.Default.PickMultipleAsync(new PickOptions() { PickerTitle = options.PickerTitle, FileTypes = filePickerFileType });
 
                 if (resultPickMultiple != null)
                 {
-                    List<FileResult> results = new();
+                    List<Maui.Storage.FileResult> results = new();
 
                     foreach (var type in resultPickMultiple)
-                        results.Add(new FileResult(type.FullPath, type.ContentType));
+                        results.Add(new Maui.Storage.FileResult(type.FullPath, type.ContentType));
 
                     return results;
                 }
                 else
-                    return null; ;
+                    return new List<Maui.Storage.FileResult>();
             }
             else
             {
                 var resultPickMultiple = await Microsoft.Maui.Storage.FilePicker.Default.PickMultipleAsync();
 
-
                 if (resultPickMultiple != null)
                 {
-                    List<FileResult> results = new();
+                    List<Maui.Storage.FileResult> results = new();
 
                     foreach (var type in resultPickMultiple)
-                        results.Add(new FileResult(type.FullPath, type.ContentType));
+                        results.Add(new Maui.Storage.FileResult(type.FullPath, type.ContentType));
 
                     return results;
                 }
                 else
-                    return null; ;
+                    return new List<Maui.Storage.FileResult>();
             }
         }
     }

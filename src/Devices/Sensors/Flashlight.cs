@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.Devices.Sensors
+﻿namespace MetaFrm.Maui.Essentials.Devices.Sensors
 {
     /// <summary>
     /// Flashlight
     /// </summary>
-    public class Flashlight : IFlashlight
+    public class Flashlight : Maui.Devices.Sensors.IFlashlight
     {
         /// <summary>
         /// FlashlightTurnOnAsync

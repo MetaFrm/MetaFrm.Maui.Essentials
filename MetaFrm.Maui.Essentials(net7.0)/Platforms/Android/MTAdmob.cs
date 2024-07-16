@@ -1,7 +1,7 @@
 ﻿using MetaFrm.Maui.Ads;
 using Plugin.MauiMTAdmob;
 
-namespace MetaFrm.Maui.Platforms
+namespace MetaFrm.Maui.Essentials.Platforms
 {
     /// <summary>
     /// MTAdmob
@@ -25,25 +25,25 @@ namespace MetaFrm.Maui.Platforms
             }
         }
 
-        private string bannerAdsId;
+        private string? bannerAdsId;
         /// <summary>
         /// BannerAdsId
         /// </summary>
-        public string BannerAdsId => this.bannerAdsId;
+        public string? BannerAdsId => this.bannerAdsId;
 
-        private string interstitialAdsId;
+        private string? interstitialAdsId;
         /// <summary>
         /// InterstitialAdsId
         /// </summary>
-        public string InterstitialAdsId => this.interstitialAdsId;
+        public string? InterstitialAdsId => this.interstitialAdsId;
 
-        private string rewardeAdsId;
+        private string? rewardeAdsId;
         /// <summary>
         /// RewardeAdsId
         /// </summary>
-        public string RewardeAdsId => this.rewardeAdsId;
+        public string? RewardeAdsId => this.rewardeAdsId;
 
-        private EventHandler InterstitialOpened;
+        private EventHandler? InterstitialOpened;
         /// <summary>
         /// OnInterstitialOpened
         /// </summary>
@@ -82,9 +82,9 @@ namespace MetaFrm.Maui.Platforms
                 this.InterstitialOpened -= value;
             }
         }
-        private void Current_OnInterstitialOpened(object sender, EventArgs e) => this.InterstitialOpened?.Invoke(sender, e);
+        private void Current_OnInterstitialOpened(object? sender, EventArgs e) => this.InterstitialOpened?.Invoke(sender, e);
 
-        private EventHandler InterstitialClosed;
+        private EventHandler? InterstitialClosed;
         /// <summary>
         /// OnInterstitialClosed
         /// </summary>
@@ -123,10 +123,10 @@ namespace MetaFrm.Maui.Platforms
                 this.InterstitialClosed -= value;
             }
         }
-        private void Current_OnInterstitialClosed(object sender, EventArgs e) => this.InterstitialClosed?.Invoke(sender, e);
+        private void Current_OnInterstitialClosed(object? sender, EventArgs e) => this.InterstitialClosed?.Invoke(sender, e);
 
 
-        private EventHandler RewardedOpened;
+        private EventHandler? RewardedOpened;
         /// <summary>
         /// OnRewardedOpened
         /// </summary>
@@ -165,9 +165,9 @@ namespace MetaFrm.Maui.Platforms
                 this.RewardedOpened -= value;
             }
         }
-        private void Current_OnRewardedOpened(object sender, EventArgs e) => this.RewardedOpened?.Invoke(sender, e);
+        private void Current_OnRewardedOpened(object? sender, EventArgs e) => this.RewardedOpened?.Invoke(sender, e);
 
-        private EventHandler RewardedClosed;
+        private EventHandler? RewardedClosed;
         /// <summary>
         /// OnRewardedClosed
         /// </summary>
@@ -206,7 +206,7 @@ namespace MetaFrm.Maui.Platforms
                 this.RewardedClosed -= value;
             }
         }
-        private void Current_OnRewardedClosed(object sender, EventArgs e) => this.RewardedClosed?.Invoke(sender, e);
+        private void Current_OnRewardedClosed(object? sender, EventArgs e) => this.RewardedClosed?.Invoke(sender, e);
 
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace MetaFrm.Maui.Platforms
             {
             }
         }
-        private void Current_OnInterstitialLoaded(object sender, EventArgs e)
+        private void Current_OnInterstitialLoaded(object? sender, EventArgs e)
         {
             CrossMauiMTAdmob.Current.ShowInterstitial();
         }
@@ -274,7 +274,7 @@ namespace MetaFrm.Maui.Platforms
             {
             }
         }
-        private void Current_OnRewardedLoaded(object sender, EventArgs e)
+        private void Current_OnRewardedLoaded(object? sender, EventArgs e)
         {
             CrossMauiMTAdmob.Current.ShowRewarded();
         }

@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.Media
+﻿namespace MetaFrm.Maui.Essentials.Media
 {
     /// <summary>
     /// Media
     /// </summary>
-    public class MediaPicker : IMediaPicker
+    public class MediaPicker : Maui.Media.IMediaPicker
     {
         /// <summary>
         /// IsCaptureSupported
@@ -16,14 +16,14 @@
         /// <param name="options"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<Storage.FileResult> CapturePhotoAsync(MediaPickerOptions options = null)
+        public async Task<Maui.Storage.FileResult> CapturePhotoAsync(Maui.Media.MediaPickerOptions? options = null)
         {
-            Microsoft.Maui.Storage.FileResult photo = await Microsoft.Maui.Media.MediaPicker.Default.CapturePhotoAsync();
+            FileResult? photo = await Microsoft.Maui.Media.MediaPicker.Default.CapturePhotoAsync(options == null ? null : new() { Title = options.Title});
 
             if (photo != null)
-                return new Storage.FileResult(photo.FullPath);
+                return new Maui.Storage.FileResult(photo.FullPath);
 
-            return null;
+            return new Maui.Storage.FileResult(string.Empty);
         }
 
         /// <summary>
@@ -31,14 +31,14 @@
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public async Task<Storage.FileResult> CaptureVideoAsync(MediaPickerOptions options = null)
+        public async Task<Maui.Storage.FileResult> CaptureVideoAsync(Maui.Media.MediaPickerOptions? options = null)
         {
-            Microsoft.Maui.Storage.FileResult photo = await Microsoft.Maui.Media.MediaPicker.Default.CaptureVideoAsync();
+            FileResult? photo = await Microsoft.Maui.Media.MediaPicker.Default.CaptureVideoAsync(options == null ? null : new() { Title = options.Title });
 
             if (photo != null)
-                return new Storage.FileResult(photo.FullPath);
+                return new Maui.Storage.FileResult(photo.FullPath);
 
-            return null;
+            return new Maui.Storage.FileResult(string.Empty);
         }
 
         /// <summary>
@@ -46,14 +46,14 @@
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public async Task<Storage.FileResult> PickPhotoAsync(MediaPickerOptions options = null)
+        public async Task<Maui.Storage.FileResult> PickPhotoAsync(Maui.Media.MediaPickerOptions? options = null)
         {
-            Microsoft.Maui.Storage.FileResult photo = await Microsoft.Maui.Media.MediaPicker.Default.PickPhotoAsync();
+            FileResult? photo = await Microsoft.Maui.Media.MediaPicker.Default.PickPhotoAsync(options == null ? null : new() { Title = options.Title });
 
             if (photo != null)
-                return new Storage.FileResult(photo.FullPath);
+                return new Maui.Storage.FileResult(photo.FullPath);
 
-            return null;
+            return new Maui.Storage.FileResult(string.Empty);
         }
 
         /// <summary>
@@ -61,14 +61,14 @@
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public async Task<Storage.FileResult> PickVideoAsync(MediaPickerOptions options = null)
+        public async Task<Maui.Storage.FileResult> PickVideoAsync(Maui.Media.MediaPickerOptions? options = null)
         {
-            Microsoft.Maui.Storage.FileResult photo = await Microsoft.Maui.Media.MediaPicker.Default.PickVideoAsync();
+            FileResult? photo = await Microsoft.Maui.Media.MediaPicker.Default.PickVideoAsync(options == null ? null : new() { Title = options.Title });
 
             if (photo != null)
-                return new Storage.FileResult(photo.FullPath);
+                return new Maui.Storage.FileResult(photo.FullPath);
 
-            return null;
+            return new Maui.Storage.FileResult(string.Empty);
         }
     }
 }

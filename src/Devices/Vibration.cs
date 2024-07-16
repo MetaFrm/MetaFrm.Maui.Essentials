@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.Devices
+﻿namespace MetaFrm.Maui.Essentials.Devices
 {
     /// <summary>
     /// Vibration
     /// </summary>
-    public class Vibration : IVibration
+    public class Vibration : Maui.Devices.IVibration
     {
         /// <summary>
         /// IsSupported

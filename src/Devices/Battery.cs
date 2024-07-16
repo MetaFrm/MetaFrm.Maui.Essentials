@@ -1,11 +1,11 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Devices
+namespace MetaFrm.Maui.Essentials.Devices
 {
     /// <summary>
     /// Battery
     /// </summary>
-    public class Battery : IBattery
+    public class Battery : Maui.Devices.IBattery
     {
         /// <summary>
         /// BatteryChargeLevel
@@ -15,24 +15,24 @@ namespace MetaFrm.Maui.Devices
         /// <summary>
         /// BatteryState
         /// </summary>
-        public BatteryState BatteryState => Microsoft.Maui.Devices.Battery.Default.State.EnumParse<BatteryState>();
+        public Maui.Devices.BatteryState BatteryState => Microsoft.Maui.Devices.Battery.Default.State.EnumParse<Maui.Devices.BatteryState>();
 
         /// <summary>
         /// BatteryPowerSource
         /// </summary>
-        public BatteryPowerSource BatteryPowerSource => Microsoft.Maui.Devices.Battery.Default.PowerSource.EnumParse<BatteryPowerSource>();
+        public Maui.Devices.BatteryPowerSource BatteryPowerSource => Microsoft.Maui.Devices.Battery.Default.PowerSource.EnumParse<Maui.Devices.BatteryPowerSource>();
 
         /// <summary>
         /// EnergySaverStatus
         /// </summary>
-        public EnergySaverStatus EnergySaverStatus => Microsoft.Maui.Devices.Battery.Default.EnergySaverStatus.EnumParse<EnergySaverStatus>();
+        public Maui.Devices.EnergySaverStatus EnergySaverStatus => Microsoft.Maui.Devices.Battery.Default.EnergySaverStatus.EnumParse<Maui.Devices.EnergySaverStatus>();
 
-        private BatteryInfoChanged BatteryInfoChanged;
+        private Maui.Devices.BatteryInfoChanged? BatteryInfoChanged;
 
         /// <summary>
         /// BatteryInfoChangedEvent
         /// </summary>
-        public event BatteryInfoChanged BatteryInfoChangedEvent
+        public event Maui.Devices.BatteryInfoChanged BatteryInfoChangedEvent
         {
             add
             {
@@ -67,14 +67,14 @@ namespace MetaFrm.Maui.Devices
             }
         }
 
-        private void Battery_BatteryInfoChanged(object sender, Microsoft.Maui.Devices.BatteryInfoChangedEventArgs e) => BatteryInfoChanged?.Invoke(sender, new BatteryInfoChangedEventArgs(e.ChargeLevel, e.State.EnumParse<BatteryState>(), e.PowerSource.EnumParse<BatteryPowerSource>()));
+        private void Battery_BatteryInfoChanged(object? sender, BatteryInfoChangedEventArgs e) => BatteryInfoChanged?.Invoke(sender, new Maui.Devices.BatteryInfoChangedEventArgs(e.ChargeLevel, e.State.EnumParse<Maui.Devices.BatteryState>(), e.PowerSource.EnumParse<Maui.Devices.BatteryPowerSource>()));
 
-        private EnergySaverStatusChanged EnergySaverStatusChanged;
+        private Maui.Devices.EnergySaverStatusChanged? EnergySaverStatusChanged;
 
         /// <summary>
         /// EnergySaverStatusChangedEvent
         /// </summary>
-        public event EnergySaverStatusChanged EnergySaverStatusChangedEvent
+        public event Maui.Devices.EnergySaverStatusChanged EnergySaverStatusChangedEvent
         {
             add
             {
@@ -109,6 +109,6 @@ namespace MetaFrm.Maui.Devices
             }
         }
 
-        private void Battery_EnergySaverStatusChanged(object sender, Microsoft.Maui.Devices.EnergySaverStatusChangedEventArgs e) => EnergySaverStatusChanged?.Invoke(sender, new EnergySaverStatusChangedEventArgs(e.EnergySaverStatus.EnumParse<EnergySaverStatus>()));
+        private void Battery_EnergySaverStatusChanged(object? sender, EnergySaverStatusChangedEventArgs e) => this.EnergySaverStatusChanged?.Invoke(sender, new Maui.Devices.EnergySaverStatusChangedEventArgs(e.EnergySaverStatus.EnumParse<Maui.Devices.EnergySaverStatus>()));
     }
 }

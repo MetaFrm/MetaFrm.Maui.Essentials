@@ -1,11 +1,11 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.Devices
+namespace MetaFrm.Maui.Essentials.Devices
 {
     /// <summary>
     /// DeviceDisplay
     /// </summary>
-    public class DeviceDisplay : IDeviceDisplay
+    public class DeviceDisplay : Maui.Devices.IDeviceDisplay
     {
         /// <summary>
         /// KeepScreenOn
@@ -25,19 +25,19 @@ namespace MetaFrm.Maui.Devices
         /// <summary>
         /// MainDisplayInfo
         /// </summary>
-        public DisplayInfo MainDisplayInfo => new DisplayInfo(Microsoft.Maui.Devices.DeviceDisplay.Current.MainDisplayInfo.Width
+        public Maui.Devices.DisplayInfo MainDisplayInfo => new(Microsoft.Maui.Devices.DeviceDisplay.Current.MainDisplayInfo.Width
                     , Microsoft.Maui.Devices.DeviceDisplay.Current.MainDisplayInfo.Height
                     , Microsoft.Maui.Devices.DeviceDisplay.Current.MainDisplayInfo.Density
-                    , Microsoft.Maui.Devices.DeviceDisplay.Current.MainDisplayInfo.Orientation.EnumParse<DisplayOrientation>()
-                    , Microsoft.Maui.Devices.DeviceDisplay.Current.MainDisplayInfo.Rotation.EnumParse<DisplayRotation>()
+                    , Microsoft.Maui.Devices.DeviceDisplay.Current.MainDisplayInfo.Orientation.EnumParse<Maui.Devices.DisplayOrientation>()
+                    , Microsoft.Maui.Devices.DeviceDisplay.Current.MainDisplayInfo.Rotation.EnumParse<Maui.Devices.DisplayRotation>()
                     , Microsoft.Maui.Devices.DeviceDisplay.Current.MainDisplayInfo.RefreshRate);
 
-        private MainDisplayInfoChanged MainDisplayInfoChanged;
+        private Maui.Devices.MainDisplayInfoChanged? MainDisplayInfoChanged;
 
         /// <summary>
         /// MainDisplayInfoChangedEvent
         /// </summary>
-        public event MainDisplayInfoChanged MainDisplayInfoChangedEvent
+        public event Maui.Devices.MainDisplayInfoChanged MainDisplayInfoChangedEvent
         {
             add
             {
@@ -77,9 +77,9 @@ namespace MetaFrm.Maui.Devices
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainDisplayInfo_MainDisplayInfoChanged(object sender, Microsoft.Maui.Devices.DisplayInfoChangedEventArgs e) => MainDisplayInfoChanged?.Invoke(sender, new DisplayInfoChangedEventArgs(new DisplayInfo(e.DisplayInfo.Width, e.DisplayInfo.Height, e.DisplayInfo.Density
-                                                                                                , e.DisplayInfo.Orientation.EnumParse<DisplayOrientation>()
-                                                                                                , e.DisplayInfo.Rotation.EnumParse<DisplayRotation>()
+        private void MainDisplayInfo_MainDisplayInfoChanged(object? sender, DisplayInfoChangedEventArgs e) => this.MainDisplayInfoChanged?.Invoke(sender, new Maui.Devices.DisplayInfoChangedEventArgs(new Maui.Devices.DisplayInfo(e.DisplayInfo.Width, e.DisplayInfo.Height, e.DisplayInfo.Density
+                                                                                                , e.DisplayInfo.Orientation.EnumParse<Maui.Devices.DisplayOrientation>()
+                                                                                                , e.DisplayInfo.Rotation.EnumParse<Maui.Devices.DisplayRotation>()
                                                                                                 , e.DisplayInfo.RefreshRate)));
     }
 }

@@ -1,11 +1,11 @@
 ﻿using MetaFrm.Extensions;
 
-namespace MetaFrm.Maui.ApplicationModel
+namespace MetaFrm.Maui.Essentials.ApplicationModel
 {
     /// <summary>
     /// Represents information about the application.
     /// </summary>
-    public class AppInfo : IAppInfo
+    public class AppInfo : Maui.ApplicationModel.IAppInfo
     {
         /// <summary>
         /// Gets the application package name or identifier.
@@ -43,17 +43,17 @@ namespace MetaFrm.Maui.ApplicationModel
         /// The Theme.
         /// </summary>
         /// <remarks>For platforms or platform versions which aren't supported, Unspecified is returned.</remarks>
-        public AppTheme RequestedTheme => Microsoft.Maui.ApplicationModel.AppInfo.Current.RequestedTheme.EnumParse<AppTheme>();
+        public Maui.ApplicationModel.AppTheme RequestedTheme => Microsoft.Maui.ApplicationModel.AppInfo.Current.RequestedTheme.EnumParse<Maui.ApplicationModel.AppTheme>();
 
         /// <summary>
         /// PackagingModel
         /// </summary>
-        public AppPackagingModel PackagingModel => Microsoft.Maui.ApplicationModel.AppInfo.Current.PackagingModel.EnumParse<AppPackagingModel>();
+        public Maui.ApplicationModel.AppPackagingModel PackagingModel => Microsoft.Maui.ApplicationModel.AppInfo.Current.PackagingModel.EnumParse<Maui.ApplicationModel.AppPackagingModel>();
 
         /// <summary>
         /// 
         /// </summary>
-        public LayoutDirection RequestedLayoutDirection => Microsoft.Maui.ApplicationModel.AppInfo.Current.RequestedLayoutDirection.EnumParse<LayoutDirection>();
+        public Maui.ApplicationModel.LayoutDirection RequestedLayoutDirection => Microsoft.Maui.ApplicationModel.AppInfo.Current.RequestedLayoutDirection.EnumParse<Maui.ApplicationModel.LayoutDirection>();
 
         /// <summary>
         /// Open the settings menu or page for the application.

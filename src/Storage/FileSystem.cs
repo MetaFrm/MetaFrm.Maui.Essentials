@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.Storage
+﻿namespace MetaFrm.Maui.Essentials.Storage
 {
     /// <summary>
     /// Provides an easy way to access the locations for device folders.
     /// </summary>
-    public class FileSystem : IFileSystem
+    public class FileSystem : Maui.Storage.IFileSystem
     {
         /// <summary>
         /// Gets the location where temporary data can be stored.

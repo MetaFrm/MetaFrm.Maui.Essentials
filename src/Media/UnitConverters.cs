@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.Media
+﻿namespace MetaFrm.Maui.Essentials.Media
 {
     /// <summary>
     /// UnitConverters
     /// </summary>
-    public class UnitConverters : IUnitConverters
+    public class UnitConverters : Maui.Media.IUnitConverters
     {
         /// <summary>
         /// Atmospheres to Pascals

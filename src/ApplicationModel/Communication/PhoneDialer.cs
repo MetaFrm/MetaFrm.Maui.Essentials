@@ -1,9 +1,9 @@
-﻿namespace MetaFrm.Maui.ApplicationModel.Communication
+﻿namespace MetaFrm.Maui.Essentials.ApplicationModel.Communication
 {
     /// <summary>
     /// PhoneDialer
     /// </summary>
-    public class PhoneDialer : IPhoneDialer
+    public class PhoneDialer : Maui.ApplicationModel.Communication.IPhoneDialer
     {
         /// <summary>
         /// IsSupported
