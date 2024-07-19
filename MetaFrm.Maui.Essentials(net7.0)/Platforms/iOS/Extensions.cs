@@ -26,18 +26,18 @@ namespace MetaFrm.Maui.Essentials.Platforms
             if (registerFirebaseServices && registerMTAdmobServices)
             {
                 if (Factory.Platform == Maui.Devices.DevicePlatform.Android)
-                    return builder.RegisterFirebaseServices().RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("AndroidAdsId"));
+                    builder.RegisterFirebaseServices().RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("AndroidAdsId"));
                 if (Factory.Platform == Maui.Devices.DevicePlatform.iOS)
-                    return builder.RegisterFirebaseServices().RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("iOSAdsId"));
+                    builder.RegisterFirebaseServices().RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("iOSAdsId"));
             }
             else if (registerFirebaseServices && !registerMTAdmobServices)
-                return builder.RegisterFirebaseServices();
+                builder.RegisterFirebaseServices();
             else if (!registerFirebaseServices && registerMTAdmobServices)
             {
                 if (Factory.Platform == Maui.Devices.DevicePlatform.Android)
-                    return builder.RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("AndroidAdsId"));
+                    builder.RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("AndroidAdsId"));
                 if (Factory.Platform == Maui.Devices.DevicePlatform.iOS)
-                    return builder.RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("iOSAdsId"));
+                    builder.RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("iOSAdsId"));
             }
 
             builder.Services.AddMetaFrm();//AddMetaFrm
