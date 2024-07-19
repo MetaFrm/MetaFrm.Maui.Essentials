@@ -12,6 +12,7 @@ namespace MetaFrm.Maui.Essentials.Localization
     {
         private static CultureInfo CurrentCulture = Thread.CurrentThread.CurrentCulture; //CultureInfo.CurrentCulture;
         private static ILocalStorageService? LocalStorage;
+        private static LocalizationManager? localizationManager;
 
         /// <summary>
         /// LocalizationManager
@@ -19,6 +20,8 @@ namespace MetaFrm.Maui.Essentials.Localization
         public LocalizationManager(ILocalStorageService? localStorageService)
         {
             LocalStorage = localStorageService;
+
+            localizationManager ??= this;
 
             GetCultureInfo();
         }
@@ -76,6 +79,9 @@ namespace MetaFrm.Maui.Essentials.Localization
         {
             get
             {
+                string result;
+                bool? successful;
+
                 if (key.Contains('^'))
                 {
                     List<string> tmps = key.Split("^").ToList();
@@ -85,17 +91,22 @@ namespace MetaFrm.Maui.Essentials.Localization
                     if (!key.IsNullOrEmpty())
                         tmps.Remove(key);
 
-                    return key.Translate(CurrentCulture, tmps.ToArray());
+                    result = key.Translate(CurrentCulture, out successful, tmps.ToArray());
                 }
                 else
-                    return key.Translate(CurrentCulture);
+                    result = key.Translate(CurrentCulture, out successful);
+
+                if (successful != null && successful == false)
+                    MetaFrm.Razor.Essentials.Localization.LocalizationManager.Instance.DictionaryCollectionInsert(key, CurrentCulture);
+
+                return result;
             }
         }
 
         /// <summary>
         /// Instance
         /// </summary>
-        public static LocalizationManager Instance { get; } = new(LocalStorage);
+        public static LocalizationManager Instance { get; } = localizationManager ?? new(LocalStorage);
 
         /// <summary>
         /// PropertyChanged
@@ -110,6 +121,9 @@ namespace MetaFrm.Maui.Essentials.Localization
         {
             LocalizationManager.SetCultureInfo(cultureInfo);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
+
+            if (localizationManager != null && !this.Equals(localizationManager))
+                localizationManager.CultureChange(cultureInfo);
         }
     }
 }

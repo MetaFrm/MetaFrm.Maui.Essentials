@@ -1,4 +1,5 @@
-﻿using MetaFrm.Localization;
+﻿using MetaFrm.Extensions;
+using MetaFrm.Localization;
 
 namespace MetaFrm.Maui.Essentials
 {
@@ -7,6 +8,22 @@ namespace MetaFrm.Maui.Essentials
     /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// AddMetaFrm
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="baseAddress"></param>
+        /// <param name="accessKey"></param>
+        /// <param name="platform"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddMetaFrm(this IServiceCollection services, string baseAddress, string accessKey, Maui.Devices.DevicePlatform platform)
+        {
+            services.AddFactory(baseAddress, accessKey, platform);
+            services.AddMetaFrm();
+
+            return services;
+        }
+
         /// <summary>
         /// AddMetaFrm
         /// </summary>
@@ -23,7 +40,7 @@ namespace MetaFrm.Maui.Essentials
 
             // Services
             services.AddScoped<ICultureChanged, Localization.LocalizationManager>();
-            services.AddScoped<Microsoft.Extensions.Localization.IStringLocalizer, MetaFrm.Razor.Essentials.Localization.LocalizationManager>();
+            services.AddScoped<Microsoft.Extensions.Localization.IStringLocalizer, Razor.Essentials.Localization.LocalizationManager>();
 
             services.AddLocalization();
 
