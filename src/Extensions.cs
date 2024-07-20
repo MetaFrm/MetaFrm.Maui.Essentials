@@ -1,5 +1,4 @@
 ﻿using MetaFrm.Extensions;
-using MetaFrm.Localization;
 
 namespace MetaFrm.Maui.Essentials
 {
@@ -38,8 +37,10 @@ namespace MetaFrm.Maui.Essentials
             services.AddSingleton<Maui.Devices.IDeviceToken, Firebase.DeviceToken>();//DeviceToken
             services.AddSingleton<Maui.Notification.ICloudMessaging, Firebase.Notification.CloudMessaging>();//CloudMessaging
 
-            // Services
-            services.AddScoped<ICultureChanged, Localization.LocalizationManager>();
+            services.AddOptions();
+            services.AddAuthorizationCore();
+
+            services.AddScoped<MetaFrm.Localization.ICultureChanged, Localization.LocalizationManager>();
             services.AddScoped<Microsoft.Extensions.Localization.IStringLocalizer, Razor.Essentials.Localization.LocalizationManager>();
 
             services.AddLocalization();
