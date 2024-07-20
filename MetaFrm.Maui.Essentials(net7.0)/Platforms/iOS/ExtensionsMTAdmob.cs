@@ -19,6 +19,8 @@ namespace MetaFrm.Maui.Essentials.Platforms
 
             CrossMauiMTAdmob.Current.AdsId = adsId;
 
+            builder.Services.AddSingleton<Ads.IAds, MTAdmob>();
+
             return builder;
         }
 

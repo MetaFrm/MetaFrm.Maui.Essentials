@@ -13,6 +13,8 @@
         /// <returns></returns>
         public static MauiAppBuilder RegisterMTAdmobServices(this MauiAppBuilder builder, string adsId)
         {
+            builder.Services.AddSingleton<Ads.IAds, MTAdmob>();
+
             return builder;
         }
     }
