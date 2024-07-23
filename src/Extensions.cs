@@ -36,6 +36,7 @@ namespace MetaFrm.Maui.Essentials
             services.AddSingleton<Maui.Devices.IDeviceInfo, Devices.DeviceInfo>();//DeviceInfo
             services.AddSingleton<Maui.Devices.IDeviceToken, Firebase.DeviceToken>();//DeviceToken
             services.AddSingleton<Maui.Notification.ICloudMessaging, Firebase.Notification.CloudMessaging>();//CloudMessaging
+            services.AddScoped<Maui.Storage.IPreferences, Maui.Essentials.Storage.Preferences>();
 
             services.AddOptions();
             services.AddAuthorizationCore();

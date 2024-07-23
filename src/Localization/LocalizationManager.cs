@@ -1,5 +1,4 @@
 ﻿using MetaFrm.Localization;
-using MetaFrm.Storage;
 using System.ComponentModel;
 using System.Globalization;
 
@@ -10,30 +9,31 @@ namespace MetaFrm.Maui.Essentials.Localization
     /// </summary>
     public class LocalizationManager : INotifyPropertyChanged, ICultureChanged
     {
+        private const string KeyValue = ".AspNetCore.Culture";
         private static CultureInfo CurrentCulture = Thread.CurrentThread.CurrentCulture; //CultureInfo.CurrentCulture;
-        private static ICookieStorageService? CookieStorageService;
-        private static LocalizationManager? localizationManager;
+        private static Maui.Storage.IPreferences? Preferences;
+        private static LocalizationManager? LocalizationManagerInstance;
 
         /// <summary>
         /// LocalizationManager
         /// </summary>
-        public LocalizationManager(ICookieStorageService? cookieStorageService)
+        public LocalizationManager(Maui.Storage.IPreferences? preferences)
         {
-            CookieStorageService = cookieStorageService;
+            Preferences = preferences;
 
-            localizationManager ??= this;
+            LocalizationManagerInstance ??= this;
 
             GetCultureInfo();
         }
-        private static async void GetCultureInfo()
+        private static void GetCultureInfo()
         {
-            if (CookieStorageService == null)
+            if (Preferences == null)
                 CurrentCulture = Thread.CurrentThread.CurrentCulture;
             else
             {
                 try
                 {
-                    string? tmp = await CookieStorageService.GetItemAsStringAsync(".AspNetCore.Culture");//c=es-MX|uic=es-MX
+                    string? tmp = Preferences.Get(KeyValue, "");//c=es-MX|uic=es-MX
 
                     if (tmp == null)
                         CurrentCulture = Thread.CurrentThread.CurrentCulture;
@@ -54,20 +54,20 @@ namespace MetaFrm.Maui.Essentials.Localization
                 }
             }
         }
-        private static async void SetCultureInfo(CultureInfo cultureInfo)
+        private static void SetCultureInfo(CultureInfo cultureInfo)
         {
-            if (CookieStorageService != null)
+            CurrentCulture = cultureInfo;
+
+            if (Preferences != null)
             {
                 try
                 {
-                    await CookieStorageService.SetItemAsStringAsync(".AspNetCore.Culture", $"c={cultureInfo.Name}|uic={cultureInfo.Name}", 365);//c=es-MX|uic=es-MX
+                    Preferences.Set(KeyValue, $"c={cultureInfo.Name}|uic={cultureInfo.Name}");//c=es-MX|uic=es-MX
                 }
                 catch (Exception)
                 {
                 }
             }
-
-            CurrentCulture = cultureInfo;
         }
 
         /// <summary>
@@ -106,7 +106,14 @@ namespace MetaFrm.Maui.Essentials.Localization
         /// <summary>
         /// Instance
         /// </summary>
-        public static LocalizationManager Instance { get; } = localizationManager ?? new(CookieStorageService);
+        public static LocalizationManager Instance
+        {
+            get
+            {
+                LocalizationManagerInstance ??= new(Preferences);
+                return LocalizationManagerInstance;
+            }
+        }
 
         /// <summary>
         /// PropertyChanged
@@ -119,11 +126,11 @@ namespace MetaFrm.Maui.Essentials.Localization
         /// <param name="cultureInfo"></param>
         public void CultureChange(CultureInfo cultureInfo)
         {
-            LocalizationManager.SetCultureInfo(cultureInfo);
+            SetCultureInfo(cultureInfo);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
 
-            if (localizationManager != null && !this.Equals(localizationManager))
-                localizationManager.CultureChange(cultureInfo);
+            if (LocalizationManagerInstance != null && !this.Equals(LocalizationManagerInstance))
+                LocalizationManagerInstance.CultureChange(cultureInfo);
         }
 
         /// <summary>
