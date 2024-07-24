@@ -41,8 +41,8 @@ namespace MetaFrm.Maui.Essentials
             services.AddOptions();
             services.AddAuthorizationCore();
 
-            services.AddScoped<MetaFrm.Localization.ICultureChanged, Localization.LocalizationManager>();
-            services.AddScoped<Microsoft.Extensions.Localization.IStringLocalizer, Razor.Essentials.Localization.LocalizationManager>();
+            services.AddSingleton<MetaFrm.Localization.ICultureChanged, Localization.LocalizationManager>();
+            services.AddSingleton<Microsoft.Extensions.Localization.IStringLocalizer, Razor.Essentials.Localization.LocalizationManager>();
 
             services.AddLocalization();
 
