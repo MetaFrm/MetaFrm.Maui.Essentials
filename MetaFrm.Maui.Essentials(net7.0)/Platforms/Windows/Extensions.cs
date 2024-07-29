@@ -31,7 +31,10 @@ namespace MetaFrm.Maui.Essentials.Platforms
                     builder.RegisterFirebaseServices().RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("iOSAdsId"));
             }
             else if (registerFirebaseServices && !registerMTAdmobServices)
+            {
                 builder.RegisterFirebaseServices();
+                builder.Services.AddScoped<Maui.Ads.IAds, MetaFrm.Ads.DummyAds>();
+            }
             else if (!registerFirebaseServices && registerMTAdmobServices)
             {
                 if (Factory.Platform == Maui.Devices.DevicePlatform.Android)
