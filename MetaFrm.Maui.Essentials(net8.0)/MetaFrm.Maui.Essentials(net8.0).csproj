@@ -19,7 +19,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>MetaFrm.Maui.Essentials.net8.0</PackageId>
-    <Version>8.0.3.32</Version>
+    <Version>8.0.3.33</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2024. dsun all rights reserved.</Copyright>
@@ -80,11 +80,11 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
-    <PackageReference Include="Plugin.MauiMTAdmob" Version="1.6.4">
+    <PackageReference Include="Plugin.MauiMTAdmob" Version="1.6.0">
     </PackageReference>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
-    <PackageReference Include="Plugin.MauiMTAdmob" Version="1.6.4">
+    <PackageReference Include="Plugin.MauiMTAdmob" Version="1.6.0">
     </PackageReference>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' != 'net8.0-ios' and '$(TargetFramework)' != 'net8.0-android'">
