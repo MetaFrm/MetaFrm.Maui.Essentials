@@ -19,7 +19,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>MetaFrm.Maui.Essentials.net8.0</PackageId>
-    <Version>8.0.3.37</Version>
+    <Version>8.0.3.38</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2024. dsun all rights reserved.</Copyright>
@@ -77,7 +77,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
-    <AndroidLibrary Include="Dependencies\user-messaging-platform-3.1.0.aar" Bind="false" />
+    <AndroidLibrary Include="Dependencies\user-messaging-platform-3.0.0.aar" Bind="false" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
