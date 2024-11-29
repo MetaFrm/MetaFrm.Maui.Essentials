@@ -23,7 +23,7 @@ namespace MetaFrm.Maui.Essentials.Storage
 
             if (options != null && options.FileTypes != null && options.FileTypes.FileTypes != null)
             {
-                Dictionary<DevicePlatform, IEnumerable<string>> fileTypes = new();
+                Dictionary<DevicePlatform, IEnumerable<string>> fileTypes = [];
 
                 foreach (var type in options.FileTypes.FileTypes)
                     fileTypes.Add(type.Key.EnumParse<DevicePlatform>(), type.Value);
@@ -64,7 +64,7 @@ namespace MetaFrm.Maui.Essentials.Storage
 
             if (options != null && options.FileTypes != null && options.FileTypes.FileTypes != null)
             {
-                Dictionary<DevicePlatform, IEnumerable<string>> fileTypes = new();
+                Dictionary<DevicePlatform, IEnumerable<string>> fileTypes = [];
 
                 foreach (var type in options.FileTypes.FileTypes)
                     fileTypes.Add(type.Key.EnumParse<DevicePlatform>(), type.Value);
@@ -75,7 +75,7 @@ namespace MetaFrm.Maui.Essentials.Storage
 
                 if (resultPickMultiple != null)
                 {
-                    List<Maui.Storage.FileResult> results = new();
+                    List<Maui.Storage.FileResult> results = [];
 
                     foreach (var type in resultPickMultiple)
                         results.Add(new Maui.Storage.FileResult(type.FullPath, type.ContentType));
@@ -83,7 +83,7 @@ namespace MetaFrm.Maui.Essentials.Storage
                     return results;
                 }
                 else
-                    return new List<Maui.Storage.FileResult>();
+                    return [];
             }
             else
             {
@@ -91,7 +91,7 @@ namespace MetaFrm.Maui.Essentials.Storage
 
                 if (resultPickMultiple != null)
                 {
-                    List<Maui.Storage.FileResult> results = new();
+                    List<Maui.Storage.FileResult> results = [];
 
                     foreach (var type in resultPickMultiple)
                         results.Add(new Maui.Storage.FileResult(type.FullPath, type.ContentType));
@@ -99,7 +99,7 @@ namespace MetaFrm.Maui.Essentials.Storage
                     return results;
                 }
                 else
-                    return new List<Maui.Storage.FileResult>();
+                    return [];
             }
         }
     }

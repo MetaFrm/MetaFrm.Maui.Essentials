@@ -12,7 +12,7 @@
         public async Task<IEnumerable<Maui.Media.Locale>> GetLocalesAsync()
         {
             IEnumerable<Locale> localesOrg = await Microsoft.Maui.Media.TextToSpeech.Default.GetLocalesAsync();
-            List<Maui.Media.Locale> locales = new();
+            List<Maui.Media.Locale> locales = [];
 
             foreach (Locale locale in localesOrg)
                 locales.Add(new Maui.Media.Locale { Language = locale.Language, Country = locale.Country, Name = locale.Name, Id = locale.Id });

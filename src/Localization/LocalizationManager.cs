@@ -84,14 +84,14 @@ namespace MetaFrm.Maui.Essentials.Localization
 
                 if (key.Contains('^'))
                 {
-                    List<string> tmps = key.Split("^").ToList();
+                    List<string> tmps = [.. key.Split("^")];
 
                     key = tmps.FirstOrDefault() ?? "";
 
                     if (!key.IsNullOrEmpty())
                         tmps.Remove(key);
 
-                    result = key.Translate(CurrentCulture, out successful, tmps.ToArray());
+                    result = key.Translate(CurrentCulture, out successful, [.. tmps]);
                 }
                 else
                     result = key.Translate(CurrentCulture, out successful);

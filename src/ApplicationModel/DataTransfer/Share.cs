@@ -68,7 +68,7 @@
 
             if (request.Files != null)
             {
-                files = new();
+                files = [];
                 foreach (Maui.ApplicationModel.DataTransfer.ShareFile shareFile in request.Files)
                     files.Add(new ShareFile(shareFile.FullPath, shareFile.ContentType));
             }

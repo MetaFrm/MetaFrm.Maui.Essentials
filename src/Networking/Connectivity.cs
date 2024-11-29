@@ -21,7 +21,7 @@ namespace MetaFrm.Maui.Essentials.Networking
             {
                 IEnumerable<ConnectionProfile> profilesOrg = Microsoft.Maui.Networking.Connectivity.Current.ConnectionProfiles;
 
-                List<Maui.Networking.ConnectionProfile> profiles = new();
+                List<Maui.Networking.ConnectionProfile> profiles = [];
 
                 foreach (ConnectionProfile profile in profilesOrg)
                     profiles.Add(profile.EnumParse<Maui.Networking.ConnectionProfile>());
@@ -74,7 +74,7 @@ namespace MetaFrm.Maui.Essentials.Networking
         {
             IEnumerable<ConnectionProfile> profilesOrg = e.ConnectionProfiles;
 
-            List<Maui.Networking.ConnectionProfile> profiles = new();
+            List<Maui.Networking.ConnectionProfile> profiles = [];
 
             foreach (ConnectionProfile profile in profilesOrg)
                 profiles.Add(profile.EnumParse<Maui.Networking.ConnectionProfile>());

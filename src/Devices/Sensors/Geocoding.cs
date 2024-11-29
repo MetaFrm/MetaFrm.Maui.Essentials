@@ -14,7 +14,7 @@ namespace MetaFrm.Maui.Essentials.Devices.Sensors
         /// <returns></returns>
         public async Task<IEnumerable<Maui.Devices.Sensors.Location>> GetLocationsAsync(string address)
         {
-            List<Maui.Devices.Sensors.Location> locationsList = new();
+            List<Maui.Devices.Sensors.Location> locationsList = [];
             IEnumerable<Location> locations = await Microsoft.Maui.Devices.Sensors.Geocoding.Default.GetLocationsAsync(address);
 
             foreach (Location locationOrg in locations)
@@ -44,7 +44,7 @@ namespace MetaFrm.Maui.Essentials.Devices.Sensors
         /// <returns></returns>
         public async Task<IEnumerable<Maui.Devices.Sensors.Placemark>> GetPlacemarksAsync(double latitude, double longitude)
         {
-            List<Maui.Devices.Sensors.Placemark> placemark = new();
+            List<Maui.Devices.Sensors.Placemark> placemark = [];
             IEnumerable<Placemark> placemarks = await Microsoft.Maui.Devices.Sensors.Geocoding.Default.GetPlacemarksAsync(latitude, longitude);
 
             foreach (Placemark placemarkOrg in placemarks)

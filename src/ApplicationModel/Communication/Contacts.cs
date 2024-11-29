@@ -12,7 +12,7 @@
         /// <returns></returns>
         public async Task<IEnumerable<Maui.ApplicationModel.Communication.Contact>> GetAllContactAsync(CancellationToken cancellationToken = default)
         {
-            List<Maui.ApplicationModel.Communication.Contact> contacts = new();
+            List<Maui.ApplicationModel.Communication.Contact> contacts = [];
 
             IEnumerable<Contact> contactsOrg = await Microsoft.Maui.ApplicationModel.Communication.Contacts.Default.GetAllAsync(cancellationToken);
 
@@ -21,11 +21,11 @@
 
                 foreach (Contact contact in contactsOrg)
                 {
-                    List<Maui.ApplicationModel.Communication.ContactPhone> phones = new();
+                    List<Maui.ApplicationModel.Communication.ContactPhone> phones = [];
                     foreach (var phone in contact.Phones)
                         phones.Add(new Maui.ApplicationModel.Communication.ContactPhone(phone.PhoneNumber));
 
-                    List<Maui.ApplicationModel.Communication.ContactEmail> emails = new();
+                    List<Maui.ApplicationModel.Communication.ContactEmail> emails = [];
                     foreach (var email in contact.Emails)
                         emails.Add(new Maui.ApplicationModel.Communication.ContactEmail(email.EmailAddress));
 
@@ -48,11 +48,11 @@
 
             if (contact != null)
             {
-                List<Maui.ApplicationModel.Communication.ContactPhone> phones = new();
+                List<Maui.ApplicationModel.Communication.ContactPhone> phones = [];
                 foreach (var phone in contact.Phones)
                     phones.Add(new Maui.ApplicationModel.Communication.ContactPhone(phone.PhoneNumber));
 
-                List<Maui.ApplicationModel.Communication.ContactEmail> emails = new();
+                List<Maui.ApplicationModel.Communication.ContactEmail> emails = [];
                 foreach (var email in contact.Emails)
                     emails.Add(new Maui.ApplicationModel.Communication.ContactEmail(email.EmailAddress));
 

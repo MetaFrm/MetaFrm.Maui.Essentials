@@ -21,7 +21,7 @@
             {
                 if (message.To != null)
                 {
-                    string[] to = message.To.ToArray();
+                    string[] to = [.. message.To];
 
                     await Microsoft.Maui.ApplicationModel.Communication.Email.Default.ComposeAsync(new EmailMessage(message.Subject ?? "", message?.Body ?? "", to));
                 }
