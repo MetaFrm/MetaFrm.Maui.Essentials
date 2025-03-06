@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0;net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
     <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-    <!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
+    <!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
     <Nullable>enable</Nullable>
     <RootNamespace>MetaFrm.Maui.Essentials</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -18,8 +18,8 @@
     <AssemblyName>MetaFrm.Maui.Essentials</AssemblyName>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageId>MetaFrm.Maui.Essentials.net9.0</PackageId>
-    <Version>9.0.4.19</Version>
+    <PackageId>MetaFrm.Maui.Essentials.net8.0</PackageId>
+    <Version>8.0.4.20</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2025. dsun all rights reserved.</Copyright>
@@ -76,7 +76,7 @@
     <Compile Include="..\src\Storage\SecureStorage.cs" Link="Storage\SecureStorage.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
     <PackageReference Include="Plugin.MauiMTAdmob" Version="2.0.0.5">
     </PackageReference>
   </ItemGroup>
@@ -84,15 +84,15 @@
     <PackageReference Include="Plugin.MauiMTAdmob" Version="2.0.0.5">
     </PackageReference>
   </ItemGroup>
-  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'ios' and '$(TargetFramework)' != 'net9.0-android'">
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'ios' and '$(TargetFramework)' != 'net8.0-android'">
     <PackageReference Include="Plugin.MauiMTAdmob" Version="1.0.4">
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MetaFrm.Core.net9.0" Version="9.0.4.21" />
-    <PackageReference Include="MetaFrm.Razor.Essentials.net9.0" Version="9.0.4.21" />
+    <PackageReference Include="MetaFrm.Core.net8.0" Version="8.0.4.21" />
+    <PackageReference Include="MetaFrm.Razor.Essentials.net8.0" Version="8.0.4.21" />
     <PackageReference Include="Plugin.Firebase.CloudMessaging" Version="3.1.2" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
   </ItemGroup>
 </Project>

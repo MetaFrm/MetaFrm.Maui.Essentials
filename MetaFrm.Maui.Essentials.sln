@@ -99,8 +99,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localizatio
 		src\Localization\TranslateExtension.cs = src\Localization\TranslateExtension.cs
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaFrm.Maui.Essentials(net8.0)", "MetaFrm.Maui.Essentials(net8.0)\MetaFrm.Maui.Essentials(net8.0).csproj", "{A8822E8D-471E-44F9-8187-1E7FB93B5D50}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Firebase", "Firebase", "{16133272-8B53-40CA-8E9E-495B5049CA7B}"
 	ProjectSection(SolutionItems) = preProject
 		src\Firebase\DeviceToken.cs = src\Firebase\DeviceToken.cs
@@ -112,7 +110,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notificatio
 		src\Firebase\Notification\CloudMessaging.cs = src\Firebase\Notification\CloudMessaging.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaFrm.Maui.Essentials(net9.0)", "MetaFrm.Maui.Essentials(net9.0)\MetaFrm.Maui.Essentials(net9.0).csproj", "{110E385C-EE17-446F-9907-A0C58E779E25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaFrm.Maui.Essentials(net8.0)", "net8\MetaFrm.Maui.Essentials(net8.0).csproj", "{3AC89924-F2AD-B21A-3780-E70589521E71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaFrm.Maui.Essentials(net9.0)", "net9\MetaFrm.Maui.Essentials(net9.0).csproj", "{8D7006EE-6F3A-9B2E-F897-20010AC5197C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,14 +120,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A8822E8D-471E-44F9-8187-1E7FB93B5D50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8822E8D-471E-44F9-8187-1E7FB93B5D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8822E8D-471E-44F9-8187-1E7FB93B5D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8822E8D-471E-44F9-8187-1E7FB93B5D50}.Release|Any CPU.Build.0 = Release|Any CPU
-		{110E385C-EE17-446F-9907-A0C58E779E25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{110E385C-EE17-446F-9907-A0C58E779E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{110E385C-EE17-446F-9907-A0C58E779E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{110E385C-EE17-446F-9907-A0C58E779E25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AC89924-F2AD-B21A-3780-E70589521E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AC89924-F2AD-B21A-3780-E70589521E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AC89924-F2AD-B21A-3780-E70589521E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AC89924-F2AD-B21A-3780-E70589521E71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D7006EE-6F3A-9B2E-F897-20010AC5197C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D7006EE-6F3A-9B2E-F897-20010AC5197C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D7006EE-6F3A-9B2E-F897-20010AC5197C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D7006EE-6F3A-9B2E-F897-20010AC5197C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

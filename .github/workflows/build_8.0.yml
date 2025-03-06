@@ -8,15 +8,15 @@ on:
 env:
   DLL_ID: ${{secrets.DLL_ID_8}} # NET버전
   UPLOAD_MODURE: "Y"
-  PUSH_NUGET: "Y"
+  PUSH_NUGET: "N"
   PASSWORD: ${{secrets.PASSWORD}}
 
 jobs:
   build8:
     runs-on: windows-2022
     env:
-      DLL_PATH: "${{vars.NAMESPACE}}(net8.0)/bin/Release/net8.0/${{vars.NAMESPACE}}.dll" # NET버전
-      PROJECT_PATH: "${{vars.NAMESPACE}}(net8.0)" # NET버전
+      DLL_PATH: "net8/bin/Release/net8.0/${{vars.NAMESPACE}}.dll" # NET버전
+      PROJECT_PATH: "net8" # NET버전
       METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule8.0.zip" # NET버전
       METAFRM_UPLOADMODULE_ZIP: "temp/MetaFrameworkManagementSystemUploadModule8.0.zip" # NET버전
       METAFRM_UPLOADMODULE_FILE: "temp/MetaFrameworkManagementSystemUploadModule.dll"
