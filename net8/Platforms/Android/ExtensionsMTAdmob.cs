@@ -17,7 +17,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
         {
             builder.UseMauiMTAdmob();
 
-            CrossMauiMTAdmob.Current.BannerAdsId = adsId;
+            CrossMauiMTAdmob.Current.AdsId = adsId;
 
             builder.Services.AddSingleton<Ads.IAds, MTAdmob>();
 
@@ -30,7 +30,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
         /// <param name="activity"></param>
         public static void MTAdmobInit(this MauiAppCompatActivity activity)
         {
-            CrossMauiMTAdmob.Current.Init(activity, CrossMauiMTAdmob.Current.BannerAdsId);
+            CrossMauiMTAdmob.Current.Init(activity, CrossMauiMTAdmob.Current.AdsId);
         }
         /// <summary>
         /// MTAdmobOnResume
