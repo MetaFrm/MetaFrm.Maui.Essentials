@@ -7,6 +7,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
     /// </summary>
     public static class ExtensionsMTAdmob
     {
+        static string AdsId = string.Empty;
         /// <summary>
         /// RegisterMTAdmobServices
         /// </summary>
@@ -17,7 +18,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
         {
             builder.UseMauiMTAdmob();
 
-            CrossMauiMTAdmob.Current.AdsId = adsId;
+            AdsId = adsId;
 
             builder.Services.AddSingleton<Ads.IAds, MTAdmob>();
 

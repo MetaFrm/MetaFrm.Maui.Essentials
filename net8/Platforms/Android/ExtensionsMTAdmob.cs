@@ -7,6 +7,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
     /// </summary>
     public static class ExtensionsMTAdmob
     {
+        static string AdsId = string.Empty;
         /// <summary>
         /// RegisterMTAdmobServices
         /// </summary>
@@ -17,7 +18,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
         {
             builder.UseMauiMTAdmob();
 
-            CrossMauiMTAdmob.Current.AdsId = adsId;
+            AdsId = adsId;
 
             builder.Services.AddSingleton<Ads.IAds, MTAdmob>();
 
@@ -30,7 +31,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
         /// <param name="activity"></param>
         public static void MTAdmobInit(this MauiAppCompatActivity activity)
         {
-            CrossMauiMTAdmob.Current.Init(activity, CrossMauiMTAdmob.Current.AdsId);
+            CrossMauiMTAdmob.Current.Init(activity, AdsId);
         }
         /// <summary>
         /// MTAdmobOnResume
