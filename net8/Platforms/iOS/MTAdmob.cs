@@ -246,7 +246,14 @@ namespace MetaFrm.Maui.Essentials.Platforms
         }
         private void Current_OnInterstitialLoaded(object? sender, EventArgs e)
         {
-            CrossMauiMTAdmob.Current.ShowInterstitial();
+            try
+            {
+                if (CrossMauiMTAdmob.Current.IsInterstitialLoaded())
+                    CrossMauiMTAdmob.Current.ShowInterstitial();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>
@@ -276,7 +283,14 @@ namespace MetaFrm.Maui.Essentials.Platforms
         }
         private void Current_OnRewardedLoaded(object? sender, EventArgs e)
         {
-            CrossMauiMTAdmob.Current.ShowRewarded();
+            try
+            {
+                if (CrossMauiMTAdmob.Current.IsRewardedLoaded())
+                    CrossMauiMTAdmob.Current.ShowRewarded();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void AdsInit()
