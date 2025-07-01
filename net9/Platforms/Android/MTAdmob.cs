@@ -237,7 +237,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
                     }
                     CrossMauiMTAdmob.Current.OnInterstitialLoaded += Current_OnInterstitialLoaded;
 
-                    CrossMauiMTAdmob.Current.LoadInterstitial(this.interstitialAdsId);
+                    CrossMauiMTAdmob.Current.LoadInterstitial(this.interstitialAdsId ?? "");
                 }
             }
             catch (Exception)
@@ -274,7 +274,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
                     }
                     CrossMauiMTAdmob.Current.OnRewardedLoaded += Current_OnRewardedLoaded;
 
-                    CrossMauiMTAdmob.Current.LoadRewarded(this.rewardeAdsId);
+                    CrossMauiMTAdmob.Current.LoadRewarded(this.rewardeAdsId ?? "");
                 }
             }
             catch (Exception)
