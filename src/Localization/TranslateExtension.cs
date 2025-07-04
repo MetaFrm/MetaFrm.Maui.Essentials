@@ -3,6 +3,7 @@
     /// <summary>
     /// TranslateExtension
     /// </summary>
+    [AcceptEmptyServiceProvider]
     [ContentProperty(nameof(Text)), QueryProperty(nameof(Text), nameof(Args))]
     public class TranslateExtension : IMarkupExtension<BindingBase>
     {

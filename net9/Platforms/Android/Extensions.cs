@@ -23,26 +23,22 @@ namespace MetaFrm.Maui.Essentials.Platforms
 
             builder.Services.AddFactory(baseAddress, accessKey, platform);
 
-            if (registerFirebaseServices && registerMTAdmobServices)
-            {
-                if (Factory.Platform == Maui.Devices.DevicePlatform.Android)
-                    builder.RegisterFirebaseServices().RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("AndroidAdsId"));
-                if (Factory.Platform == Maui.Devices.DevicePlatform.iOS)
-                    builder.RegisterFirebaseServices().RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("iOSAdsId"));
-            }
-            else if (registerFirebaseServices && !registerMTAdmobServices)
-            {
+            if (registerFirebaseServices)
                 builder.RegisterFirebaseServices();
-                builder.Services.AddScoped<Maui.Ads.IAds, MetaFrm.Ads.DummyAds>();
-            }
-            else if (!registerFirebaseServices && registerMTAdmobServices)
-            {
+
+            if (registerMTAdmobServices)
+            { 
                 if (Factory.Platform == Maui.Devices.DevicePlatform.Android)
                     builder.RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("AndroidAdsId"));
                 if (Factory.Platform == Maui.Devices.DevicePlatform.iOS)
                     builder.RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("iOSAdsId"));
             }
+            else
+                builder.Services.AddSingleton<Ads.IAds, MetaFrm.Ads.DummyAds>();
 
+            if (!builder.Services.Any(x => x.ServiceType == typeof(Control.IActionEvent)))
+                builder.Services.AddSingleton<Control.IActionEvent, Control.DummyActionEvent>();
+            
             builder.Services.AddMetaFrm();//AddMetaFrm
 
             return builder;
