@@ -34,10 +34,6 @@ namespace MetaFrm.Maui.Essentials.Platforms
                     builder.RegisterMTAdmobServices("MetaFrm.Maui.Platforms".GetAttribute("iOSAdsId"));
             }
             else
-                builder.Services.AddSingleton<Ads.IAds, MetaFrm.Ads.DummyAds>();
-
-            if (!builder.Services.Any(x => x.ServiceType == typeof(Control.IActionEvent)))
-                builder.Services.AddSingleton<Control.IActionEvent, Control.DummyActionEvent>();
 
             builder.Services.AddMetaFrm();//AddMetaFrm
 
