@@ -44,6 +44,9 @@ namespace MetaFrm.Maui.Essentials
             services.AddSingleton<MetaFrm.Localization.ICultureChanged, Localization.LocalizationManager>();
             services.AddSingleton<Microsoft.Extensions.Localization.IStringLocalizer, Razor.Essentials.Localization.LocalizationManager>();
 
+            if (!services.Any(x => x.ServiceType == typeof(Control.IActionEvent)))
+                services.AddSingleton<Control.IActionEvent, Control.DummyActionEvent>();
+
             services.AddLocalization();
 
             return services;
