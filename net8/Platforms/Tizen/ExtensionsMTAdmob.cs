@@ -1,4 +1,6 @@
-﻿namespace MetaFrm.Maui.Essentials.Platforms
+﻿using MetaFrm.Ads;
+
+namespace MetaFrm.Maui.Essentials.Platforms
 {
     /// <summary>
     /// ExtensionsMTAdmob
@@ -9,11 +11,10 @@
         /// RegisterMTAdmobServices
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="adsId"></param>
         /// <returns></returns>
-        public static MauiAppBuilder RegisterMTAdmobServices(this MauiAppBuilder builder, string adsId)
+        public static MauiAppBuilder RegisterMTAdmobServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<Ads.IAds, MTAdmob>();
+            builder.Services.AddSingleton<Ads.IAds, DummyAds>();
 
             return builder;
         }

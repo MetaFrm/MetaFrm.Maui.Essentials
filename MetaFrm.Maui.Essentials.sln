@@ -95,6 +95,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Media", "Media", "{A9AD74A2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localization", "{A5C6F04F-49C0-4CEB-8CD8-504BBC2641D8}"
 	ProjectSection(SolutionItems) = preProject
+		src\Localization\CultureChanger.cs = src\Localization\CultureChanger.cs
 		src\Localization\LocalizationManager.cs = src\Localization\LocalizationManager.cs
 		src\Localization\TranslateExtension.cs = src\Localization\TranslateExtension.cs
 	EndProjectSection

@@ -1,74 +1,18 @@
-﻿using MetaFrm.Localization;
+﻿using MetaFrm.Control;
+using MetaFrm.Localization;
 using System.ComponentModel;
-using System.Globalization;
 
 namespace MetaFrm.Maui.Essentials.Localization
 {
     /// <summary>
-    /// LocalizationManager
+    /// LocalizationNotifier
     /// </summary>
-    public class LocalizationManager : INotifyPropertyChanged, ICultureChanged
+    /// <param name="cultureChanged"></param>
+    /// <param name="languageCollector"></param>
+    public class LocalizationNotifier(ICultureChanged cultureChanged, ILanguageCollector languageCollector) : INotifyPropertyChanged, IActionEvent
     {
-        private const string KeyValue = ".AspNetCore.Culture";
-        private static CultureInfo CurrentCulture = Thread.CurrentThread.CurrentCulture; //CultureInfo.CurrentCulture;
-        private static Maui.Storage.IPreferences? Preferences;
-        private static LocalizationManager? LocalizationManagerInstance;
-
-        /// <summary>
-        /// LocalizationManager
-        /// </summary>
-        public LocalizationManager(Maui.Storage.IPreferences? preferences)
-        {
-            Preferences = preferences;
-
-            LocalizationManagerInstance ??= this;
-
-            GetCultureInfo();
-        }
-        private static void GetCultureInfo()
-        {
-            if (Preferences == null)
-                CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            else
-            {
-                try
-                {
-                    string? tmp = Preferences.Get(KeyValue, "");//c=es-MX|uic=es-MX
-
-                    if (tmp == null)
-                        CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                    else
-                    {
-                        if (tmp.Contains('|'))
-                            tmp = tmp.Split('|')[0];
-
-                        if (tmp.Contains("c=") && tmp.Contains('-'))
-                            CurrentCulture = new(tmp.Split('=')[1]);
-                        else
-                            CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                    }
-                }
-                catch (Exception)
-                {
-                    CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                }
-            }
-        }
-        private static void SetCultureInfo(CultureInfo cultureInfo)
-        {
-            CurrentCulture = cultureInfo;
-
-            if (Preferences != null)
-            {
-                try
-                {
-                    Preferences.Set(KeyValue, $"c={cultureInfo.Name}|uic={cultureInfo.Name}");//c=es-MX|uic=es-MX
-                }
-                catch (Exception)
-                {
-                }
-            }
-        }
+        private readonly ICultureChanged CultureChange = cultureChanged;
+        private readonly ILanguageCollector LanguageCollector = languageCollector;
 
         /// <summary>
         /// Translate
@@ -91,27 +35,15 @@ namespace MetaFrm.Maui.Essentials.Localization
                     if (!key.IsNullOrEmpty())
                         tmps.Remove(key);
 
-                    result = key.Translate(CurrentCulture, out successful, [.. tmps]);
+                    result = key.Translate(this.CultureChange?.CultureInfo ?? Thread.CurrentThread.CurrentCulture, out successful, [.. tmps]);
                 }
                 else
-                    result = key.Translate(CurrentCulture, out successful);
+                    result = key.Translate(this.CultureChange?.CultureInfo ?? Thread.CurrentThread.CurrentCulture, out successful);
 
                 if (successful != null && successful == false)
-                    MetaFrm.Razor.Essentials.Localization.LocalizationManager.Instance.DictionaryCollectionInsert(key, CurrentCulture);
+                    this.LanguageCollector.Add(key);
 
                 return result;
-            }
-        }
-
-        /// <summary>
-        /// Instance
-        /// </summary>
-        public static LocalizationManager Instance
-        {
-            get
-            {
-                LocalizationManagerInstance ??= new(Preferences);
-                return LocalizationManagerInstance;
             }
         }
 
@@ -121,21 +53,24 @@ namespace MetaFrm.Maui.Essentials.Localization
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
-        /// CultureChange
+        /// Action
         /// </summary>
-        /// <param name="cultureInfo"></param>
-        public void CultureChange(CultureInfo cultureInfo)
-        {
-            SetCultureInfo(cultureInfo);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
-
-            if (LocalizationManagerInstance != null && !this.Equals(LocalizationManagerInstance))
-                LocalizationManagerInstance.CultureChange(cultureInfo);
-        }
+        public event MetaFrmEventHandler? Action;
 
         /// <summary>
-        /// CultureInfo
+        /// ActionEvnt
         /// </summary>
-        public CultureInfo CultureInfo => CurrentCulture;
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public object? ActionEvnt(ICore sender, MetaFrmEventArgs e)
+        {
+            if (e.Action == "CultureChange")
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
+
+            this.Action?.Invoke(sender, e);
+
+            return null;
+        }
     }
 }

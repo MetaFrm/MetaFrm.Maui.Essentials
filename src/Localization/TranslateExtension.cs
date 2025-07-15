@@ -29,20 +29,20 @@
                 {
                     Mode = BindingMode.OneWay,
                     Path = $"[{Text}]",
-                    Source = LocalizationManager.Instance
+                    Source = Factory.NotifyPropertyChanged
                 };
             else
                 return new Binding
                 {
                     Mode = BindingMode.OneWay,
                     Path = $"[{Text}^{Args}]",
-                    Source = LocalizationManager.Instance
+                    Source = Factory.NotifyPropertyChanged
                 };
         }
 
         object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider)
         {
-            return ProvideValue(serviceProvider);
+            return this.ProvideValue(serviceProvider);
         }
     }
 }

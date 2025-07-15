@@ -7,18 +7,14 @@ namespace MetaFrm.Maui.Essentials.Platforms
     /// </summary>
     public static class ExtensionsMTAdmob
     {
-        static string AdsId = string.Empty;
         /// <summary>
         /// RegisterMTAdmobServices
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="adsId"></param>
         /// <returns></returns>
-        public static MauiAppBuilder RegisterMTAdmobServices(this MauiAppBuilder builder, string adsId)
+        public static MauiAppBuilder RegisterMTAdmobServices(this MauiAppBuilder builder)
         {
             builder.UseMauiMTAdmob();
-
-            AdsId = adsId;
 
             builder.Services.AddSingleton<Ads.IAds, MTAdmob>();
 
@@ -31,7 +27,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
         /// <param name="activity"></param>
         public static void MTAdmobInit(this MauiAppCompatActivity activity)
         {
-            CrossMauiMTAdmob.Current.Init(activity, AdsId);
+            CrossMauiMTAdmob.Current.Init(activity, Factory.ProjectService.Attribute.SingleOrDefault(x => x.AttributeName == "Maui.Essentials.Platforms.AndroidAdsId")?.AttributeValue ?? "");
         }
         /// <summary>
         /// MTAdmobOnResume

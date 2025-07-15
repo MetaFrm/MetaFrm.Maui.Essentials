@@ -1,4 +1,5 @@
 ﻿using MetaFrm.Extensions;
+using System.ComponentModel;
 
 namespace MetaFrm.Maui.Essentials
 {
@@ -30,22 +31,27 @@ namespace MetaFrm.Maui.Essentials
         /// <returns></returns>
         public static IServiceCollection AddMetaFrm(this IServiceCollection services)
         {
-            services.AddSingleton<Maui.ApplicationModel.IPermissions, ApplicationModel.Permissions>();
-            services.AddSingleton<Maui.ApplicationModel.IBrowser, ApplicationModel.Browser>();
-            services.AddScoped<Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider, Auth.AuthenticationStateProvider>();
-            services.AddSingleton<Maui.Devices.IDeviceInfo, Devices.DeviceInfo>();//DeviceInfo
-            services.AddSingleton<Maui.Devices.IDeviceToken, Firebase.DeviceToken>();//DeviceToken
-            services.AddSingleton<Maui.Notification.ICloudMessaging, Firebase.Notification.CloudMessaging>();//CloudMessaging
-            services.AddScoped<Maui.Storage.IPreferences, Storage.Preferences>();
+            //services.AddSingleton<  Factory>();//ExtensionsIServiceCollection에서 기본으로 AddSingleton DI 해줌
+            services.AddSingleton<  Maui.ApplicationModel.IPermissions, ApplicationModel.Permissions>();
+            services.AddSingleton<  Maui.ApplicationModel.IBrowser, ApplicationModel.Browser>();
+            services.AddSingleton<  Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider, Auth.AuthenticationStateProvider>();
+            services.AddSingleton<  Maui.Devices.IDeviceInfo, Devices.DeviceInfo>();
+            services.AddSingleton<  Maui.Devices.IDeviceToken, Firebase.DeviceToken>();
+            services.AddSingleton<  Maui.Notification.ICloudMessaging, Firebase.Notification.CloudMessaging>();
+            //Maui.Ads.IAds 개별 플랫폼에 정의 되어 있음
+            services.AddSingleton<  Maui.Storage.IPreferences, Storage.Preferences>();
 
             services.AddOptions();
             services.AddAuthorizationCore();
 
-            services.AddSingleton<MetaFrm.Localization.ICultureChanged, Localization.LocalizationManager>();
-            services.AddSingleton<Microsoft.Extensions.Localization.IStringLocalizer, Razor.Essentials.Localization.LocalizationManager>();
+            services.AddSingleton<  MetaFrm.Localization.ICultureChanged, MetaFrm.Maui.Essentials.Localization.CultureChanger>();
+            services.AddSingleton<  MetaFrm.Localization.ILanguageCollector, MetaFrm.Localization.LanguageCollector>();
+            services.AddSingleton<  Microsoft.Extensions.Localization.IStringLocalizer, MetaFrm.Razor.Essentials.Localization.LocalizationManager>();
+
+            services.AddSingleton<INotifyPropertyChanged, MetaFrm.Maui.Essentials.Localization.LocalizationNotifier>();//Maui xaml
 
             if (!services.Any(x => x.ServiceType == typeof(Control.IActionEvent)))
-                services.AddSingleton<Control.IActionEvent, Control.DummyActionEvent>();
+                services.AddSingleton<  Control.IActionEvent, Control.DummyActionEvent>();
 
             services.AddLocalization();
 
