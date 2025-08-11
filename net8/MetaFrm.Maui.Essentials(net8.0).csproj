@@ -19,7 +19,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>MetaFrm.Maui.Essentials.net8.0</PackageId>
-    <Version>8.0.4.56</Version>
+    <Version>8.0.4.57</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2025. dsun all rights reserved.</Copyright>
@@ -82,8 +82,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MetaFrm.Core.net8.0" Version="8.0.4.55" />
-    <PackageReference Include="MetaFrm.Razor.Essentials.net8.0" Version="8.0.4.56" />
+    <PackageReference Include="MetaFrm.Core.net8.0" Version="8.0.4.57" />
+    <PackageReference Include="MetaFrm.Razor.Essentials.net8.0" Version="8.0.4.57" />
     <PackageReference Include="Plugin.Firebase.CloudMessaging" Version="3.1.2" />
     <PackageReference Include="Plugin.MauiMTAdmob" Version="2.0.2" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
