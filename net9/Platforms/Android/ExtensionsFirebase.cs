@@ -1,8 +1,4 @@
-﻿using Microsoft.Maui.LifecycleEvents;
-using Plugin.Firebase.CloudMessaging;
-using Plugin.Firebase.Core.Platforms.Android;
-
-namespace MetaFrm.Maui.Essentials.Platforms
+﻿namespace MetaFrm.Maui.Essentials.Platforms
 {
     /// <summary>
     /// ExtensionsFirebase
@@ -16,14 +12,6 @@ namespace MetaFrm.Maui.Essentials.Platforms
         /// <returns></returns>
         public static MauiAppBuilder RegisterFirebaseServices(this MauiAppBuilder builder)
         {
-            builder.ConfigureLifecycleEvents(events =>
-            {
-                events.AddAndroid(android => android.OnCreate((activity, _) =>
-                CrossFirebase.Initialize(activity)));
-            });
-
-            builder.Services.AddSingleton(_ => CrossFirebaseCloudMessaging.Current);
-
             return builder;
         }
     }
