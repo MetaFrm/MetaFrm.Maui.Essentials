@@ -1,4 +1,5 @@
 ﻿using MetaFrm.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace MetaFrm.Maui.Essentials.Devices
 {
@@ -63,8 +64,15 @@ namespace MetaFrm.Maui.Essentials.Devices
 
             devicePlatform = Microsoft.Maui.Devices.DeviceInfo.Platform.EnumParse<Maui.Devices.DevicePlatform>();
 
-            if ((Factory.DeviceInfo != null ? Factory.DeviceInfo.Platform : Factory.Platform) != devicePlatform)
-                throw new Exception("Factory.Init DevicePlatform setting is incorrect.");
+            if (Factory.Platform != devicePlatform)
+            {
+                MetaFrmException exception = new("Factory.Init DevicePlatform setting is incorrect.");
+
+                if (Factory.Logger != null)
+                    Factory.Logger.LogError(exception, "(Factory.Platform{Platform} != devicePlatform{DevicePlatform})", Factory.Platform, devicePlatform);
+
+                throw exception;
+            }
 
             this.Model = Microsoft.Maui.Devices.DeviceInfo.Model;
             this.Manufacturer = Microsoft.Maui.Devices.DeviceInfo.Manufacturer;
@@ -74,8 +82,6 @@ namespace MetaFrm.Maui.Essentials.Devices
             this.Platform = devicePlatform;
             this.Idiom = Microsoft.Maui.Devices.DeviceInfo.Idiom.EnumParse<Maui.Devices.DeviceIdiom>();
             this.DeviceType = Microsoft.Maui.Devices.DeviceInfo.DeviceType.EnumParse<Maui.Devices.DeviceType>();
-
-            Factory.DeviceInfo = this;
         }
     }
 }

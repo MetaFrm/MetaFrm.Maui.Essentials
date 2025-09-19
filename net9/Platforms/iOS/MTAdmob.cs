@@ -226,7 +226,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
         {
             try
             {
-                if (!this.interstitialAdsId.IsNullOrEmpty() && Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.iOS))
+                if (!this.interstitialAdsId.IsNullOrEmpty() && (Factory.Platform == Maui.Devices.DevicePlatform.Android || Factory.Platform == Maui.Devices.DevicePlatform.iOS))
                 {
                     try
                     {
@@ -263,7 +263,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
         {
             try
             {
-                if (!this.rewardeAdsId.IsNullOrEmpty() && Factory.DeviceInfo != null && (Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.Android || Factory.DeviceInfo.Platform == Maui.Devices.DevicePlatform.iOS))
+                if (!this.rewardeAdsId.IsNullOrEmpty() && (Factory.Platform == Maui.Devices.DevicePlatform.Android || Factory.Platform == Maui.Devices.DevicePlatform.iOS))
                 {
                     try
                     {
@@ -297,9 +297,9 @@ namespace MetaFrm.Maui.Essentials.Platforms
         {
             try
             {
-                if (DeviceInfo.Platform.Equals(DevicePlatform.Android))
+                if (Factory.Platform == Maui.Devices.DevicePlatform.Android)
                     this.bannerAdsId = this.IsDebug ? "ca-app-pub-3940256099942544/6300978111" : this.GetAttribute("AndroidBannerAdsId");
-                else if (DeviceInfo.Platform.Equals(DevicePlatform.iOS))
+                else if (Factory.Platform == Maui.Devices.DevicePlatform.iOS)
                     this.bannerAdsId = this.IsDebug ? "ca-app-pub-3940256099942544/2934735716" : this.GetAttribute("iOSBannerAdsId");
                 else
                     this.bannerAdsId = "";
@@ -311,9 +311,9 @@ namespace MetaFrm.Maui.Essentials.Platforms
 
             try
             {
-                if (DeviceInfo.Platform.Equals(DevicePlatform.Android))
+                if (Factory.Platform == Maui.Devices.DevicePlatform.Android)
                     this.interstitialAdsId = this.IsDebug ? "ca-app-pub-3940256099942544/1033173712" : this.GetAttribute("AndroidInterstitialAdsId");
-                else if (DeviceInfo.Platform.Equals(DevicePlatform.iOS))
+                else if (Factory.Platform == Maui.Devices.DevicePlatform.iOS)
                     this.interstitialAdsId = this.IsDebug ? "ca-app-pub-3940256099942544/4411468910" : this.GetAttribute("iOSInterstitialAdsId");
                 else
                     this.interstitialAdsId = "";
@@ -325,9 +325,9 @@ namespace MetaFrm.Maui.Essentials.Platforms
 
             try
             {
-                if (DeviceInfo.Platform.Equals(DevicePlatform.Android))
+                if (Factory.Platform == Maui.Devices.DevicePlatform.Android)
                     this.rewardeAdsId = this.IsDebug ? "ca-app-pub-3940256099942544/5224354917" : this.GetAttribute("AndroidRewardeAdsId");
-                else if (DeviceInfo.Platform.Equals(DevicePlatform.iOS))
+                else if (Factory.Platform == Maui.Devices.DevicePlatform.iOS)
                     this.rewardeAdsId = this.IsDebug ? "ca-app-pub-3940256099942544/1712485313" : this.GetAttribute("iOSRewardeAdsId");
                 else
                     this.rewardeAdsId = "";
