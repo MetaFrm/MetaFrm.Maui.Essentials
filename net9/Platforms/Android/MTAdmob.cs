@@ -1,5 +1,5 @@
 ﻿using MetaFrm.Maui.Ads;
-using Plugin.MauiMTAdmob;
+using Plugin.MauiMtAdmob;
 
 namespace MetaFrm.Maui.Essentials.Platforms
 {
