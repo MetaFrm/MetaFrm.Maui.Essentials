@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32630.192
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루션 항목", "{0C5E5285-684F-40AE-87FE-83AE1961F279}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A112
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{90D941C1-8257-4052-9D59-676FC64C1586}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build_10.0.yml = .github\workflows\build_10.0.yml
 		.github\workflows\build_8.0.yml = .github\workflows\build_8.0.yml
 		.github\workflows\build_9.0.yml = .github\workflows\build_9.0.yml
 	EndProjectSection
@@ -115,6 +116,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaFrm.Maui.Essentials(net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaFrm.Maui.Essentials(net9.0)", "net9\MetaFrm.Maui.Essentials(net9.0).csproj", "{8D7006EE-6F3A-9B2E-F897-20010AC5197C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaFrm.Maui.Essentials(net10.0)", "net10\MetaFrm.Maui.Essentials(net10.0).csproj", "{41EE43D3-FAE8-8535-389D-C3951ADF6BC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +132,10 @@ Global
 		{8D7006EE-6F3A-9B2E-F897-20010AC5197C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D7006EE-6F3A-9B2E-F897-20010AC5197C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D7006EE-6F3A-9B2E-F897-20010AC5197C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41EE43D3-FAE8-8535-389D-C3951ADF6BC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41EE43D3-FAE8-8535-389D-C3951ADF6BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41EE43D3-FAE8-8535-389D-C3951ADF6BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41EE43D3-FAE8-8535-389D-C3951ADF6BC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

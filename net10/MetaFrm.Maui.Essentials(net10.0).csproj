@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
     <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-    <!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
+    <!-- <TargetFrameworks>$(TargetFrameworks);net10.0-tizen</TargetFrameworks> -->
     <Nullable>enable</Nullable>
     <RootNamespace>MetaFrm.Maui.Essentials</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -18,8 +18,8 @@
     <AssemblyName>MetaFrm.Maui.Essentials</AssemblyName>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageId>MetaFrm.Maui.Essentials.net8.0</PackageId>
-    <Version>8.0.4.70</Version>
+    <PackageId>MetaFrm.Maui.Essentials.net10.0</PackageId>
+    <Version>10.0.0.0</Version>
     <Authors>dsun</Authors>
     <Company>Meta Framework</Company>
     <Copyright>Copyright 2025. dsun all rights reserved.</Copyright>
@@ -82,10 +82,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MetaFrm.Core.net8.0" Version="8.0.4.70" />
-    <PackageReference Include="MetaFrm.Razor.Essentials.net8.0" Version="8.0.4.70" />
+    <PackageReference Include="MetaFrm.Core.net10.0" Version="10.0.0.0" />
+    <PackageReference Include="MetaFrm.Razor.Essentials.net10.0" Version="10.0.0.0" />
     <PackageReference Include="Plugin.Firebase.CloudMessaging" Version="3.1.2" />
-    <PackageReference Include="Plugin.MauiMTAdmob" Version="2.0.2" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+    <PackageReference Include="Plugin.MauiMTAdmob" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.10" />
   </ItemGroup>
 </Project>

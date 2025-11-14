@@ -1,4 +1,4 @@
-name: build 9.0
+name: build 10.0
 
 on:
   push:
@@ -6,19 +6,19 @@ on:
   pull_request:
     branches: [ "master" ]
 env:
-  DLL_ID: ${{secrets.DLL_ID_9}} # NET버전
+  DLL_ID: ${{secrets.DLL_ID_10}} # NET버전
   UPLOAD_MODURE: "Y" # 고정
   PUSH_NUGET: "Y"
   PASSWORD: ${{secrets.PASSWORD}}
 
 jobs:
-  build9:
+  build10:
     runs-on: windows-2022
     env:
-      DLL_PATH: "net9/bin/Release/net9.0/${{vars.NAMESPACE}}.dll" # NET버전
-      PROJECT_PATH: "net9" # NET버전
-      METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule9.0.zip" # NET버전
-      METAFRM_UPLOADMODULE_ZIP: "temp/MetaFrameworkManagementSystemUploadModule9.0.zip" # NET버전
+      DLL_PATH: "net10/bin/Release/net10.0/${{vars.NAMESPACE}}.dll" # NET버전
+      PROJECT_PATH: "net10" # NET버전
+      METAFRM_UPLOADMODULE_URL: "https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule10.0.zip" # NET버전
+      METAFRM_UPLOADMODULE_ZIP: "temp/MetaFrameworkManagementSystemUploadModule10.0.zip" # NET버전
       METAFRM_UPLOADMODULE_FILE: "temp/MetaFrameworkManagementSystemUploadModule.dll"
 
     steps:
@@ -27,7 +27,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x # NET버전
+        dotnet-version: 10.0.x # NET버전
 
     - name: Setup NuGet
       if: runner.os != 'Windows'
