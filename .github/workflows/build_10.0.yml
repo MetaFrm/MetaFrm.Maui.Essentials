@@ -13,7 +13,7 @@ env:
 
 jobs:
   build10:
-    runs-on: windows-2022
+    runs-on: windows-latest
     env:
       DLL_PATH: "net10/bin/Release/net10.0/${{vars.NAMESPACE}}.dll" # NET버전
       PROJECT_PATH: "net10" # NET버전
@@ -22,10 +22,10 @@ jobs:
       METAFRM_UPLOADMODULE_FILE: "temp/MetaFrameworkManagementSystemUploadModule.dll"
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 10.0.x # NET버전
 
@@ -38,36 +38,26 @@ jobs:
     - name: Install MAUI Workload (Windows)
       if: runner.os == 'Windows'
       run: dotnet workload install maui --ignore-failed-sources
-
-    # - uses: actions/setup-java@v4
-    #   with:
-    #     distribution: 'microsoft'
-    #     java-version: '11'
       
     - name: mkdir temp (Windows)
-      if: runner.os == 'Windows'
-      run: mkdir temp
+      run: mkdir -p temp
 
 
     - name: Download Upload Module
       if: runner.os != 'Windows'
-      run: wget -d "${{env.METAFRM_UPLOADMODULE_URL}}" -P temp
+      run: wget -q "${{ env.METAFRM_UPLOADMODULE_URL }}" -O "${{ env.METAFRM_UPLOADMODULE_ZIP }}"
 
     - name: Download Upload Module (Windows)
       if: runner.os == 'Windows'
-      run: curl ${{env.METAFRM_UPLOADMODULE_URL}} --output "${{env.METAFRM_UPLOADMODULE_ZIP}}"
-      
-    - name: Download unzip.exe (Windows)
-      if: runner.os == 'Windows'
-      run: curl http://stahlworks.com/dev/unzip.exe --output temp/unzip.exe
+      run: powershell -Command "Invoke-WebRequest -Uri '${{ env.METAFRM_UPLOADMODULE_URL }}' -OutFile '${{ env.METAFRM_UPLOADMODULE_ZIP }}'"
 
     - name: Unzip
       if: runner.os != 'Windows'
-      run: unzip "${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp
+      run: unzip -q "${{ env.METAFRM_UPLOADMODULE_ZIP }}" -d temp
       
     - name: Unzip (Windows)
       if: runner.os == 'Windows'
-      run: temp\unzip.exe "${{env.METAFRM_UPLOADMODULE_ZIP}}" -d temp
+      run: powershell -Command "Expand-Archive -Path '${{ env.METAFRM_UPLOADMODULE_ZIP }}' -DestinationPath 'temp' -Force"
 
 
     - name: Restore dependencies
@@ -80,28 +70,32 @@ jobs:
 
     - name: Build Debug
       id: ST2
-      run: dotnet build "${{env.PROJECT_PATH}}" -c Debug --no-restore
+      working-directory: ${{ env.PROJECT_PATH }}
+      run: dotnet build -c Debug --no-restore -v minimal
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}^${{env.PASSWORD}}" "notification" "Build Debug Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
 
     - name: Test Debug
       id: ST3
-      run: dotnet test "${{env.PROJECT_PATH}}" -c Debug --no-build --verbosity normal
+      working-directory: ${{ env.PROJECT_PATH }}
+      run: dotnet test -c Debug --no-build --verbosity normal
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}^${{env.PASSWORD}}" "notification" "Test Debug Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
 
     - name: Build Release
       id: ST4
-      run: dotnet build "${{env.PROJECT_PATH}}" -c Release --no-restore
+      working-directory: ${{ env.PROJECT_PATH }}
+      run: dotnet build -c Release --no-restore -v minimal
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}^${{env.PASSWORD}}" "notification" "Build Release Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
       
     - name: Test Release
       id: ST5
-      run: dotnet test "${{env.PROJECT_PATH}}" -c Release --no-build --verbosity normal
+      working-directory: ${{ env.PROJECT_PATH }}
+      run: dotnet test -c Release --no-build --verbosity normal
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' }}
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}^${{env.PASSWORD}}" "notification" "Test Release Fail !!" "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
