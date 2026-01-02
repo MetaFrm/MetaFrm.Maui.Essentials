@@ -78,9 +78,12 @@ namespace MetaFrm.Maui.Essentials.Storage
                     List<Maui.Storage.FileResult> results = [];
 
                     foreach (var type in resultPickMultiple)
-                        results.Add(new Maui.Storage.FileResult(type.FullPath, type.ContentType));
+                    {
+                        if (type != null)
+                            results.Add(new Maui.Storage.FileResult(type.FullPath, type.ContentType));
+                    }
 
-                    return results;
+                    return results.AsEnumerable();
                 }
                 else
                     return [];
@@ -94,9 +97,12 @@ namespace MetaFrm.Maui.Essentials.Storage
                     List<Maui.Storage.FileResult> results = [];
 
                     foreach (var type in resultPickMultiple)
-                        results.Add(new Maui.Storage.FileResult(type.FullPath, type.ContentType));
+                    {
+                        if (type != null)
+                            results.Add(new Maui.Storage.FileResult(type.FullPath, type.ContentType));
+                    }
 
-                    return results;
+                    return results.AsEnumerable();
                 }
                 else
                     return [];

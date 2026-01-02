@@ -1,27 +1,36 @@
 ﻿using MetaFrm.Extensions;
+#if ANDROID || IOS || MACCATALYST || WINDOWS || TIZEN
+using MetaFrm.Maui.Essentials.Platforms;
+#endif
 using System.ComponentModel;
 
 namespace MetaFrm.Maui.Essentials
 {
     /// <summary>
-    /// AddMetaFrm
+    /// Extensions
     /// </summary>
     public static class Extensions
     {
         /// <summary>
-        /// AddMetaFrm
+        /// UseMetaFrm
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="builder"></param>
         /// <param name="baseAddress"></param>
         /// <param name="accessKey"></param>
         /// <param name="platform"></param>
+        /// <param name="registerFirebaseServices"></param>
+        /// <param name="registerMTAdmobServices"></param>
         /// <returns></returns>
-        public static IServiceCollection AddMetaFrm(this IServiceCollection services, string baseAddress, string accessKey, Maui.Devices.DevicePlatform platform)
+        public static MauiAppBuilder UseMetaFrm(this MauiAppBuilder builder, string baseAddress, string accessKey, Maui.Devices.DevicePlatform platform, bool registerFirebaseServices, bool registerMTAdmobServices)
         {
-            services.AddFactory(baseAddress, accessKey, platform);
-            services.AddMetaFrm();
+#if ANDROID || IOS || MACCATALYST || WINDOWS || TIZEN
+            builder.UseMetaFrmMauiApp(registerFirebaseServices, registerMTAdmobServices);
+#endif
 
-            return services;
+            builder.Services.AddFactory(baseAddress, accessKey, platform);
+            builder.Services.AddMetaFrm();
+
+            return builder;
         }
 
         /// <summary>
@@ -29,7 +38,7 @@ namespace MetaFrm.Maui.Essentials
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection AddMetaFrm(this IServiceCollection services)
+        private static IServiceCollection AddMetaFrm(this IServiceCollection services)
         {
             //services.AddSingleton<  Factory>();//ExtensionsIServiceCollection에서 기본으로 AddSingleton DI 해줌
             services.AddSingleton<  Maui.ApplicationModel.IPermissions, ApplicationModel.Permissions>();

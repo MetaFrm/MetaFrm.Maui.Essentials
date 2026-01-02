@@ -1,27 +1,20 @@
-﻿using MetaFrm.Extensions;
-
-namespace MetaFrm.Maui.Essentials.Platforms
+﻿namespace MetaFrm.Maui.Essentials.Platforms
 {
     /// <summary>
-    /// UseMetaFrm
+    /// Extensions
     /// </summary>
     public static class Extensions
     {
         /// <summary>
-        /// UseMetaFrm
+        /// UseMetaFrmMauiApp
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="baseAddress"></param>
-        /// <param name="accessKey"></param>
-        /// <param name="platform"></param>
         /// <param name="registerFirebaseServices"></param>
         /// <param name="registerMTAdmobServices"></param>
         /// <returns></returns>
-        public static MauiAppBuilder UseMetaFrm(this MauiAppBuilder builder, string baseAddress, string accessKey, Maui.Devices.DevicePlatform platform, bool registerFirebaseServices, bool registerMTAdmobServices)
+        public static MauiAppBuilder UseMetaFrmMauiApp(this MauiAppBuilder builder, bool registerFirebaseServices, bool registerMTAdmobServices)
         {
             Factory.AppDataDirectory = FileSystem.Current.AppDataDirectory;
-
-            builder.Services.AddFactory(baseAddress, accessKey, platform);
 
             if (registerFirebaseServices)
                 builder.RegisterFirebaseServices();
@@ -30,8 +23,6 @@ namespace MetaFrm.Maui.Essentials.Platforms
                 builder.RegisterMTAdmobServices();
             else
                 builder.Services.AddSingleton<Ads.IAds, MetaFrm.Ads.DummyAds>();
-
-            builder.Services.AddMetaFrm();//AddMetaFrm
 
             return builder;
         }

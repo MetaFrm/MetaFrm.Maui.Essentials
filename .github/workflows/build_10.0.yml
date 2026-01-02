@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 env:
   DLL_ID: ${{secrets.DLL_ID_10}} # NET버전
-  UPLOAD_MODURE: "N" # 고정
+  UPLOAD_MODULE: "N" # 고정
   PUSH_NUGET: "Y"
   PASSWORD: ${{secrets.PASSWORD}}
 
@@ -103,7 +103,7 @@ jobs:
 
     - name: Upload Module
       id: ST6
-      if: env.UPLOAD_MODURE == 'Y'
+      if: env.UPLOAD_MODULE == 'Y'
       run: dotnet "${{env.METAFRM_UPLOADMODULE_FILE}}" "${{secrets.METAFRM_UPLOADMODULE_ACCESSKEY}}" "${{github.event.pusher.email}}^${{env.PASSWORD}}" "upload" ${{env.DLL_ID}} "${{env.DLL_PATH}}" "${{vars.NAMESPACE}}"
     - name: if failure
       if: ${{ failure() && steps.ST1.outcome != 'failure' && steps.ST2.outcome != 'failure' && steps.ST3.outcome != 'failure' && steps.ST4.outcome != 'failure' && steps.ST5.outcome != 'failure' }}
