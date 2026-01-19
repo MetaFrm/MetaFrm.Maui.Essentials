@@ -23,7 +23,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
 
             publishedUrl = string.Format(publishedUrl, AppInfo.Current.PackageName);
 
-            if (!publishedVersion.IsNullOrEmpty() && publishedVersion != AppInfo.Current.VersionString)
+            if (!string.IsNullOrEmpty(publishedVersion) && publishedVersion != AppInfo.Current.VersionString)
             {
                 bool update = await page.DisplayAlertAsync(
                     stringLocalizer["업데이트 안내"],

@@ -9,7 +9,7 @@ namespace MetaFrm.Maui.Essentials.Localization
     /// </summary>
     /// <param name="cultureChanged"></param>
     /// <param name="languageCollector"></param>
-    public class LocalizationNotifier(ICultureChanged cultureChanged, ILanguageCollector languageCollector) : INotifyPropertyChanged, IActionEvent
+    public partial class LocalizationNotifier(ICultureChanged cultureChanged, ILanguageCollector languageCollector) : INotifyPropertyChanged, IActionEvent
     {
         private readonly ICultureChanged CultureChange = cultureChanged;
         private readonly ILanguageCollector LanguageCollector = languageCollector;
@@ -32,7 +32,7 @@ namespace MetaFrm.Maui.Essentials.Localization
 
                     key = tmps.FirstOrDefault() ?? "";
 
-                    if (!key.IsNullOrEmpty())
+                    if (!string.IsNullOrEmpty(key))
                         tmps.Remove(key);
 
                     result = key.Translate(this.CultureChange?.CultureInfo ?? Thread.CurrentThread.CurrentCulture, out successful, [.. tmps]);

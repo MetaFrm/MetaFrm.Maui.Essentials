@@ -24,7 +24,7 @@
         /// <returns></returns>
         public BindingBase ProvideValue(IServiceProvider serviceProvider)
         {
-            if (Args.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(Args))
                 return new Binding
                 {
                     Mode = BindingMode.OneWay,

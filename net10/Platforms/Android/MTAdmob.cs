@@ -226,7 +226,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
         {
             try
             {
-                if (!this.interstitialAdsId.IsNullOrEmpty() && (Factory.Platform == Maui.Devices.DevicePlatform.Android || Factory.Platform == Maui.Devices.DevicePlatform.iOS))
+                if (!string.IsNullOrEmpty(this.interstitialAdsId) && (Factory.Platform == Maui.Devices.DevicePlatform.Android || Factory.Platform == Maui.Devices.DevicePlatform.iOS))
                 {
                     try
                     {
@@ -263,7 +263,7 @@ namespace MetaFrm.Maui.Essentials.Platforms
         {
             try
             {
-                if (!this.rewardeAdsId.IsNullOrEmpty() && (Factory.Platform == Maui.Devices.DevicePlatform.Android || Factory.Platform == Maui.Devices.DevicePlatform.iOS))
+                if (!string.IsNullOrEmpty(this.rewardeAdsId) && (Factory.Platform == Maui.Devices.DevicePlatform.Android || Factory.Platform == Maui.Devices.DevicePlatform.iOS))
                 {
                     try
                     {
