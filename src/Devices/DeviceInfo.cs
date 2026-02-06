@@ -1,5 +1,4 @@
 ﻿using MetaFrm.Extensions;
-using Microsoft.Extensions.Logging;
 
 namespace MetaFrm.Maui.Essentials.Devices
 {
@@ -68,8 +67,7 @@ namespace MetaFrm.Maui.Essentials.Devices
             {
                 MetaFrmException exception = new("Factory.Init DevicePlatform setting is incorrect.");
 
-                if (Factory.Logger != null)
-                    Factory.Logger.LogError(exception, "(Factory.Platform{Platform} != devicePlatform{DevicePlatform})", Factory.Platform, devicePlatform);
+                Factory.Logger.Error(exception, "(Factory.Platform{0} != devicePlatform{0})", Factory.Platform, devicePlatform);
 
                 throw exception;
             }
