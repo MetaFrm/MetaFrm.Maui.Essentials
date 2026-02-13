@@ -12,7 +12,7 @@
 [![NuGet downloads (MetaFrm.Maui.Essentials.net8.0)](https://img.shields.io/nuget/dt/MetaFrm.Maui.Essentials.net8.0)](https://www.nuget.org/packages/MetaFrm.Maui.Essentials.net8.0/)
 
 ## Sponsor/Donate
-[![Sponsor/Donate](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=autoking&button_colour=BD5FFF&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/autoking)
+[![Sponsor/Donate](https://i.imgur.com/nyZtCjx.png)](https://www.buymeacoffee.com/autoking)
 
 ## Installing
 
