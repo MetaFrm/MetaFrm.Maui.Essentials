@@ -44,7 +44,7 @@ jobs:
       shell: pwsh
       run: |
         "DLL_PATH=${{vars.NAMESPACE}}(net${{env.NET_VERSION}}.0)/bin/Release/net${{env.NET_VERSION}}.0/${{vars.NAMESPACE}}.dll" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        "PROJECT_PATH=${{ vars.NAMESPACE }}(net${{ env.NET_VERSION }}.0)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        "PROJECT_PATH=net${{ env.NET_VERSION }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         "METAFRM_UPLOADMODULE_URL=https://download.metafrm.net/github/MetaFrameworkManagementSystemUploadModule${{env.NET_VERSION}}.0.zip" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         "METAFRM_UPLOADMODULE_ZIP=temp/MetaFrameworkManagementSystemUploadModule${{env.NET_VERSION}}.0.zip" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
