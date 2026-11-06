@@ -8,7 +8,7 @@ on:
 env:
   NET_VERSION: "10"
   PUSH_NUGET: "Y"
-  UPLOAD_MODULE: "Y"
+  UPLOAD_MODULE: "N"
   COMPLETED_MESSAGE: "CI/CD Failed !!"
 
 jobs:
