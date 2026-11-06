@@ -1,0 +1,81 @@
+<Solution>
+  <Folder Name="/.github/" />
+  <Folder Name="/.github/workflows/">
+    <File Path=".github/workflows/build_10.0.yml" />
+  </Folder>
+  <Folder Name="/src/">
+    <File Path="src/Extensions.cs" />
+  </Folder>
+  <Folder Name="/src/ApplicationModel/">
+    <File Path="src/ApplicationModel/AppInfo.cs" />
+    <File Path="src/ApplicationModel/Browser.cs" />
+    <File Path="src/ApplicationModel/Launcher.cs" />
+    <File Path="src/ApplicationModel/Map.cs" />
+    <File Path="src/ApplicationModel/Permissions.cs" />
+    <File Path="src/ApplicationModel/Permissions7.cs" />
+    <File Path="src/ApplicationModel/VersionTracking.cs" />
+  </Folder>
+  <Folder Name="/src/ApplicationModel/Communication/">
+    <File Path="src/ApplicationModel/Communication/Contacts.cs" />
+    <File Path="src/ApplicationModel/Communication/Email.cs" />
+    <File Path="src/ApplicationModel/Communication/PhoneDialer.cs" />
+    <File Path="src/ApplicationModel/Communication/Sms.cs" />
+  </Folder>
+  <Folder Name="/src/ApplicationModel/DataTransfer/">
+    <File Path="src/ApplicationModel/DataTransfer/Clipboard.cs" />
+    <File Path="src/ApplicationModel/DataTransfer/Share.cs" />
+  </Folder>
+  <Folder Name="/src/Devices/">
+    <File Path="src/Devices/Battery.cs" />
+    <File Path="src/Devices/DeviceDisplay.cs" />
+    <File Path="src/Devices/DeviceInfo.cs" />
+    <File Path="src/Devices/HapticFeedback.cs" />
+    <File Path="src/Devices/Vibration.cs" />
+  </Folder>
+  <Folder Name="/src/Devices/Sensors/">
+    <File Path="src/Devices/Sensors/Accelerometer.cs" />
+    <File Path="src/Devices/Sensors/Barometer.cs" />
+    <File Path="src/Devices/Sensors/Compass.cs" />
+    <File Path="src/Devices/Sensors/Flashlight.cs" />
+    <File Path="src/Devices/Sensors/Geocoding.cs" />
+    <File Path="src/Devices/Sensors/Geolocation.cs" />
+    <File Path="src/Devices/Sensors/Gyroscope.cs" />
+    <File Path="src/Devices/Sensors/Magnetometer.cs" />
+    <File Path="src/Devices/Sensors/OrientationSensor.cs" />
+  </Folder>
+  <Folder Name="/src/Firebase/">
+    <File Path="src/Firebase/DeviceToken.cs" />
+    <File Path="src/Firebase/DeviceToken7.cs" />
+  </Folder>
+  <Folder Name="/src/Firebase/Notification/">
+    <File Path="src/Firebase/Notification/CloudMessaging.cs" />
+  </Folder>
+  <Folder Name="/src/Localization/">
+    <File Path="src/Localization/CultureChanger.cs" />
+    <File Path="src/Localization/LocalizationManager.cs" />
+    <File Path="src/Localization/TranslateExtension.cs" />
+  </Folder>
+  <Folder Name="/src/Media/">
+    <File Path="src/Media/MediaPicker.cs" />
+    <File Path="src/Media/Screenshot.cs" />
+    <File Path="src/Media/ScreenshotResult.cs" />
+    <File Path="src/Media/TextToSpeech.cs" />
+    <File Path="src/Media/UnitConverters.cs" />
+  </Folder>
+  <Folder Name="/src/Networking/">
+    <File Path="src/Networking/Connectivity.cs" />
+  </Folder>
+  <Folder Name="/src/Storage/">
+    <File Path="src/Storage/FilePicker.cs" />
+    <File Path="src/Storage/FileSystem.cs" />
+    <File Path="src/Storage/Preferences.cs" />
+    <File Path="src/Storage/SecureStorage.cs" />
+    <File Path="src/Storage/SecureStorage7.cs" />
+  </Folder>
+  <Folder Name="/솔루션 항목/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE.txt" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="net10/MetaFrm.Maui.Essentials(net10.0).csproj" />
+</Solution>
