@@ -8,8 +8,8 @@ on:
 env:
   COMPLETED_MESSAGE: "CI/CD Failed !!"
   METAFRM_UPLOADMODULE: "temp/MetaFrameworkManagementSystemUploadModule" # + "${{env.NET_VERSION}}.0.zip"
-  UPLOAD_MODULE: "N"
-  PUSH_NUGET: "Y"
+  UPLOAD_MODULE: ${{ vars.UPLOAD_MODULE || 'Y' }}
+  PUSH_NUGET: ${{ vars.PUSH_NUGET || 'Y' }}
 
 jobs:
   build:
